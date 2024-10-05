@@ -1,0 +1,54 @@
+version: "3.7"
+
+services:
+  app:
+    build:
+      args:
+        user: dev
+        uid: 1000
+      context: ./
+      dockerfile: ./docker/Dockerfile
+    image: softcrm-app
+    container_name: softcrm-app
+    restart: unless-stopped
+    ports:
+      - 9000:9000
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - softcrm
+  
+  mysql:
+    image: mariadb:latest
+    container_name: softcrm-db
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+    environment:
+      MARIADB_DATABASE: ${DB_DATABASE}
+      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mariadb
+    volumes:
+      - ./docker/db:/docker-entrypoint-initdb.d
+    networks:
+      - softcrm
+    
+  nginx:
+    image: nginx:latest
+    container_name: softcrm-nginx
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx:/etc/nginx/conf.d
+    networks:
+      - softcrm
+
+networks:
+  softcrm:
+    driver: bridge  
