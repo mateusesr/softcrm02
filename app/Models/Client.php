@@ -12,6 +12,7 @@ class Client extends Model
         'name',
         'email',
         'phone',
+        'is_active',
         'updated_at',
     ];
 

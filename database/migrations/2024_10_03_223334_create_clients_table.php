@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string("name");
             $table->string("email")->unique();
             $table->string("phone");
+            $table->tinyInteger("is_active");
+
             $table->timestamps();
 
             $table->foreign('city_id')->references("id")->on("cities");
