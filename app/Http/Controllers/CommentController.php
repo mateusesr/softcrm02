@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use Illuminate\Http\Request;
 
-class CommentsController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -49,7 +50,7 @@ class CommentsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Client $client)
     {
         //
     }

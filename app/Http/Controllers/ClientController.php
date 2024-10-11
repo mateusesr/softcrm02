@@ -31,10 +31,10 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         
-        dd ($request);
+        
         $client = Client::create($request->toArray());
         
-        return redirect("client");
+        return view("client.create", compact('client'));
     }
 
     /**
