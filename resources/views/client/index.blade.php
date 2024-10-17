@@ -23,7 +23,7 @@
                     <td>{{ $client->name }}</td>
                     <td>{{ $client->email }}</td>
                     <td>{{ $client->phone }}</td>
-                    <td>{{ $client->city_id }}</td>
+                    <td>{{ $client->city->name}}</td>
                     <td>
                         @if($client->is_active)
                             <span class="badge bg-success">Ativo</span>

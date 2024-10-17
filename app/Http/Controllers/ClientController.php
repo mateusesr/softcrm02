@@ -13,7 +13,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
+        $clients = Client::with('city')->get();
+        // dd($clients);
         return view('client.index', compact("clients"));
     }
 
@@ -31,7 +32,7 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         
-        
+
         $client = Client::create($request->toArray());
         
         return view("client.create", compact('client'));
@@ -50,7 +51,8 @@ class ClientController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $client = Client::whereId($id)->first();
+        return view("client.edit", compact('client'));
     }
 
     /**
@@ -58,7 +60,21 @@ class ClientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $client = Client::whereId($id)->update([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'phone'=>$request->phone,
+            'city_id'=>$request->city_id
+        ]);
+        if ($client){
+            $client = Client::whereId($id)->first();
+            $message = 'Cliente Atualizado com Sucesso!';
+        }
+        else {
+            $client = Client::whereId($id)->first();
+            $message = 'Erro ao Atualizar!';
+        }
+        return view("client.edit", compact('client', 'message'));
     }
 
     /**
@@ -66,6 +82,12 @@ class ClientController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $deleted = Client::destroy($id);
+    
+        if ($deleted) {
+            return response()->json(['message' => 'Cliente deletado com sucesso'], 200);
+        } else {
+            return response()->json(['message' => 'Cliente não encontrado'], 404);
+        }
     }
 }
