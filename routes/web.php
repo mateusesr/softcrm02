@@ -20,14 +20,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Route::prefix('client', function () {
-        Route::post('/client', [ClientController::class, 'store'])->name('client.store');
-        Route::put('/client/{client}', [ClientController::class, 'update'])->name('client.update');
-        Route::delete('/{client}', [ClientController::class, 'destroy'])->name('client.destroy');
+    Route::post('/client', [ClientController::class, 'store'])->name('client.store');
+    Route::put('/client/{client}', [ClientController::class, 'update'])->name('client.update');
+    Route::delete('/{client}', [ClientController::class, 'destroy'])->name('client.destroy');
 
-        Route::get('/client', [ClientController::class, 'index'])->name('client.index');
-        Route::get('/show/{client}', [ClientController::class, 'show'])->name('client.show');
-        Route::get('/client/create', [ClientController::class, 'create'])->name('client.create');
-        Route::get('/edit/{client}', [ClientController::class, 'edit'])->name('client.edit');
+    Route::get('/client', [ClientController::class, 'index'])->name('client.index');
+    Route::get('/show/{client}', [ClientController::class, 'show'])->name('client.show');
+    Route::get('/client/create', [ClientController::class, 'create'])->name('client.create');
+    Route::get('/edit/{client}', [ClientController::class, 'edit'])->name('client.edit');
 
     // });
 
@@ -40,7 +40,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [AttendanceController::class, 'show'])->name('attendance.show');
         Route::get('/', [AttendanceController::class, 'create'])->name('attendance.create');
         Route::get('/', [AttendanceController::class, 'edit'])->name('attendance.edit');
-
     });
 
     Route::prefix('comment', function () {
@@ -52,9 +51,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [CommentController::class, 'show'])->name('comment.show');
         Route::get('/', [CommentController::class, 'create'])->name('comment.create');
         Route::get('/', [CommentController::class, 'edit'])->name('comment.edit');
-
     });
-
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -31,10 +31,10 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        
+
 
         $client = Client::create($request->toArray());
-        
+
         return view("client.create", compact('client'));
     }
 
@@ -61,16 +61,15 @@ class ClientController extends Controller
     public function update(Request $request, string $id)
     {
         $client = Client::whereId($id)->update([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'phone'=>$request->phone,
-            'city_id'=>$request->city_id
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'city_id' => $request->city_id
         ]);
-        if ($client){
+        if ($client) {
             $client = Client::whereId($id)->first();
             $message = 'Cliente Atualizado com Sucesso!';
-        }
-        else {
+        } else {
             $client = Client::whereId($id)->first();
             $message = 'Erro ao Atualizar!';
         }
@@ -81,13 +80,16 @@ class ClientController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-    {
-        $deleted = Client::destroy($id);
-    
-        if ($deleted) {
-            return response()->json(['message' => 'Cliente deletado com sucesso'], 200);
-        } else {
-            return response()->json(['message' => 'Cliente não encontrado'], 404);
-        }
+{
+    $deleted = Client::destroy($id);
+
+    if ($deleted) {
+ 
+        return redirect()->route('client.index');
+    } else {
+
+        return redirect()->route('client.index');
     }
+}
+
 }
