@@ -10,10 +10,17 @@ class AttendanceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $attendances = Attendance::all(); // Buscando todos os atendimentos
-        return view('attendance.index', compact('attendances')); // Retornando a view com os atendimentos
+        $clientId = $request->get('client_id'); // Obtém o ID do cliente da requisição
+
+        if ($clientId) {
+            $attendances = Attendance::where('client_id', $clientId)->get(); // Filtra atendimentos pelo ID do cliente
+        } else {
+            $attendances = Attendance::all(); // Caso não tenha ID, busca todos os atendimentos
+        }
+
+        return view('attendance.index', compact('attendances')); // Retorna a view com os atendimentos filtrados
     }
 
     /**
@@ -21,7 +28,7 @@ class AttendanceController extends Controller
      */
     public function create()
     {
-        //
+        return view('attendance.create');
     }
 
     /**
@@ -29,7 +36,10 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $attendance = Attendance::create($request->toArray());
+
+        return view("attendance.create", compact('attendance'));
     }
 
     /**
