@@ -28,7 +28,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/show/{client}', [ClientController::class, 'show'])->name('client.show');
     Route::get('/client/create', [ClientController::class, 'create'])->name('client.create');
     Route::get('/edit/{client}', [ClientController::class, 'edit'])->name('client.edit');
-
+    
+    Route::get('/attendances', [AttendanceController::class, 'index'])->name('attendance.index');
+    Route::get('/attendances/{attendance}', [AttendanceController::class, 'show'])->name('attendance.show');
+    Route::get('/attendances/create', [AttendanceController::class, 'create'])->name('attendance.create');
+    Route::get('/attendances/{attendance}/edit', [AttendanceController::class, 'edit'])->name('attendance.edit');
     // });
 
     Route::prefix('attendance', function () {
@@ -55,3 +59,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+

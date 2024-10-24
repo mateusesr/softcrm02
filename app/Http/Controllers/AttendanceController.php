@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance; // Certifique-se de que o modelo Attendance está importado
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -11,7 +12,8 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        //
+        $attendances = Attendance::all(); // Buscando todos os atendimentos
+        return view('attendance.index', compact('attendances')); // Retornando a view com os atendimentos
     }
 
     /**

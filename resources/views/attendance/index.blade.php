@@ -1,58 +1,45 @@
 @extends('layouts.app')
 
 @section('content')
-  <h2 class="text-center mb-4" style="color: white; font-size: 24px;">Listagem de Clientes</h2>
+<h2 class="text-center mb-4" style="color: white; font-size: 24px;">Listagem de Atendimentos</h2>
 
-    <div class="table-container"> <!-- Contêiner para centralizar a tabela -->
-        <table class="table table-bordered table-hover table-striped text-center align-middle" style="background-color: white; border-radius: 8px; overflow: hidden;"> <!-- Adiciona cor de fundo branca e bordas arredondadas -->
-            <thead class="thead-dark">
+<div class="table-container">
+    <table class="table table-bordered table-hover table-striped text-center align-middle" style="background-color: white; border-radius: 8px; overflow: hidden;">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Data</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($attendances as $attendance)
                 <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Telefone</th>
-                    <th>Cidade</th>
-                    <th>Status</th>
-                    <th>Ações</th>
+                    <td>{{ $attendance->id }}</td>
+                    <td>{{ $attendance->client->name }}</td> <!-- Supondo que você tenha um relacionamento com o modelo Client -->
+                    <td>{{ $attendance->date }}</td>
+                    <td>{{ $attendance->status }}</td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <a href="{{ route('attendance.edit', $attendance->id) }}" class="btn btn-sm btn-warning mx-1">Editar</a>
+                            <form action="{{ route('attendance.destroy', $attendance->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger mx-1">Excluir</button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach($clients as $client)
-                    <tr>
-                        <td>{{ $client->id }}</td>
-                        <td>{{ $client->name }}</td>
-                        <td>{{ $client->email }}</td>
-                        <td>{{ $client->phone }}</td>
-                        <td>{{ $client->city->name }}</td>
-                        <td>
-                            @if($client->is_active)
-                                <span class="badge bg-success">Ativo</span>
-                            @else
-                                <span class="badge bg-danger">Inativo</span>
-                            @endif
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-center">
-                                <a href="{{ route('client.edit', $client->id) }}" class="btn btn-sm btn-warning mx-1">Editar</a> <br><br>
-                                <form action="{{ route('client.destroy', $client->id) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger mx-1">Excluir</button> <br><br>
-                                </form>
-                                <a href="#" class="btn btn-sm btn-secondary mx-1">Inativar</a> <br><br>
-                                <a href="{{ route('attendance.index', ['client_id' => $client->id]) }}" class="btn btn-sm btn-primary mx-1">Atendimentos</a> <br><br> 
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+            @endforeach
+        </tbody>
+    </table>
 </div>
+@endsection
 
-<!-- CSS inline para estilizar a tabela e centralização -->
 <style>
-    h2 {
+   h2 {
         font-weight: bold;
         color: #343a40;
         margin-bottom: 20px; /* Espaçamento abaixo do título */
@@ -116,4 +103,4 @@
     .btn-secondary { background-color: #6c757d; border-color: #6c757d; color: white; }
     .btn-primary { background-color: #007bff; border-color: #007bff; color: white; }
 </style>
-@endsection
+
