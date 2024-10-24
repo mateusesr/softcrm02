@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $users = [
-            ['name' => 'Mateus Rosa','email' =>'mateus@gmail.com','password' => bcrypt('admin')],
+            ['name' => 'Mateus Rosa','email' =>'mateusesr1@gmail.com','password' => bcrypt('admin')],
             ['name' => 'Alex Pors','email' =>'alex@gmail.com','password' => bcrypt('admin')],
         ];
 
