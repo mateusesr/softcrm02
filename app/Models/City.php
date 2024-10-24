@@ -14,4 +14,8 @@ class City extends Model
         'uf'
     ];
 
+    public static function getAllCities() {
+        return self::all();
+    }
+
 }

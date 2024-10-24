@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\City;
 use GuzzleHttp\Client as GuzzleHttpClient;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,8 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view('client.create');
+        $cities = City::orderBy('uf')->orderBy('name')->get(); // Ordenando primeiro pela UF e depois pelo nome
+        return view('client.create', compact('cities')); // Passando as cidades para a view
     }
 
     /**
@@ -31,11 +33,10 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $client = Client::create($request->toArray());
 
-        return view("client.create", compact('client'));
+        $cities = City::orderBy('uf')->orderBy('name')->get(); // Adicionando a busca das cidades
+        return view("client.create", compact('client', 'cities')); // Passando as cidades para a view
     }
 
     /**

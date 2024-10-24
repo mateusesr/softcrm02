@@ -36,9 +36,9 @@
     <div class="container form-container">
         <div class="form-box">
             @if (isset($client))
-                <div class="alert alert-success" role="alert">
-                    Cliente salvo com sucesso!
-                </div>
+            <div class="alert alert-success" role="alert">
+                Cliente salvo com sucesso!
+            </div>
             @endif
 
             <h2 class="text-center mb-4">Criar Cliente</h2>
@@ -61,8 +61,12 @@
                 </div>
                 <div class="mb-3">
                     <label for="city_id" class="form-label">Cidade</label>
-                    <input type="number" class="form-control" id="city_id" name="city_id" placeholder="Digite o ID da cidade"
-                        required>
+                    <select class="form-control" id="city_id" name="city_id" required>
+                        <option value="" disabled selected>Escolha a sua cidade</option>
+                        @foreach($cities as $city)
+                            <option value="{{ $city->id }}">{{ $city->name }} - {{$city->uf}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary">Enviar</button>
