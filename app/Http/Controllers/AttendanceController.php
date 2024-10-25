@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance; // Certifique-se de que o modelo Attendance está importado
+use App\Models\Client; // Certifique-se de que o modelo Client está importado
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -12,15 +13,15 @@ class AttendanceController extends Controller
      */
     public function index(Request $request)
     {
-        $clientId = $request->get('client_id'); // Obtém o ID do cliente da requisição
+        $clientId = $request->get('client_id');
 
         if ($clientId) {
-            $attendances = Attendance::where('client_id', $clientId)->get(); // Filtra atendimentos pelo ID do cliente
+            $attendances = Attendance::where('client_id', $clientId)->get();
         } else {
-            $attendances = Attendance::all(); // Caso não tenha ID, busca todos os atendimentos
+            $attendances = Attendance::all();
         }
 
-        return view('attendance.index', compact('attendances')); // Retorna a view com os atendimentos filtrados
+        return view('attendance.index', compact('attendances'));
     }
 
     /**
@@ -53,17 +54,22 @@ class AttendanceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $attendance = Attendance::findOrFail($id);
+        $clients = Client::all(); // Se precisar listar clientes para seleção
+        return view('attendance.edit', compact('attendance', 'clients'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $attendance = Attendance::findOrFail($id);
+        $attendance->update($request->only(['client_id', 'type_id', 'date', 'status', 'description']));
+
+        return redirect()->route('attendance.index')->with('message', 'Atendimento atualizado com sucesso!');
     }
 
     /**

@@ -23,8 +23,8 @@
             @foreach($attendances as $attendance)
                 <tr>
                     <td>{{ $attendance->client_id }}</td>
-                    <td>{{ $attendance->client->name }}</td> <!-- Supondo que você tenha um relacionamento com o modelo Client -->
-                    <td>{{ $attendance->created_at->format('d/m/Y') }}</td> <!-- Mostra a data de criação do atendimento -->
+                    <td>{{ $attendance->client->name }}</td> 
+                    <td>{{ \Carbon\Carbon::parse($attendance->date)->format('d/m/Y') }}</td> <!-- Use a coluna date -->
                     <td>{{ $attendance->status }}</td>
                     <td>{{ $attendance->description }}</td>
                     <td>

@@ -22,7 +22,8 @@ Route::middleware('auth')->group(function () {
     // Route::prefix('client', function () {
     Route::post('/client', [ClientController::class, 'store'])->name('client.store');
     Route::put('/client/{client}', [ClientController::class, 'update'])->name('client.update');
-    Route::delete('/{client}', [ClientController::class, 'destroy'])->name('client.destroy');
+    Route::delete('/client/{client}', [ClientController::class, 'destroy'])->name('client.destroy');
+    Route::post('/client/{id}/reactivate', [ClientController::class, 'reactivate'])->name('client.reactivate');
 
     Route::get('/client', [ClientController::class, 'index'])->name('client.index');
     Route::get('/show/{client}', [ClientController::class, 'show'])->name('client.show');
@@ -37,7 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
     Route::get('/show/{attendance}', [AttendanceController::class, 'show'])->name('attendance.show');
     Route::get('/attendance/create', [AttendanceController::class, 'create'])->name('attendance.create');
-    Route::get('/edit/{attendance}', [AttendanceController::class, 'edit'])->name('attendance.edit');
+    Route::get('/attendance/{attendance}/edit', [AttendanceController::class, 'edit'])->name('attendance.edit');
     // });
 
     Route::prefix('attendance', function () {

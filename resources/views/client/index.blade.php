@@ -3,117 +3,141 @@
 @section('content')
   <h2 class="text-center mb-4" style="color: white; font-size: 24px;">Listagem de Clientes</h2>
 
-    <div class="table-container"> <!-- Contêiner para centralizar a tabela -->
-        <table class="table table-bordered table-hover table-striped text-center align-middle" style="background-color: white; border-radius: 8px; overflow: hidden;"> <!-- Adiciona cor de fundo branca e bordas arredondadas -->
-            <thead class="thead-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Telefone</th>
-                    <th>Cidade</th>
-                    <th>Status</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($clients as $client)
-                    <tr>
-                        <td>{{ $client->id }}</td>
-                        <td>{{ $client->name }}</td>
-                        <td>{{ $client->email }}</td>
-                        <td>{{ $client->phone }}</td>
-                        <td>{{ $client->city->name }}</td>
-                        <td>
-                            @if($client->is_active)
-                                <span class="badge bg-success">Ativo</span>
-                            @else
-                                <span class="badge bg-danger">Inativo</span>
-                            @endif
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-center">
-                                <a href="{{ route('client.edit', $client->id) }}" class="btn btn-sm btn-warning mx-1">Editar</a> <br><br>
-                                <form action="{{ route('client.destroy', $client->id) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger mx-1">Excluir</button> <br><br>
-                                </form>
-                                <a href="#" class="btn btn-sm btn-secondary mx-1">Inativar</a> <br><br>
-                                <a href="{{ route('attendance.index', ['client_id' => $client->id]) }}" class="btn btn-sm btn-primary mx-1">Atendimentos</a> <br><br> 
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+  <!-- Formulário de filtro estilizado -->
+  <form method="GET" action="{{ route('client.index') }}" class="mb-3 d-flex justify-content-center" style="padding: 20px;">
+    <select name="status" class="form-select me-2" style="width: 150px; border-radius: 8px; padding: 8px; font-size: 16px; color: #333;">
+      <option value="" style="background-color: #f9f9f9;">Todos</option>
+      <option value="ativo" {{ request('status') == 'ativo' ? 'selected' : '' }} style="background-color: #c6f6d5;">Ativos</option>
+      <option value="inativo" {{ request('status') == 'inativo' ? 'selected' : '' }} style="background-color: #f8d7da;">Inativos</option>
+    </select>
+    <button type="submit" class="btn btn-primary ms-2" style="border-radius: 8px; padding: 8px; font-size: 16px;">Filtrar</button>
+  </form>
+
+  <div class="table-container">
+    <table class="table table-bordered table-hover table-striped text-center align-middle" style="background-color: white; border-radius: 8px; overflow: hidden;">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Telefone</th>
+          <th>Cidade</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($clients as $client)
+          <tr>
+            <td>{{ $client->id }}</td>
+            <td>{{ $client->name }}</td>
+            <td>{{ $client->email }}</td>
+            <td>{{ $client->phone }}</td>
+            <td>{{ $client->city->name }}</td>
+            <td>
+              @if($client->is_active)
+                <span class="badge bg-success">Ativo</span>
+              @else
+                <span class="badge bg-danger">Inativo</span>
+              @endif
+            </td>
+            <td>
+              <div class="d-flex justify-content-center">
+              <br>
+                <a href="{{ route('client.edit', $client->id) }}" class="btn btn-sm btn-warning mx-1">Editar</a>
+                @if($client->is_active)
+                    <form action="{{ route('client.destroy', $client->id) }}" method="POST" class="d-inline">
+                        @csrf
+                        @method('DELETE')
+                        <br>
+                        <button type="submit" class="btn btn-sm btn-danger mx-1">Inativar</button>
+                    </form>
+                @else
+                    <form action="{{ route('client.reactivate', $client->id) }}" method="POST" class="d-inline">
+                        @csrf
+                        <br>
+                        <button type="submit" class="btn btn-sm btn-success mx-1">Reativar</button>
+                    </form>
+                @endif
+                <br>
+                <a href="{{ route('attendance.index', ['client_id' => $client->id]) }}" class="btn btn-sm btn-primary mx-1">Atendimentos</a>
+              </div>
+            </td>
+          </tr>
+        @endforeach
+      </tbody>
+    </table>
+  </div>
+
+  @if(session('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
     </div>
-</div>
+  @endif
 
 <!-- CSS inline para estilizar a tabela e centralização -->
 <style>
-    h2 {
-        font-weight: bold;
-        color: #343a40;
-        margin-bottom: 20px; /* Espaçamento abaixo do título */
-    }
-    
-    table th, table td {
-        vertical-align: middle; /* Centraliza o conteúdo verticalmente */
-        padding: 15px; /* Espaçamento interno das células */
-        border-bottom: 1px solid #dee2e6; /* Linha inferior de borda nas células */
-    }
-    
-    table th {
-        background-color: #007bff; /* Cor de fundo para o cabeçalho */
-        color: #fff; /* Cor do texto no cabeçalho */
-    }
-    
-    .table {
-        width: 100%; /* Largura total da tabela */
-        max-width: 1000px; /* Largura máxima para a tabela */
-        margin: 20px auto; /* Centraliza a tabela horizontalmente e adiciona margem superior */
-        border-radius: 10px; /* Arredondamento das bordas */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave ao redor da tabela */
-        border-collapse: separate; /* Para manter o arredondamento das bordas */
-        border-spacing: 0; /* Remove espaço entre as células da tabela */
-    }
-    
-    .table td:first-child {
-        border-top-left-radius: 10px; /* Arredondamento do primeiro cabeçalho e célula */
-        border-bottom-left-radius: 10px; /* Arredondamento da primeira célula da última linha */
-    }
-    
-    .table td:last-child {
-        border-top-right-radius: 10px; /* Arredondamento do último cabeçalho */
-        border-bottom-right-radius: 10px; /* Arredondamento da última célula da última linha */
-    }
-    
-    .btn {
-        margin: 0 5px; /* Espaçamento entre os botões */
-        padding: 8px 16px; /* Aumenta o espaçamento interno dos botões */
-        border-radius: 5px; /* Arredondamento dos botões */
-        font-size: 14px; /* Tamanho da fonte dos botões */
-    }
+  h2 {
+    font-weight: bold;
+    color: #343a40;
+    margin-bottom: 20px;
+  }
+  
+  table th, table td {
+    vertical-align: middle;
+    padding: 15px;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  table th {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .table {
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  
+  .table td:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  
+  .table td:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  
+  .btn {
+    margin: 0 5px;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 14px;
+  }
 
-    .btn-group {
-        display: flex; /* Os botões ficarão alinhados na horizontal */
-        justify-content: center; /* Centraliza o grupo de botões */
-    }
+  .btn-group {
+    display: flex;
+    justify-content: center;
+  }
 
-    /* Sombra e margem adicionais ao redor da tabela */
-    .table-container {
-        padding: 100px;
-        background-color: #f8f9fa; /* Fundo claro */
-        border-radius: 10px; /* Arredondamento das bordas */
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra mais forte */
-        margin-bottom: 40px; /* Espaçamento inferior */
-    }
+  .table-container {
+    padding: 100px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    margin-bottom: 40px;
+  }
 
-    /* Estilos dos botões para diferentes ações */
-    .btn-warning { background-color: #ffc107; border-color: #ffc107; color: #212529; }
-    .btn-danger { background-color: #dc3545; border-color: #dc3545; color: white; }
-    .btn-secondary { background-color: #6c757d; border-color: #6c757d; color: white; }
-    .btn-primary { background-color: #007bff; border-color: #007bff; color: white; }
+  .btn-warning { background-color: #ffc107; border-color: #ffc107; color: #212529; }
+  .btn-danger { background-color: #dc3545; border-color: #dc3545; color: white; }
+  .btn-secondary { background-color: #6c757d; border-color: #6c757d; color: white; }
+  .btn-primary { background-color: #007bff; border-color: #007bff; color: white; }
+  .btn-success { background-color: #28a745; border-color: #28a745; color: white; } /* Estilo para o botão Reativar */
 </style>
 @endsection
