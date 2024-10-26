@@ -17,12 +17,12 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::delete('/profile', [ProfileController::class, 'desactivate'])->name('profile.desactivate');
 
     // Route::prefix('client', function () {
     Route::post('/client', [ClientController::class, 'store'])->name('client.store');
     Route::put('/client/{client}', [ClientController::class, 'update'])->name('client.update');
-    Route::delete('/client/{id}', [ClientController::class, 'destroy'])->name('client.destroy');
+    Route::delete('/client/{id}', [ClientController::class, 'desactivate'])->name('client.desactivate');
     Route::post('/client/{id}/reactivate', [ClientController::class, 'reactivate'])->name('client.reactivate');
     
 
@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/attendance', [AttendanceController::class, 'store'])->name('attendance.store');
     Route::put('/attendance/{attendance}', [AttendanceController::class, 'update'])->name('attendance.update');
-    Route::delete('/{attendance}', [AttendanceController::class, 'destroy'])->name('attendance.destroy');
+    Route::delete('/{attendance}', [AttendanceController::class, 'desactivate'])->name('attendance.desactivate');
 
     Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
     Route::get('/show/{attendance}', [AttendanceController::class, 'show'])->name('attendance.show');
@@ -45,7 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('attendance', function () {
         Route::post('/', [AttendanceController::class, 'store'])->name('attendance.store');
         Route::put('/', [AttendanceController::class, 'update'])->name('attendance.update');
-        Route::delete('/', [AttendanceController::class, 'destroy'])->name('attendance.destroy');
+        Route::delete('/', [AttendanceController::class, 'desactivate'])->name('attendance.desactivate');
 
         Route::get('/', [AttendanceController::class, 'index'])->name('attendance.index');
         Route::get('/', [AttendanceController::class, 'show'])->name('attendance.show');
@@ -56,7 +56,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('comment', function () {
         Route::post('/', [CommentController::class, 'store'])->name('comment.store');
         Route::put('/', [CommentController::class, 'update'])->name('comment.update');
-        Route::delete('/', [CommentController::class, 'destroy'])->name('comment.destroy');
+        Route::delete('/', [CommentController::class, 'desactivate'])->name('comment.desactivate');
 
         Route::get('/', [CommentController::class, 'index'])->name('comment.index');
         Route::get('/', [CommentController::class, 'show'])->name('comment.show');

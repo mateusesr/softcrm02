@@ -32,7 +32,7 @@
                     <td>
                         <div class="d-flex justify-content-center">
                             <a href="{{ route('attendance.edit', $attendance->id) }}" class="btn btn-sm btn-warning mx-1">Editar</a>
-                            <form action="{{ route('attendance.destroy', $attendance->id) }}" method="POST" class="d-inline">
+                            <form action="{{ route('attendance.desactivate', $attendance->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <br>

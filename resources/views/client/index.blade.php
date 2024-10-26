@@ -46,7 +46,7 @@
                 
                 <a href="{{ route('client.edit', $client->id) }}" class="btn btn-sm btn-warning mx-1">Editar</a>
                 @if($client->is_active)
-                    <form action="{{ route('client.destroy', $client->id) }}" method="POST" class="d-inline">
+                    <form action="{{ route('client.desactivate', $client->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
                         <br>
