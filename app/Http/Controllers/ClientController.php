@@ -87,16 +87,13 @@ class ClientController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
         $client = Client::findOrFail($id);
+        $client->is_active = false; // Define o cliente como inativo
+        $client->save(); // Salva as alterações
 
-        // Exclui os atendimentos relacionados
-        $client->attendances()->delete();
-
-        $client->delete();
-
-        return redirect()->route('clients.index')->with('success', 'Cliente excluído com sucesso.');
+        return redirect()->route('client.index')->with('message', 'Cliente inativado com sucesso!');
     }
 
     public function reactivate($id)
@@ -106,6 +103,15 @@ class ClientController extends Controller
         $client->save(); // Salva as alterações
 
         return redirect()->route('client.index')->with('message', 'Cliente reativado com sucesso!');
+    }
+
+    public function deactivate(string $id)
+    {
+        $client = Client::findOrFail($id);
+        $client->is_active = false; // Define o cliente como inativo
+        $client->save(); // Salva as alterações
+
+        return redirect()->route('client.index')->with('message', 'Cliente inativado com sucesso!');
     }
 
 }

@@ -43,7 +43,7 @@
             </td>
             <td>
               <div class="d-flex justify-content-center">
-              <br>
+                
                 <a href="{{ route('client.edit', $client->id) }}" class="btn btn-sm btn-warning mx-1">Editar</a>
                 @if($client->is_active)
                     <form action="{{ route('client.destroy', $client->id) }}" method="POST" class="d-inline">
@@ -60,19 +60,8 @@
                     </form>
                 @endif
                 <br>
-                
-                <br>
                 <a href="{{ route('attendance.index', ['client_id' => $client->id]) }}" class="btn btn-sm btn-primary mx-1">Atendimentos</a>
               </div>
-            </td>
-            <!-- <td>
-              <form action="{{ route('clients.destroy', $client->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este cliente?');">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger">Excluir</button>
-              </form>
-            </td> -->
-          </tr>
         @endforeach
       </tbody>
     </table>

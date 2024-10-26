@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
     // Route::prefix('client', function () {
     Route::post('/client', [ClientController::class, 'store'])->name('client.store');
     Route::put('/client/{client}', [ClientController::class, 'update'])->name('client.update');
-    Route::delete('/client/{client}', [ClientController::class, 'destroy'])->name('client.destroy');
+    Route::delete('/client/{id}', [ClientController::class, 'destroy'])->name('client.destroy');
     Route::post('/client/{id}/reactivate', [ClientController::class, 'reactivate'])->name('client.reactivate');
     
 
