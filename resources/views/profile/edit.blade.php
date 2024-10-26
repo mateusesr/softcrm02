@@ -26,7 +26,7 @@
             </div>
 
             <div class="flex items-center justify-end mt-3">
-                <button type="submit" class="btn btn-primary bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button type="submit" class="btn btn-primary bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">
                     Atualizar
                 </button>
             </div>

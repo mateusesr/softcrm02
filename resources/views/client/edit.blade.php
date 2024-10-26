@@ -64,9 +64,11 @@
                 <div class="mb-3">
                     <label for="city_id" class="form-label">Cidade</label>
                     <select class="form-control" id="city_id" name="city_id" required>
-                        <option value="" disabled selected>Escolha a sua cidade</option>
+                        <option value="" disabled>Escolha a sua cidade</option>
                         @foreach($cities as $city)
-                            <option value="{{ $city->id }}">{{ $city->uf }} - {{$city->name}}</option>
+                            <option value="{{ $city->id }}" {{ $client->city_id == $city->id ? 'selected' : '' }}>
+                                {{ $city->uf }} - {{ $city->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
