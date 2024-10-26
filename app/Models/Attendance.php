@@ -11,10 +11,9 @@ class Attendance extends Model
     protected $fillable = [
         'client_id',
         'type_id',
-        'description',
-        'solution',
+        'date',
         'status',
-        'updated_at',
+        'description',
     ];
 
     public function client() {

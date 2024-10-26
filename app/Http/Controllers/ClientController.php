@@ -12,10 +12,20 @@ class ClientController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $clients = Client::with('city')->get();
-        // dd($clients);
+        $query = Client::with('city');
+
+        // Verifica se um status foi selecionado e aplica o filtro
+        if ($request->has('status') && $request->status !== '') {
+            if ($request->status == 'ativo') {
+                $query->where('is_active', true);
+            } elseif ($request->status == 'inativo') {
+                $query->where('is_active', false);
+            }
+        }
+
+        $clients = $query->get(); // Obtém os clientes com base na consulta filtrada
         return view('client.index', compact("clients"));
     }
 
@@ -44,16 +54,19 @@ class ClientController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $client = Client::findOrFail($id);
+        $cities = City::orderBy('uf')->orderBy('name')->get(); // Adicionando a busca das cidades
+        return view('client.show', compact('client', 'cities')); // Passando as cidades para a view
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        $client = Client::whereId($id)->first();
-        return view("client.edit", compact('client'));
+        $client = Client::findOrFail($id);
+        $cities = City::orderBy('uf')->orderBy('name')->get(); // Ordenando as cidades por UF e nome
+        return view('client.edit', compact('client', 'cities'));
     }
 
     /**
@@ -67,30 +80,29 @@ class ClientController extends Controller
             'phone' => $request->phone,
             'city_id' => $request->city_id
         ]);
-        if ($client) {
-            $client = Client::whereId($id)->first();
-            $message = 'Cliente Atualizado com Sucesso!';
-        } else {
-            $client = Client::whereId($id)->first();
-            $message = 'Erro ao Atualizar!';
-        }
-        return view("client.edit", compact('client', 'message'));
+
+        return redirect()->route('client.index')->with('message', 'Cliente atualizado com sucesso!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-{
-    $deleted = Client::destroy($id);
+    {
+        $client = Client::findOrFail($id);
+        $client->is_active = false; // Define o cliente como inativo
+        $client->save(); // Salva as alterações
 
-    if ($deleted) {
- 
-        return redirect()->route('client.index');
-    } else {
-
-        return redirect()->route('client.index');
+        return redirect()->route('client.index')->with('message', 'Cliente inativado com sucesso!');
     }
-}
+
+    public function reactivate($id)
+    {
+        $client = Client::findOrFail($id);
+        $client->is_active = true; // Define o cliente como ativo
+        $client->save(); // Salva as alterações
+
+        return redirect()->route('client.index')->with('message', 'Cliente reativado com sucesso!');
+    }
 
 }
