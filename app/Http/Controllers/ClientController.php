@@ -65,7 +65,7 @@ class ClientController extends Controller
     public function edit($id)
     {
         $client = Client::findOrFail($id);
-        $cities = City::orderBy('uf')->orderBy('name')->get(); // Ordenando as cidades por UF e nome
+        $cities = City::orderBy('uf')->orderBy('name')->get(); // Obter a lista de cidades ordenadas
         return view('client.edit', compact('client', 'cities'));
     }
 

@@ -15,6 +15,7 @@
                 <th>Cliente</th>
                 <th>Data</th>
                 <th>Status</th>
+                <th>Tipo</th>
                 <th>Descrição</th>
                 <th>Ações</th>
             </tr>
@@ -26,6 +27,7 @@
                     <td>{{ $attendance->client->name }}</td> 
                     <td>{{ \Carbon\Carbon::parse($attendance->date)->format('d/m/Y') }}</td> <!-- Use a coluna date -->
                     <td>{{ $attendance->status }}</td>
+                    <td>{{ $attendance->type->name }}</td>
                     <td>{{ $attendance->description }}</td>
                     <td>
                         <div class="d-flex justify-content-center">
