@@ -20,4 +20,9 @@ class Client extends Model
         return $this->belongsTo(City::class);
     }
 
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
+
 }

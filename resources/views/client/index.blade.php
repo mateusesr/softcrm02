@@ -61,6 +61,13 @@
                 <a href="{{ route('attendance.index', ['client_id' => $client->id]) }}" class="btn btn-sm btn-primary mx-1">Atendimentos</a>
               </div>
             </td>
+            <!-- <td>
+              <form action="{{ route('clients.destroy', $client->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este cliente?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Excluir</button>
+              </form>
+            </td> -->
           </tr>
         @endforeach
       </tbody>
