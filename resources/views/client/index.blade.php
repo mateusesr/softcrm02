@@ -43,18 +43,23 @@
             </td>
             <td>
               <div class="d-flex justify-content-center">
+              <br>
                 <a href="{{ route('client.edit', $client->id) }}" class="btn btn-sm btn-warning mx-1">Editar</a>
                 @if($client->is_active)
-                    <form action="{{ route('client.deactivate', $client->id) }}" method="POST" class="d-inline">
+                    <form action="{{ route('client.destroy', $client->id) }}" method="POST" class="d-inline">
                         @csrf
+                        @method('DELETE')
+                        <br>
                         <button type="submit" class="btn btn-sm btn-danger mx-1">Inativar</button>
                     </form>
                 @else
                     <form action="{{ route('client.reactivate', $client->id) }}" method="POST" class="d-inline">
                         @csrf
+                        <br>
                         <button type="submit" class="btn btn-sm btn-success mx-1">Reativar</button>
                     </form>
                 @endif
+                <br>
                 <a href="{{ route('attendance.index', ['client_id' => $client->id]) }}" class="btn btn-sm btn-primary mx-1">Atendimentos</a>
               </div>
             </td>
