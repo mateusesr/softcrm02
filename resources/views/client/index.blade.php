@@ -59,6 +59,7 @@
                         <button type="submit" class="btn btn-sm btn-success mx-1">Reativar</button>
                     </form>
                 @endif
+                
                 <br>
                 <a href="{{ route('attendance.index', ['client_id' => $client->id]) }}" class="btn btn-sm btn-primary mx-1">Atendimentos</a>
               </div>
