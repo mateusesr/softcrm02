@@ -72,6 +72,14 @@ class AttendanceController extends Controller
         return redirect()->route('attendance.index')->with('message', 'Atendimento atualizado com sucesso!');
     }
 
+    public function destroy($id)
+    {
+        $attendance = Attendance::findOrFail($id);
+        $attendance->delete();
+
+        return redirect()->route('attendances.index')->with('success', 'Atendimento excluído com sucesso.');
+    }
+
     /**
      * Remove the specified resource from storage.
      */

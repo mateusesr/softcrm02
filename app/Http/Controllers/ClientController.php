@@ -84,6 +84,20 @@ class ClientController extends Controller
         return redirect()->route('client.index')->with('message', 'Cliente atualizado com sucesso!');
     }
 
+
+    public function destroy(string $id)
+{
+    $deleted = Client::destroy($id);
+
+    if ($deleted) {
+ 
+        return redirect()->route('client.index');
+    } else {
+
+        return redirect()->route('client.index');
+    }
+}
+
     /**
      * Remove the specified resource from storage.
      */

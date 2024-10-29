@@ -17,11 +17,13 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::delete('/profile', [ProfileController::class, 'desactivate'])->name('profile.desactivate');
 
     // Route::prefix('client', function () {
     Route::post('/client', [ClientController::class, 'store'])->name('client.store');
     Route::put('/client/{client}', [ClientController::class, 'update'])->name('client.update');
+    Route::delete('/{client}', [ClientController::class, 'destroy'])->name('client.destroy');
     Route::delete('/client/{id}', [ClientController::class, 'desactivate'])->name('client.desactivate');
     Route::post('/client/{id}/reactivate', [ClientController::class, 'reactivate'])->name('client.reactivate');
     
@@ -34,7 +36,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/attendance', [AttendanceController::class, 'store'])->name('attendance.store');
     Route::put('/attendance/{attendance}', [AttendanceController::class, 'update'])->name('attendance.update');
-    Route::delete('/{attendance}', [AttendanceController::class, 'desactivate'])->name('attendance.desactivate');
+    Route::delete('/{attendance}', [AttendanceController::class, 'destroy'])->name('attendance.destroy');
 
     Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
     Route::get('/show/{attendance}', [AttendanceController::class, 'show'])->name('attendance.show');
@@ -66,6 +68,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('clients', ClientController::class);
+Route::resource('attendances', AttendanceController::class);
 
 require __DIR__ . '/auth.php';
 
