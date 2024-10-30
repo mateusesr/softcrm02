@@ -20,13 +20,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::delete('/profile', [ProfileController::class, 'desactivate'])->name('profile.desactivate');
 
-    // Route::prefix('client', function () {
     Route::post('/client', [ClientController::class, 'store'])->name('client.store');
     Route::put('/client/{client}', [ClientController::class, 'update'])->name('client.update');
     Route::delete('/{client}', [ClientController::class, 'destroy'])->name('client.destroy');
     Route::delete('/client/{id}', [ClientController::class, 'desactivate'])->name('client.desactivate');
     Route::post('/client/{id}/reactivate', [ClientController::class, 'reactivate'])->name('client.reactivate');
-    
 
     Route::get('/client', [ClientController::class, 'index'])->name('client.index');
     Route::get('/show/{client}', [ClientController::class, 'show'])->name('client.show');
@@ -42,30 +40,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/show/{attendance}', [AttendanceController::class, 'show'])->name('attendance.show');
     Route::get('/attendance/create', [AttendanceController::class, 'create'])->name('attendance.create');
     Route::get('/attendance/{attendance}/edit', [AttendanceController::class, 'edit'])->name('attendance.edit');
-    // });
-
-    Route::prefix('attendance', function () {
-        Route::post('/', [AttendanceController::class, 'store'])->name('attendance.store');
-        Route::put('/', [AttendanceController::class, 'update'])->name('attendance.update');
-        Route::delete('/', [AttendanceController::class, 'desactivate'])->name('attendance.desactivate');
-
-        Route::get('/', [AttendanceController::class, 'index'])->name('attendance.index');
-        Route::get('/', [AttendanceController::class, 'show'])->name('attendance.show');
-        Route::get('/', [AttendanceController::class, 'create'])->name('attendance.create');
-        Route::get('/', [AttendanceController::class, 'edit'])->name('attendance.edit');
-    });
-
-    Route::prefix('comment', function () {
-        Route::post('/', [CommentController::class, 'store'])->name('comment.store');
-        Route::put('/', [CommentController::class, 'update'])->name('comment.update');
-        Route::delete('/', [CommentController::class, 'desactivate'])->name('comment.desactivate');
-
-        Route::get('/', [CommentController::class, 'index'])->name('comment.index');
-        Route::get('/', [CommentController::class, 'show'])->name('comment.show');
-        Route::get('/', [CommentController::class, 'create'])->name('comment.create');
-        Route::get('/', [CommentController::class, 'edit'])->name('comment.edit');
-    });
 });
+
+Route::resource('comment', CommentController::class);
 
 Route::resource('clients', ClientController::class);
 Route::resource('attendances', AttendanceController::class);

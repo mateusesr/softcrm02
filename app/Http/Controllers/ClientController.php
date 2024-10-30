@@ -62,11 +62,10 @@ class ClientController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Client $client)
     {
-        $client = Client::findOrFail($id);
-        $cities = City::orderBy('uf')->orderBy('name')->get(); // Obter a lista de cidades ordenadas
-        return view('client.edit', compact('client', 'cities'));
+        $cities = City::all(); // Obtém todas as cidades
+        return view('client.edit', compact('client', 'cities')); // Passa o cliente e a lista de cidades
     }
 
     /**

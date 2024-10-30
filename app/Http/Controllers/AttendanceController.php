@@ -2,89 +2,64 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Attendance; // Certifique-se de que o modelo Attendance está importado
-use App\Models\Client; // Certifique-se de que o modelo Client está importado
+use App\Models\Attendance;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(Request $request)
+    public function index()
     {
-        $clientId = $request->get('client_id');
-
-        if ($clientId) {
-            $attendances = Attendance::where('client_id', $clientId)->get();
-        } else {
-            $attendances = Attendance::all();
-        }
-
+        $attendances = Attendance::all();
         return view('attendance.index', compact('attendances'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('attendance.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
+        $request->validate([
+            'date' => 'required|date',
+            'status' => 'required|boolean',
+            // Adicione outras validações conforme necessário
+        ]);
 
-        $attendance = Attendance::create($request->toArray());
+        Attendance::create($request->all());
 
-        return view("attendance.create", compact('attendance'));
+        return redirect()->route('attendance.index')->with('success', 'Atendimento criado com sucesso.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Attendance $attendance)
     {
-        //
+        return view('attendance.show', compact('attendance'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
+    public function edit(Attendance $attendance)
     {
-        $attendance = Attendance::findOrFail($id);
-        $clients = Client::all(); // Se precisar listar clientes para seleção
+        $clients = Client::all();
         return view('attendance.edit', compact('attendance', 'clients'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, Attendance $attendance)
     {
-        $attendance = Attendance::findOrFail($id);
-        $attendance->update($request->only(['client_id', 'type_id', 'date', 'status', 'description']));
+        $request->validate([
+            'date' => 'required|date',
+            'status' => 'required|boolean',
+            // Adicione outras validações conforme necessário
+        ]);
 
-        return redirect()->route('attendance.index')->with('message', 'Atendimento atualizado com sucesso!');
+        $attendance->update($request->all());
+
+        return redirect()->route('attendance.index')->with('success', 'Atendimento atualizado com sucesso.');
     }
 
-    public function destroy($id)
+    public function destroy(Attendance $attendance)
     {
-        $attendance = Attendance::findOrFail($id);
         $attendance->delete();
 
-        return redirect()->route('attendances.index')->with('success', 'Atendimento excluído com sucesso.');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function desactivate(string $id)
-    {
-        //
+        return redirect()->route('attendance.index')->with('success', 'Atendimento excluído com sucesso.');
     }
 }

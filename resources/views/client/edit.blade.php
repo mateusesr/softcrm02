@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
+
+@section('content')
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Form</title>
+    <title>Editar Atendimento</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style> 
-        
+    <style>
         body,
         html {
             height: 100%;
@@ -31,58 +31,33 @@
         }
     </style>
 </head>
-
-<body>
-
-    <div class="container form-container">
-        <div class="form-box">
-            @if (isset($message))
-            <div class="alert alert-success" role="alert">
-                Cliente salvo com sucesso!
-            </div>
-            @endif
-
-            <h2 class="text-center mb-4">Editar Cliente</h2>
-            <form action='{{ "/client/$client->id" }}' method="POST">
-                @csrf
-                @method('put')
-                <div class="mb-3">
-                    <label for="name" class="form-label">Nome</label>
-                    <input value='{{ $client->name }}' type="text" class="form-control" id="name" name="name"
-                        placeholder="Digite seu nome" required>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input value='{{ $client->email }}' type="email" class="form-control" id="email"
-                        name="email" placeholder="Digite seu email" required>
-                </div>
-                <div class="mb-3">
-                    <label for="phone" class="form-label">Telefone</label>
-                    <input value='{{ $client->phone }}' type="tel" class="form-control" id="phone"
-                        name="phone" placeholder="Digite seu numero de telefone" required>
-                </div>
-                <div class="mb-3">
-                    <label for="city_id" class="form-label">Cidade</label>
-                    <select class="form-control" id="city_id" name="city_id" required>
-                        <option value="" disabled>Escolha a sua cidade</option>
-                        @foreach($cities as $city)
-                            <option value="{{ $city->id }}" {{ $client->city_id == $city->id ? 'selected' : '' }}>
-                                {{ $city->uf }} - {{ $city->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                    <br>
-                    <a href="{{ route('client.index') }}" class="btn btn-secondary">Cancelar</a>
-                </div>
-            </form>
+<div class="container">
+    <h1>Editar Cliente</h1>
+    <form action="{{ route('client.update', $client->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+        <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" name="name" id="name" value="{{ $client->name }}" class="form-control" required>
         </div>
-    </div>
-
-    <!-- Bootstrap JS and Popper.js -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" value="{{ $client->email }}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Telefone</label>
+            <input type="text" name="phone" id="phone" value="{{ $client->phone }}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="city_id">Cidade</label>
+            <select name="city_id" id="city_id" class="form-control" required>
+                <!-- Supondo que você tenha uma lista de cidades -->
+                @foreach ($cities as $city)
+                    <option value="{{ $city->id }}" {{ $client->city_id == $city->id ? 'selected' : '' }}>{{ $city->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Atualizar</button>
+    </form>
+</div>
+@endsection

@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("client_id");
             $table->unsignedBigInteger("type_id");
+            $table->date('date');
             $table->text("description");
             $table->enum("status",["Ativo","Em espera","Finalizado"]);
+
             $table->timestamps();
 
             $table->foreign('client_id')->references("id")->on("clients");

@@ -1,60 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2 class="text-center mb-4" style="color: white; font-size: 24px;">Listagem de Atendimentos</h2>
-
-    @if (request()->get('client_id'))
-        <h4 class="text-center mb-4" style="color: gray; font-size: 15px;">Atendimentos para o Cliente ID:
-            {{ request()->get('client_id') }}</h4>
-    @endif
-
-    <div class="table-container">
-        <table class="table table-bordered table-hover table-striped text-center align-middle"
-            style="background-color: white; border-radius: 8px; overflow: hidden;">
-            <thead class="thead-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Cliente</th>
-                    <th>Data</th>
-                    <th>Status</th>
-                    <th>Tipo</th>
-                    <th>Descrição</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <div class="d-flex justify-content-center mb-3">
-                    <a href="{{ route('attendances.create') }}" class="btn btn-primary">Novo Atendimento</a>
-                </div>
-                @foreach ($attendances as $attendance)
-                    <tr>
-                        <td>{{ $attendance->id }}</td>
-                        <td>{{ $attendance->client->name }}</td>
-                        <td>{{ \Carbon\Carbon::parse($attendance->date)->format('d/m/Y') }}</td>
-                        <td>{{ $attendance->status }}</td>
-                        <td>{{ $attendance->type->name }}</td>
-                        <td>{{ $attendance->description }}</td>
-                        <td>
-                            <div class="d-flex justify-content-center">
-                                <a href="{{ route('attendance.edit', $attendance->id) }}"
-                                    class="btn btn-sm btn-warning mx-1">Editar</a>
-                                <form action="{{ route('attendances.destroy', $attendance->id) }}" method="POST"
-                                    onsubmit="return confirm('Tem certeza que deseja excluir este atendimento?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <br>
-                                    <button type="submit" class="btn btn-sm btn-danger mx-1">Excluir</button>
-                                </form>
-                                <a href="{{ route('comment.create', ['attendance_id' => $attendance->id]) }}" class="btn btn-success">Adicionar Comentário</a>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-@endsection
+<div class="container">
+    <h1>Comentários</h1>
+    <a href="{{ route('comment.create') }}" class="btn btn-primary">Novo Comentário</a>
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descrição</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($comments as $comment)
+            <tr>
+                <td>{{ $comment->id }}</td>
+                <td>{{ $comment->description }}</td>
+                <td>
+                    <a href="{{ route('comment.show', $comment->id) }}" class="btn btn-primary">Ver</a>
+                    <a href="{{ route('comment.edit', $comment->id) }}" class="btn btn-warning">Editar</a>
+                    <form action="{{ route('comment.destroy', $comment->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este comentário?');">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 
 <style>
     h2 {
@@ -168,3 +144,6 @@
         color: white;
     }
 </style>
+
+
+@endsection 
