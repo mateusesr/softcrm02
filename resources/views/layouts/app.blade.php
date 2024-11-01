@@ -14,6 +14,7 @@
                     <a href="{{ route('client.index') }}" class="text-white hover:bg-gray-700 px-3 py-2 rounded">Clientes</a>
                     <a href="{{ route('attendance.index') }}" class="text-white hover:bg-gray-700 px-3 py-2 rounded">Atendimentos</a>
                     <a href="{{ route('comment.index') }}" class="text-white hover:bg-gray-700 px-3 py-2 rounded">Comentários</a>
+                    <a href="{{ route('city.index') }}" class="text-white hover:bg-gray-700 px-3 py-2 rounded">Cidades</a>
                 </div>
                 <div class="flex space-x-4">
                     @auth

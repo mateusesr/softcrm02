@@ -46,7 +46,7 @@
                                     <br>
                                     <button type="submit" class="btn btn-sm btn-danger mx-1">Excluir</button>
                                 </form>
-                                <a href="{{ route('comment.create', ['attendance_id' => $attendance->id]) }}" class="btn btn-success">Adicionar Comentário</a>
+                                <a href="{{ route('comment.create', ['attendance_id' => $attendance->id]) }}" class="btn btn-secondary">Criar Comentário</a>
                             </div>
                         </td>
                     </tr>
