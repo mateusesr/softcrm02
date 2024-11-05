@@ -1,59 +1,65 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2 class="text-center mb-4" style="color: white; font-size: 24px;">Listagem de Atendimentos</h2>
+<h2 class="text-center mb-4" style="color: white; font-size: 24px;">Listagem de Atendimentos</h2>
 
-    @if (request()->get('client_id'))
-        <h4 class="text-center mb-4" style="color: gray; font-size: 15px;">Atendimentos para o Cliente ID:
-            {{ request()->get('client_id') }}</h4>
-    @endif
+@if (request()->get('client_id'))
+<h4 class="text-center mb-4" style="color: gray; font-size: 15px;">Atendimentos para o Cliente ID:
+    {{ request()->get('client_id') }}
+</h4>
+@endif
 
-    <div class="table-container">
-        <table class="table table-bordered table-hover table-striped text-center align-middle"
-            style="background-color: white; border-radius: 8px; overflow: hidden;">
-            <thead class="thead-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Cliente</th>
-                    <th>Data</th>
-                    <th>Status</th>
-                    <th>Tipo</th>
-                    <th>Descrição</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
+<div class="table-container">
+    <table class="table table-bordered table-hover table-striped text-center align-middle"
+        style="background-color: white; border-radius: 8px; overflow: hidden;">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Data</th>
+                <th>Status</th>
+                <th>Tipo</th>
+                <th>Descrição</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
 
-                <div class="d-flex justify-content-center mb-3">
-                    <a href="{{ route('attendances.create') }}" class="btn btn-primary">Novo Atendimento</a>
-                </div>
-                @foreach ($attendances as $attendance)
-                    <tr>
-                        <td>{{ $attendance->id }}</td>
-                        <td>{{ $attendance->client->name }}</td>
-                        <td>{{ \Carbon\Carbon::parse($attendance->date)->format('d/m/Y') }}</td>
-                        <td>{{ $attendance->status }}</td>
-                        <td>{{ $attendance->type->name }}</td>
-                        <td>{{ $attendance->description }}</td>
-                        <td>
-                            <div class="d-flex justify-content-center">
-                                <a href="{{ route('attendance.edit', $attendance->id) }}"
-                                    class="btn btn-sm btn-warning mx-1">Editar</a>
-                                <form action="{{ route('attendances.destroy', $attendance->id) }}" method="POST"
-                                    onsubmit="return confirm('Tem certeza que deseja excluir este atendimento?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <br>
-                                    <button type="submit" class="btn btn-sm btn-danger mx-1">Excluir</button>
-                                </form>
-                                <a href="{{ route('comment.create', ['attendance_id' => $attendance->id]) }}" class="btn btn-secondary">Criar Comentário</a>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+            <div class="d-flex justify-content-center mb-3">
+                <a href="{{ route('attendances.create') }}" class="btn btn-primary">Novo Atendimento</a>
+            </div>
+            @foreach ($attendances as $attendance)
+            <tr>
+                <td>{{ $attendance->id }}</td>
+                <td>{{ $attendance->client->name }}</td>
+                <td>{{ \Carbon\Carbon::parse($attendance->date)->format('d/m/Y') }}</td>
+                <td>{{ $attendance->status }}</td>
+                <td>{{ $attendance->type->name }}</td>
+                <td>{{ $attendance->description }}</td>
+                <td>
+                    <div class="d-flex justify-content-center">
+                        <a href="{{ route('attendance.edit', $attendance->id) }}"
+                            class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-edit list-icon">
+                                stylus
+                            </span></a>
+                        <form action="{{ route('attendances.destroy', $attendance->id) }}" method="POST"
+                            onsubmit="return confirm('Tem certeza que deseja excluir este atendimento?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-delete list-icon">
+                                    delete
+                                </span></button>
+                        </form>
+                        <a href="{{ route('comment.create', ['attendance_id' => $attendance->id]) }}" class="btn"><span class="material-symbols-outlined list-icon-add list-icon">
+                                note_add
+                            </span></a>
+                    </div>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 @endsection
 
 <style>
@@ -74,6 +80,9 @@
         /* Linha inferior de borda nas células */
     }
 
+    
+
+    
     table th {
         background-color: #007bff;
         /* Cor de fundo para o cabeçalho */
@@ -131,16 +140,8 @@
     }
 
     /* Sombra e margem adicionais ao redor da tabela */
-    .table-container {
-        padding: 100px;
-        background-color: #f8f9fa;
-        /* Fundo claro */
+    .table-container { 
         border-radius: 10px;
-        /* Arredondamento das bordas */
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        /* Sombra mais forte */
-        margin-bottom: 40px;
-        /* Espaçamento inferior */
     }
 
     /* Estilos dos botões para diferentes ações */

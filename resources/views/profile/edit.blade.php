@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen flex items-center justify-center bg-gray-100">
+<div class="min-h-screen flex items-center justify-center">
     <div class="w-1/2 max-w-sm px-4 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
         <h1 class="text-center text-xl font-bold mb-4">Editar Perfil</h1>
 
         @if (session('status'))
-            <div class="alert alert-success" role="alert">
+            <div class="alert alert-success green-box" role="alert">
                 {{ session('status') }}
             </div>
         @endif
@@ -34,3 +34,13 @@
     </div>
 </div>
 @endsection
+
+<style>
+ .green-box{
+    border:2px #00800080 solid;
+    border-radius:0.5em;
+    background-color: #00800080;
+    padding: 3px;
+    text-align: center;
+ }
+</style>

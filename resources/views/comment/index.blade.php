@@ -18,12 +18,18 @@
                 <td>{{ $comment->id }}</td>
                 <td>{{ $comment->description }}</td>
                 <td>
-                    <a href="{{ route('comment.show', $comment->id) }}" class="btn btn-primary">Ver</a>
-                    <a href="{{ route('comment.edit', $comment->id) }}" class="btn btn-warning">Editar</a>
+                    <a title="Ver Comentário" href="{{ route('comment.show', $comment->id) }}" class="btn "><span class="material-symbols-outlined list-icon">
+                            folder_eye
+                        </span></a>
+                    <a title="Editar" href="{{ route('comment.edit', $comment->id) }}" class="btn"><span class="material-symbols-outlined list-icon-edit list-icon">
+                            stylus
+                        </span></a>
                     <form action="{{ route('comment.destroy', $comment->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este comentário?');">Excluir</button>
+                        <button title="Excluir" type="submit" class="btn" onclick="return confirm('Tem certeza que deseja excluir este comentário?');"><span class="material-symbols-outlined list-icon-delete list-icon">
+                                delete
+                            </span></button>
                     </form>
                 </td>
             </tr>
@@ -48,6 +54,7 @@
         /* Espaçamento interno das células */
         border-bottom: 1px solid #dee2e6;
         /* Linha inferior de borda nas células */
+        text-align: center;
     }
 
     table th {
@@ -108,15 +115,7 @@
 
     /* Sombra e margem adicionais ao redor da tabela */
     .table-container {
-        padding: 100px;
-        background-color: #f8f9fa;
-        /* Fundo claro */
         border-radius: 10px;
-        /* Arredondamento das bordas */
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        /* Sombra mais forte */
-        margin-bottom: 40px;
-        /* Espaçamento inferior */
     }
 
     /* Estilos dos botões para diferentes ações */
@@ -146,4 +145,4 @@
 </style>
 
 
-@endsection 
+@endsection

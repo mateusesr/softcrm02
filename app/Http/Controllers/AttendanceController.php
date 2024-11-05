@@ -8,9 +8,16 @@ use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $attendances = Attendance::all();
+        $clientId = $request->get('client_id');
+
+        if ($clientId) {
+            $attendances = Attendance::where('client_id', $clientId)->get();
+        } else {
+            $attendances = Attendance::all();
+        }
+
         return view('attendance.index', compact('attendances'));
     }
 
