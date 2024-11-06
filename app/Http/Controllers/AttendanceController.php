@@ -22,10 +22,11 @@ class AttendanceController extends Controller
 
     public function create(Request $request)
 {
-    $client_id = $request->get('client_id'); // Obtém o client_id da requisição
-    $clients = Client::all(); // Obtém todos os clientes
-    
-    return view('attendance.create', compact('client_id', 'clients')); // 
+        $client_id = $request->get('client_id'); // Obtém o client_id da requisição
+        $clients = Client::all(); // Obtém todos os clientes
+        $types = Type::all(); // Obtém todos os tipos de atendimento
+
+        return view('attendance.create', compact('client_id', 'clients', 'types')); 
 }
 
     public function store(Request $request)

@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-       body,
+        body,
         html {
             height: 100%;
         }
@@ -36,9 +36,9 @@
     <div class="container form-container">
         <div class="form-box">
             @if (isset($attendance))
-                <div class="alert alert-success" role="alert">
-                    Atendimento salvo com sucesso!
-                </div>
+            <div class="alert alert-success" role="alert">
+                Atendimento salvo com sucesso!
+            </div>
             @endif
 
             <h2 class="text-center mb-4">Criar Atendimento</h2>
@@ -48,9 +48,9 @@
                     <label for="client_id" class="form-label">Cliente</label>
                     <select class="form-control" id="client_id" name="client_id" required>
                         @foreach($clients as $client)
-                            <option value="{{ $client->id }}" {{ isset($client_id) && $client_id == $client->id ? 'selected' : '' }}>
-                                {{ $client->name }}
-                            </option>
+                        <option value="{{ $client->id }}" {{ isset($client_id) && $client_id == $client->id ? 'selected' : '' }}>
+                            {{ $client->name }}
+                        </option>
                         @endforeach
                     </select>
                 </div>
@@ -58,9 +58,9 @@
                     <label for="type_id" class="form-label">Tipo</label>
                     <select class="form-control" id="type_id" name="type_id" required>
                         <option value="">Selecione o tipo</option>
-                        <option value="1">Presencial</option>
-                        <option value="2">Remoto</option>
-                        <option value="3">Hibrido</option>
+                        @foreach ($types as $type)
+                        <option value="{{ $type->id }}">{{ $type->name }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="mb-3">
@@ -76,7 +76,7 @@
                         <option value="3">Finalizado</option>
                     </select>
                 </div>
-                
+
                 <div class="mb-3">
                     <label for="description" class="form-label">Descrição</label>
                     <input type="text" class="form-control" id="description" name="description"
