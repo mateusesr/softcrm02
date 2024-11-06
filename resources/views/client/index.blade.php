@@ -2,99 +2,94 @@
 
 @section('content')
 <div class="client-container">
-<h2 class="text-center mb-4" style="color: white; font-size: 24px;">Listagem de Clientes</h2>
+  <h2 class="text-center mb-4" style="color: white; font-size: 24px;">Listagem de Clientes</h2>
 
-<!-- Formulário de filtro estilizado -->
-<form method="GET" action="{{ route('client.index') }}" class="mb-3 d-flex justify-content-center" style="padding: 20px;">
-  <select name="status" class="form-select me-2"
-    style="width: 150px; border-radius: 8px; padding: 8px; font-size: 16px; color: #333;">
-    <option value="" style="background-color: #f9f9f9;">Todos</option>
-    <option value="ativo" {{ request('status') == 'ativo' ? 'selected' : '' }} style="background-color: #c6f6d5;">
-      Ativos</option>
-    <option value="inativo" {{ request('status') == 'inativo' ? 'selected' : '' }}
-      style="background-color: #f8d7da;">Inativos</option>
-  </select>
-  <button type="submit" class="btn btn-primary ms-2"
-    style="border-radius: 8px; padding: 8px; font-size: 16px;">Filtrar</button>
-</form>
+  <form method="GET" action="{{ route('client.index') }}" class="mb-3 d-flex justify-content-center" style="padding: 20px;">
+    <select name="status" class="form-select me-2"
+      style="width: 150px; border-radius: 8px; padding: 8px; font-size: 16px; color: #333;">
+      <option value="" style="background-color: #f9f9f9;">Todos</option>
+      <option value="ativo" {{ request('status') == 'ativo' ? 'selected' : '' }} style="background-color: #c6f6d5;">
+        Ativos</option>
+      <option value="inativo" {{ request('status') == 'inativo' ? 'selected' : '' }}
+        style="background-color: #f8d7da;">Inativos</option>
+    </select>
+    <button type="submit" class="btn btn-primary ms-2"
+      style="border-radius: 8px; padding: 8px; font-size: 16px;">Filtrar</button>
+  </form>
 
-<div class="table-container">
-  <table class="table table-bordered table-hover table-striped text-center align-middle"
-    style="background-color: white; border-radius: 8px; overflow: hidden;">
-    <thead class="thead-dark">
-      <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Email</th>
-        <th>Telefone</th>
-        <th>Cidade</th>
-        <th>Status</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
+  <div class="table-container">
+    <table class="table table-bordered table-hover table-striped text-center align-middle"
+      style="background-color: white; border-radius: 8px; overflow: hidden;">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Telefone</th>
+          <th>Cidade</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
 
-      <div class="d-flex justify-content-center mb-3 margin-left">
-        <a href="{{ route('clients.create') }}" class="btn btn-primary">Novo Cliente</a>
-      </div>
+        <div class="d-flex justify-content-center mb-3 margin-left">
+          <a href="{{ route('clients.create') }}" class="btn btn-primary">Novo Cliente</a>
+        </div>
 
-      @foreach ($clients as $client)
-      <tr>
-        <td>{{ $client->id }}</td>
-        <td>{{ $client->name }}</td>
-        <td>{{ $client->email }}</td>
-        <td>{{ $client->phone }}</td>
-        <td>{{ $client->city->name }}</td>
-        <td>
-          @if ($client->is_active)
-          <span class="badge bg-success">Ativo</span>
-          @else
-          <span class="badge bg-danger">Inativo</span>
-          @endif
-        </td>
-        <td>
-          <div class="d-flex justify-content-center">
-
-            <a href="{{ route('client.edit', $client->id) }}"
-              class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-edit list-icon">
-                stylus
-              </span></a>
+        @foreach ($clients as $client)
+        <tr>
+          <td>{{ $client->id }}</td>
+          <td>{{ $client->name }}</td>
+          <td>{{ $client->email }}</td>
+          <td>{{ $client->phone }}</td>
+          <td>{{ $client->city->name }}</td>
+          <td>
             @if ($client->is_active)
-            <form action="{{ route('client.desactivate', $client->id) }}" method="POST"
-              class="d-inline">
-              @csrf
-              @method('DELETE')
-              
-              <button type="submit" class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-delete list-icon">
-                  cancel
-                </span></button>
-            </form>
+            <span class="badge bg-success">Ativo</span>
             @else
-            <form action="{{ route('client.reactivate', $client->id) }}" method="POST"
-              class="d-inline">
-              @csrf
-
-              <button type="submit" class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-add list-icon">
-                  power_settings_circle
-                </span></button>
-            </form>
+            <span class="badge bg-danger">Inativo</span>
             @endif
-    
-            <a title="Ver Atendimentos" href="{{ route('attendance.index', ['client_id' => $client->id]) }}"
-              class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon">
-                table_eye
-              </span></a>
-          </div>
-          @endforeach
-    </tbody>
-  </table>
-</div>
+          </td>
+          <td>
+            <div class="d-flex justify-content-center">
 
-@if (session('message'))
-<div class="alert alert-success">
-  {{ session('message') }}
-</div>
-@endif
+              <a href="{{ route('client.edit', $client->id) }}"
+                class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-edit list-icon">
+                  stylus
+                </span></a>
+              @if ($client->is_active)
+              <form action="{{ route('client.desactivate', $client->id) }}" method="POST"
+                class="d-inline">
+                @csrf
+                @method('DELETE')
+
+                <button title="Cliente Ativo" type="submit" class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-add list-icon-check list-icon ">
+                  </span></button>
+              </form>
+              @else
+              <form action="{{ route('client.reactivate', $client->id) }}" method="POST"
+                class="d-inline">
+                @csrf
+                <button title="Cliente Inativo" type="submit" class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-delete list-icon-cancel list-icon">
+                  </span></button>
+              </form>
+              @endif
+              <a title="Ver Atendimentos" href="{{ route('attendance.index', ['client_id' => $client->id]) }}"
+                class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon">
+                  table_eye
+                </span></a>
+            </div>
+            @endforeach
+      </tbody>
+    </table>
+  </div>
+
+  @if (session('message'))
+  <div class="alert alert-success">
+    {{ session('message') }}
+  </div>
+  @endif
 </div>
 <!-- CSS inline para estilizar a tabela e centralização -->
 <style>
@@ -122,7 +117,7 @@
     margin: 0 auto;
   }
 
-   .margin-left{
+  .margin-left {
     margin-left: 15px !important;
   }
 

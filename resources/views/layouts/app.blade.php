@@ -52,6 +52,47 @@
             color: #4da94d
         }
 
+        .list-icon:hover {
+            color: #fff;
+            background-color: #002557;
+            Border-radius: 3px
+        }
+
+        .list-icon-edit:hover {
+            color: #fff;
+            background-color: #3498db;
+        }
+
+        .list-icon-add:hover {
+            color: #fff;
+            background-color: #2ecc71;
+        }
+
+        .list-icon-delete:hover {
+            color: #fff;
+            background-color: #e74c3c;
+        }
+
+        .list-icon-check:after {
+            content: 'check_circle';
+        }
+
+        .list-icon-check:hover::after {
+            content: 'cancel';
+            background-color: #e74c3c;
+            Border-radius: 3px
+        }
+
+        .list-icon-cancel:after {
+            content: 'cancel';
+        }
+
+        .list-icon-cancel:hover::after {
+            content: 'check_circle';
+            background-color: #2ecc71;
+            Border-radius: 3px
+        }
+
         table td div {
             display: flex;
             justify-content: center;

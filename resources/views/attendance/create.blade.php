@@ -42,12 +42,17 @@
             @endif
 
             <h2 class="text-center mb-4">Criar Atendimento</h2>
-            <form action="/attendance" method="POST">
+            <form action="{{ route('attendance.store') }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="client_id" class="form-label">Cliente</label>
-                    <input type="number" class="form-control" id="client_id" name="client_id"
-                        placeholder="Digite o ID do cliente" required>
+                    <select class="form-control" id="client_id" name="client_id" required>
+                        @foreach($clients as $client)
+                            <option value="{{ $client->id }}" {{ isset($client_id) && $client_id == $client->id ? 'selected' : '' }}>
+                                {{ $client->name }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="type_id" class="form-label">Tipo</label>
@@ -65,8 +70,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="status" class="form-label">Status</label>
-                    <select type="text" class="form-control" id="status" name="status">
-                        <option value="">Selecione o Status</option>
+                    <select class="form-control" id="status" name="status" required>
                         <option value="1">Ativo</option>
                         <option value="2">Em Espera</option>
                         <option value="3">Finalizado</option>
@@ -81,7 +85,7 @@
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary">Enviar</button>
                     <br>
-                    <a href="{{ route('attendance.index') }}" class="btn btn-primary">Retornar</a>
+                    <a href="{{ route('attendance.index', ['client_id' => $client_id]) }}" class="btn btn-primary">Retornar</a>
                 </div>
             </form>
         </div>

@@ -1,12 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="attendance-container">
 <h2 class="text-center mb-4" style="color: white; font-size: 24px;">Listagem de Atendimentos</h2>
 
 @if (request()->get('client_id'))
 <h4 class="text-center mb-4" style="color: gray; font-size: 15px;">Atendimentos para o Cliente ID:
     {{ request()->get('client_id') }}
 </h4>
+<div class="d-flex justify-content-center mb-3">
+    <a href="{{ route('attendance.create', ['client_id' => request()->get('client_id')]) }}" class="btn btn-primary">Novo Atendimento</a>
+</div>
 @endif
 
 <div class="table-container">
@@ -24,10 +28,6 @@
             </tr>
         </thead>
         <tbody>
-
-            <div class="d-flex justify-content-center mb-3">
-                <a href="{{ route('attendances.create') }}" class="btn btn-primary">Novo Atendimento</a>
-            </div>
             @foreach ($attendances as $attendance)
             <tr>
                 <td>{{ $attendance->id }}</td>
@@ -61,6 +61,7 @@
     </table>
 </div>
 @endsection
+</div>
 
 <style>
     h2 {
@@ -80,9 +81,6 @@
         /* Linha inferior de borda nas células */
     }
 
-    
-
-    
     table th {
         background-color: #007bff;
         /* Cor de fundo para o cabeçalho */

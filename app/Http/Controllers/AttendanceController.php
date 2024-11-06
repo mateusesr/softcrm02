@@ -11,31 +11,36 @@ class AttendanceController extends Controller
 {
     public function index(Request $request)
     {
-        $clientId = $request->get('client_id');
-        if ($clientId) {
-            $attendances = Attendance::where('client_id', $clientId)->get();
+        $client_id = $request->get('client_id');
+        if ($client_id) {
+            $attendances = Attendance::where('client_id', $client_id)->get();
         } else {
             $attendances = Attendance::all();
         }
         return view('attendance.index', compact('attendances'));
     }
 
-    public function create()
-    {
-        return view('attendance.create');
-    }
+    public function create(Request $request)
+{
+    $client_id = $request->get('client_id'); // Obtém o client_id da requisição
+    $clients = Client::all(); // Obtém todos os clientes
+    
+    return view('attendance.create', compact('client_id', 'clients')); // 
+}
 
     public function store(Request $request)
     {
         $request->validate([
+            'client_id' => 'required|exists:clients,id',
             'date' => 'required|date',
-            'status' => 'required|boolean',
-            // Adicione outras validações conforme necessário
+            'status' => 'required|in:1,2,3',
+            'type_id' => 'required|exists:types,id',
+            'description' => 'required|string|max:255',
         ]);
 
         Attendance::create($request->all());
 
-        return redirect()->route('attendance.index')->with('success', 'Atendimento criado com sucesso.');
+        return redirect()->route('attendance.index', ['client_id' => $request->client_id])->with('success', 'Atendimento criado com sucesso.');
     }
 
     public function show(Attendance $attendance)
