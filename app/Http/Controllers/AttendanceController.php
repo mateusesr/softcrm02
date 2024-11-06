@@ -9,27 +9,28 @@ use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $attendances = Attendance::all();
+        $clientId = $request->get('client_id');
+        if ($clientId) {
+            $attendances = Attendance::where('client_id', $clientId)->get();
+        } else {
+            $attendances = Attendance::all();
+        }
         return view('attendance.index', compact('attendances'));
     }
 
     public function create()
     {
-        $clients = Client::all();
-        $types = Type::all();
-        return view('attendance.create', compact('clients', 'types'));
+        return view('attendance.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'client_id' => 'required|exists:clients,id',
-            'type_id' => 'required|exists:types,id',
             'date' => 'required|date',
             'status' => 'required|boolean',
-            'description' => 'required|string|max:255',
+            // Adicione outras validações conforme necessário
         ]);
 
         Attendance::create($request->all());
@@ -45,18 +46,15 @@ class AttendanceController extends Controller
     public function edit(Attendance $attendance)
     {
         $clients = Client::all();
-        $types = Type::all();
-        return view('attendance.edit', compact('attendance', 'clients', 'types'));
+        return view('attendance.edit', compact('attendance', 'clients'));
     }
 
     public function update(Request $request, Attendance $attendance)
     {
         $request->validate([
-            'client_id' => 'required|exists:clients,id',
-            'type_id' => 'required|exists:types,id',
             'date' => 'required|date',
             'status' => 'required|boolean',
-            'description' => 'required|string|max:255',
+            // Adicione outras validações conforme necessário
         ]);
 
         $attendance->update($request->all());
