@@ -5,6 +5,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -48,6 +49,7 @@ Route::resource('comment', CommentController::class);
 Route::resource('clients', ClientController::class);
 Route::resource('attendances', AttendanceController::class);
 Route::resource('city', CityController::class);
+Route::resource('type', TypeController::class);
 
 require __DIR__ . '/auth.php';
 

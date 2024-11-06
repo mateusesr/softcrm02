@@ -4,34 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendance;
 use App\Models\Client;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $clientId = $request->get('client_id');
-
-        if ($clientId) {
-            $attendances = Attendance::where('client_id', $clientId)->get();
-        } else {
-            $attendances = Attendance::all();
-        }
-
+        $attendances = Attendance::all();
         return view('attendance.index', compact('attendances'));
     }
 
     public function create()
     {
-        return view('attendance.create');
+        $clients = Client::all();
+        $types = Type::all();
+        return view('attendance.create', compact('clients', 'types'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
+            'client_id' => 'required|exists:clients,id',
+            'type_id' => 'required|exists:types,id',
             'date' => 'required|date',
             'status' => 'required|boolean',
-            // Adicione outras validações conforme necessário
+            'description' => 'required|string|max:255',
         ]);
 
         Attendance::create($request->all());
@@ -47,15 +45,18 @@ class AttendanceController extends Controller
     public function edit(Attendance $attendance)
     {
         $clients = Client::all();
-        return view('attendance.edit', compact('attendance', 'clients'));
+        $types = Type::all();
+        return view('attendance.edit', compact('attendance', 'clients', 'types'));
     }
 
     public function update(Request $request, Attendance $attendance)
     {
         $request->validate([
+            'client_id' => 'required|exists:clients,id',
+            'type_id' => 'required|exists:types,id',
             'date' => 'required|date',
             'status' => 'required|boolean',
-            // Adicione outras validações conforme necessário
+            'description' => 'required|string|max:255',
         ]);
 
         $attendance->update($request->all());
