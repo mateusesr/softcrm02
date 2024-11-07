@@ -21,23 +21,14 @@ class AttendanceController extends Controller
     }
 
     public function create(Request $request)
-<<<<<<< HEAD
-{
-        $client_id = $request->get('client_id'); // Obtém o client_id da requisição
-        $clients = Client::all(); // Obtém todos os clientes
-        $types = Type::all(); // Obtém todos os tipos de atendimento
 
-        return view('attendance.create', compact('client_id', 'clients', 'types')); 
-}
-=======
     {
-        $client_id = $request->get('client_id'); // Obtém o client_id da requisição
-        $clients = Client::all(); // Obtém todos os clientes
-        $types = Type::all(); // Obtém todos os tipos de atendimento
-    
-        return view('attendance.create', compact('client_id', 'clients', 'types')); 
+        $client_id = $request->get('client_id'); 
+        $clients = Client::all(); 
+        $types = Type::all(); 
+
+        return view('attendance.create', compact('client_id', 'clients', 'types'));
     }
->>>>>>> 6f8104393f7803ff50c9984b52a6c8117e195738
 
     public function store(Request $request)
     {
@@ -62,7 +53,8 @@ class AttendanceController extends Controller
     public function edit(Attendance $attendance)
     {
         $clients = Client::all();
-        return view('attendance.edit', compact('attendance', 'clients'));
+        $types = Type::all();
+        return view('attendance.edit', compact('attendance', 'clients', 'types'));
     }
 
     public function update(Request $request, Attendance $attendance)

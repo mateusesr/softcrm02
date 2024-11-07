@@ -55,13 +55,14 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label for="type_id" class="form-label">Tipo</label>
-                <select class="form-control" id="type_id" name="type_id" required>
-                    <option value="1" {{ $attendance->type_id == 1 ? 'selected' : '' }}>Presencial</option>
-                    <option value="2" {{ $attendance->type_id == 2 ? 'selected' : '' }}>Remoto</option>
-                    <option value="3" {{ $attendance->type_id == 3 ? 'selected' : '' }}>Híbrido</option>
-                </select>
-            </div>
+                    <label for="type_id" class="form-label">Tipo</label>
+                    <select class="form-control" id="type_id" name="type_id" required>
+                        <option value="">Selecione o tipo</option>
+                        @foreach ($types as $type)
+                        <option value="{{ $type->id }}">{{ $type->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
             <div class="mb-3">
                 <label for="date" class="form-label">Data</label>
                 <input type="date" class="form-control" id="date" name="date" value="{{ $attendance->date }}" required>

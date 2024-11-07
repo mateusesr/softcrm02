@@ -55,7 +55,6 @@
                     </select>
                 </div>
                 <div class="mb-3">
-<<<<<<< HEAD
                     <label for="type_id" class="form-label">Tipo</label>
                     <select class="form-control" id="type_id" name="type_id" required>
                         <option value="">Selecione o tipo</option>
@@ -64,16 +63,7 @@
                         @endforeach
                     </select>
                 </div>
-=======
-    <label for="type_id" class="form-label">Tipo</label>
-    <select class="form-control" id="type_id" name="type_id" required>
-        <option value="">Selecione o tipo</option>
-        @foreach ($types as $type)
-            <option value="{{ $type->id }}">{{ $type->name }}</option>
-        @endforeach
-    </select>
-</div>
->>>>>>> 6f8104393f7803ff50c9984b52a6c8117e195738
+
                 <div class="mb-3">
                     <label for="date" class="form-label">Data</label>
                     <input type="date" class="form-control" id="date" name="date"
