@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Atendimento</title>
+    <title>Editar Cliente</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -21,13 +21,15 @@
             height: 100%;
         }
 
-        .form-box {
-            width: 100%;
-            max-width: 400px;
-            padding: 15px;
-            border-radius: 8px;
-            background-color: #f9f9f9;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        h2 {
+            font-weight: bold;
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            margin-top: 10px;
+            /* Espaçamento entre os botões */
         }
     </style>
 </head>
@@ -53,7 +55,7 @@
             <select name="city_id" id="city_id" class="form-control" required>
                 <!-- Supondo que você tenha uma lista de cidades -->
                 @foreach ($cities as $city)
-                    <option value="{{ $city->id }}" {{ $client->city_id == $city->id ? 'selected' : '' }}>{{ $city->name }}</option>
+                <option value="{{ $city->id }}" {{ $client->city_id == $city->id ? 'selected' : '' }}>{{ $city->name }}</option>
                 @endforeach
             </select>
         </div>
