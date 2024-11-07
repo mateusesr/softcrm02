@@ -81,7 +81,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Salvar</button>
-            <a href="{{ route('attendance.index') }}" class="btn btn-secondary">Cancelar</a>
+            <a href="{{ route('attendance.index' , ['client_id' => $client_id]) }}" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
     <!-- Bootstrap JS and Popper.js -->

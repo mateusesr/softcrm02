@@ -50,11 +50,12 @@ class AttendanceController extends Controller
         return view('attendance.show', compact('attendance'));
     }
 
-    public function edit(Attendance $attendance)
+    public function edit(Request $request, Attendance $attendance)
     {
+        $client_id = $request->get('client_id'); 
         $clients = Client::all();
         $types = Type::all();
-        return view('attendance.edit', compact('attendance', 'clients', 'types'));
+        return view('attendance.edit', compact('attendance', 'client_id', 'clients', 'types'));
     }
 
     public function update(Request $request, Attendance $attendance)
@@ -62,18 +63,17 @@ class AttendanceController extends Controller
         $request->validate([
             'date' => 'required|date',
             'status' => 'required|boolean',
-            // Adicione outras validações conforme necessário
         ]);
 
         $attendance->update($request->all());
 
-        return redirect()->route('attendance.index')->with('success', 'Atendimento atualizado com sucesso.');
+        return redirect()->route('attendance.index', ['client_id' => $request->client_id])->with('success', 'Atendimento criado com sucesso.');
     }
 
-    public function destroy(Attendance $attendance)
+    public function destroy(Request $request, Attendance $attendance)
     {
         $attendance->delete();
 
-        return redirect()->route('attendance.index')->with('success', 'Atendimento excluído com sucesso.');
+        return redirect()->route('attendance.index', ['client_id' => $request->client_id])->with('success', 'Atendimento criado com sucesso.');
     }
 }
