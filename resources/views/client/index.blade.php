@@ -55,7 +55,7 @@
             <div class="d-flex justify-content-center">
 
               <a href="{{ route('client.edit', $client->id) }}"
-                class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-edit list-icon">
+              title="Editar Cliente" class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-edit list-icon">
                   stylus
                 </span></a>
               @if ($client->is_active)
@@ -64,14 +64,14 @@
                 @csrf
                 @method('DELETE')
 
-                <button title="Cliente Ativo" type="submit" class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-add list-icon-check list-icon ">
+                <button title="Inativar Cliente" type="submit" class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-add list-icon-check list-icon ">
                   </span></button>
               </form>
               @else
               <form action="{{ route('client.reactivate', $client->id) }}" method="POST"
                 class="d-inline">
                 @csrf
-                <button title="Cliente Inativo" type="submit" class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-delete list-icon-cancel list-icon">
+                <button title="Ativar Cliente" type="submit" class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-delete list-icon-cancel list-icon">
                   </span></button>
               </form>
               @endif

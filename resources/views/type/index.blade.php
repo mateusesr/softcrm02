@@ -31,13 +31,13 @@
                     <td>{{ $type->name }}</td>
                     <td>
                         <div class="d-flex justify-content-center">
-                            <a href="{{ route('type.edit', $type->id) }}" class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-edit list-icon">
+                            <a title="Editar o Tipo de Atendimento" href="{{ route('type.edit', $type->id) }}" class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-edit list-icon">
                                 stylus
                                 </span></a>
                             <form action="{{ route('type.destroy', $type->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm mx-1" onclick="return confirm('Tem certeza que deseja excluir este tipo?');"><span class="material-symbols-outlined list-icon-delete list-icon">
+                                <button title="Excluir o Tipo de Atendimento" type="submit" class="btn btn-sm mx-1" onclick="return confirm('Tem certeza que deseja excluir este tipo?');"><span class="material-symbols-outlined list-icon-delete list-icon">
                                     cancel
                                 </span></button>
                             </form>

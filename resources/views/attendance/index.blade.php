@@ -38,7 +38,7 @@
                 <td>{{ $attendance->description }}</td>
                 <td>
                     <div class="d-flex justify-content-center">
-                        <a href="{{ route('attendance.edit', $attendance->id) }}"
+                        <a title="Editar Atendimento" href="{{ route('attendance.edit', $attendance->id) }}"
                             class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-edit list-icon">
                                 stylus
                             </span></a>
@@ -46,11 +46,11 @@
                             onsubmit="return confirm('Tem certeza que deseja excluir este atendimento?');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-delete list-icon">
+                            <button title="Excluir Atendimento" type="submit" class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-delete list-icon">
                                     delete
                                 </span></button>
                         </form>
-                        <a href="{{ route('comment.create', ['attendance_id' => $attendance->id]) }}" class="btn"><span class="material-symbols-outlined list-icon-add list-icon">
+                        <a title="Criar Comentário Sobre o Atendimento" href="{{ route('comment.create', ['attendance_id' => $attendance->id]) }}" class="btn"><span class="material-symbols-outlined list-icon-add list-icon">
                                 note_add
                             </span></a>
                     </div>
