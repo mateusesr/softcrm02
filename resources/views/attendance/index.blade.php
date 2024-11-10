@@ -2,65 +2,71 @@
 
 @section('content')
 <div class="attendance-container">
-<h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Listagem de Atendimentos</h2>
+    <h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Listagem de Atendimentos</h2>
 
-@if (request()->get('client_id'))
-<h4 class="text-center mb-4" style="color: gray; font-size: 15px;">Atendimentos para o Cliente ID:
-    {{ request()->get('client_id') }}
-</h4>
-<div class="d-flex justify-content-center mb-3">
-    <a href="{{ route('attendance.create', ['client_id' => request()->get('client_id')]) }}" class="btn btn-primary">Novo Atendimento</a>
-</div>
-@endif
+    @if (request()->get('client_id'))
+    <h4 class="text-center mb-4" style="color: gray; font-size: 15px;">Atendimentos para o Cliente ID:
+        {{ request()->get('client_id') }}
+    </h4>
+    <div class="d-flex justify-content-center mb-3">
+        <a href="{{ route('attendance.create', ['client_id' => request()->get('client_id')]) }}" class="btn btn-primary">Novo Atendimento</a>
+    </div>
+    @endif
 
-<div class="table-container">
-    <table class="table table-bordered table-hover table-striped text-center align-middle"
-        style="background-color: white; border-radius: 8px; overflow: hidden;">
-        <thead class="thead-dark">
-            <tr>
-                <th>ID</th>
-                <th>Cliente</th>
-                <th>Data</th>
-                <th>Status</th>
-                <th>Tipo</th>
-                <th>Descrição</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($attendances as $attendance)
-            <tr>
-                <td>{{ $attendance->id }}</td>
-                <td>{{ $attendance->client->name }}</td>
-                <td>{{ \Carbon\Carbon::parse($attendance->date)->format('d/m/Y') }}</td>
-                <td>{{ $attendance->status }}</td>
-                <td>{{ $attendance->type->name }}</td>
-                <td>{{ $attendance->description }}</td>
-                <td>
-                    <div class="d-flex justify-content-center">
-                        <a title="Editar Atendimento" href="{{ route('attendance.edit', $attendance->id) }}"
-                            class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-edit list-icon">
-                                stylus
-                            </span></a>
-                        <form action="{{ route('attendances.destroy', $attendance->id) }}" method="POST"
-                            onsubmit="return confirm('Tem certeza que deseja excluir este atendimento?');">
-                            @csrf
-                            @method('DELETE')
-                            <button title="Excluir Atendimento" type="submit" class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-delete list-icon">
-                                    delete
-                                </span></button>
-                        </form>
-                        <a title="Criar Comentário Sobre o Atendimento" href="{{ route('comment.create', ['attendance_id' => $attendance->id]) }}" class="btn"><span class="material-symbols-outlined list-icon-add list-icon">
-                                note_add
-                            </span></a>
-                    </div>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
-@endsection
+    <div class="table-container">
+        <table class="table table-bordered table-hover table-striped text-center align-middle"
+            style="background-color: white; border-radius: 8px; overflow: hidden;">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Data</th>
+                    <th>Status</th>
+                    <th>Tipo</th>
+                    <th>Descrição</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($attendances as $attendance)
+                <tr>
+                    <td>{{ $attendance->id }}</td>
+                    <td>{{ $attendance->client->name }}</td>
+                    <td>{{ \Carbon\Carbon::parse($attendance->date)->format('d/m/Y') }}</td>
+                    <td>{{ $attendance->status }}</td>
+                    <td>{{ $attendance->type->name }}</td>
+                    <td>{{ $attendance->description }}</td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <a title="Editar Atendimento" href="{{ route('attendance.edit', $attendance->id) }}"
+                                class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-edit list-icon">
+                                    stylus
+                                </span></a>
+                            <form action="{{ route('attendances.destroy', $attendance->id) }}" method="POST"
+                                onsubmit="return confirm('Tem certeza que deseja excluir este atendimento?');">
+                                @csrf
+                                @method('DELETE')
+                                <button title="Excluir Atendimento" type="submit" class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-delete list-icon">
+                                        delete
+                                    </span></button>
+                            </form>
+
+                            <a title="Ver Comentários Desse Atendimento" href="{{ route('comment.index', ['attendance_id' => $attendance->id]) }}"
+                                class="btn"><span class="material-symbols-outlined list-icon">
+                                    table_eye
+                                </span></a>
+
+                            <a title="Criar Comentário Sobre o Atendimento" href="{{ route('comment.create', ['attendance_id' => $attendance->id]) }}" class="btn"><span class="material-symbols-outlined list-icon-add list-icon">
+                                    note_add
+                                </span></a>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    @endsection
 </div>
 
 <style>
@@ -138,7 +144,7 @@
     }
 
     /* Sombra e margem adicionais ao redor da tabela */
-    .table-container { 
+    .table-container {
         border-radius: 10px;
     }
 
