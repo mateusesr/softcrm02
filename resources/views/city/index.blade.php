@@ -4,8 +4,8 @@
 
 
 <div class="container mx-auto px-4">
-    <h1 class="text-2xl font-bold mb-4">Cidades</h1>
-    <a href="{{ route('city.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Nova Cidade</a>
+<h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Listagem de Cidades</h2>
+<a href="{{ route('city.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Nova Cidade</a>
     <table class="table table-bordered table-hover table-striped text-center align-middle"
     style="background-color: white; border-radius: 8px; overflow: hidden;">
         <thead>
@@ -31,7 +31,7 @@
                         <form action="{{ route('city.destroy', $city->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button title="Excluir Cidade" type="submit" class="text-red-500 hover:underline" onclick="return confirm('Tem certeza que deseja excluir esta cidade?');"><span class="material-symbols-outlined list-icon-delete list-icon">
+                            <button title="Excluir Cidade" type="submit" class="text-red-500 hover:underline, btn btn-sm mx-1" onclick="return confirm('Tem certeza que deseja excluir esta cidade?');"><span class="material-symbols-outlined list-icon-delete list-icon">
                                     delete
                                 </span></button>
                         </form>

@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    <h1>Comentários</h1>
-    <a href="{{ route('comment.create') }}" class="btn btn-primary">Novo Comentário</a>
+<h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Listagem de Comentários</h2>
+    <a href="{{ route('comment.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Novo Comentário</a>
     <table class="table mt-3">
         <thead>
             <tr>

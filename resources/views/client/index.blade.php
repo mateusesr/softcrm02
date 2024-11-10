@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="client-container">
-  <h2 class="text-center mb-4" style="color: white; font-size: 24px;">Listagem de Clientes</h2>
+  <h2 class="text-center mb-4" style="color: black; font-size: 24px;">Listagem de Clientes</h2>
 
   <form method="GET" action="{{ route('client.index') }}" class="mb-3 d-flex justify-content-center" style="padding: 20px;">
     <select name="status" class="form-select me-2"

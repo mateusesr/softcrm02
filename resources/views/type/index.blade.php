@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="type-container">
-    <h2 class="text-center mb-4" style="color: white; font-size: 24px;">Listagem de Tipos</h2>
+    <h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Listagem de Tipos de Atendimentos</h2>
 
     @if (session('message'))
     <div class="alert alert-success">
@@ -11,7 +11,7 @@
     @endif
 
     <div class="d-flex justify-content-center mb-3">
-        <a href="{{ route('type.create') }}" class="btn btn-primary">Novo Tipo</a>
+        <a href="{{ route('type.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Novo Tipo de Atendimento</a>
     </div>
 
     <div class="table-container">
@@ -38,7 +38,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button title="Excluir o Tipo de Atendimento" type="submit" class="btn btn-sm mx-1" onclick="return confirm('Tem certeza que deseja excluir este tipo?');"><span class="material-symbols-outlined list-icon-delete list-icon">
-                                    cancel
+                                    delete
                                 </span></button>
                             </form>
                         </div>

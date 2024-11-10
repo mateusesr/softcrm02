@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="attendance-container">
-<h2 class="text-center mb-4" style="color: white; font-size: 24px;">Listagem de Atendimentos</h2>
+<h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Listagem de Atendimentos</h2>
 
 @if (request()->get('client_id'))
 <h4 class="text-center mb-4" style="color: gray; font-size: 15px;">Atendimentos para o Cliente ID:
@@ -50,7 +50,7 @@
                                     delete
                                 </span></button>
                         </form>
-                        <a title="Criar Comentário S'obre o Atendimento" href="{{ route('comment.create', ['attendance_id' => $attendance->id]) }}" class="btn"><span class="material-symbols-outlined list-icon-add list-icon">
+                        <a title="Criar Comentário Sobre o Atendimento" href="{{ route('comment.create', ['attendance_id' => $attendance->id]) }}" class="btn"><span class="material-symbols-outlined list-icon-add list-icon">
                                 note_add
                             </span></a>
                     </div>
