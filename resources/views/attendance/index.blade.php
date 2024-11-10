@@ -50,7 +50,7 @@
                                     delete
                                 </span></button>
                         </form>
-                        <a title="Criar Comentário Sobre o Atendimento" href="{{ route('comment.create', ['attendance_id' => $attendance->id]) }}" class="btn"><span class="material-symbols-outlined list-icon-add list-icon">
+                        <a title="Criar Comentário S'obre o Atendimento" href="{{ route('comment.create', ['attendance_id' => $attendance->id]) }}" class="btn"><span class="material-symbols-outlined list-icon-add list-icon">
                                 note_add
                             </span></a>
                     </div>
