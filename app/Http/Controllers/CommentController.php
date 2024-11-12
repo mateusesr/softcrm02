@@ -2,31 +2,40 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Comment;
+use App\Models\Attendance;
 use Illuminate\Http\Request;
+
 
 class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $comments = Comment::all();
+        $attendance_id = $request->get('attendance_id');
+        if ($attendance_id) {
+            $comments = Comment::where('attendance_id', $attendance_id)->get();
+        } else {
+            $comments = Comment::all();
+        }
         return view('comment.index', compact('comments'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('comment.create');
-    }
+        $attendance_id = $request->get('attendance_id'); 
+        $attendance = Attendance::find($attendance_id);
+        $attendances = Attendance::all();
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
+        return view('comment.create', compact('attendance_id', 'attendance', 'attendances'));
+    }
     public function store(Request $request)
     {
         \Illuminate\Support\Facades\Log::info('Dados recebidos:', $request->all());
@@ -36,12 +45,9 @@ class CommentController extends Controller
             'attendance_id' => 'required|exists:attendances,id',
         ]);
 
-        Comment::create([
-            'description' => $request->description,
-            'attendance_id' => $request->attendance_id,
-        ]);
+        Comment::create($request->all());
 
-        return redirect()->route('comment.index')->with('success', 'Comentário criado com sucesso.');
+        return redirect()->route('comment.index', ['attendance_id' => $request->attendance_id])->with('success', 'Atendimento criado com sucesso.');
     }
 
     /**

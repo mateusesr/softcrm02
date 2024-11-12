@@ -2,7 +2,10 @@
 
 @section('content')
 <div class="container">
-<h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Listagem de Comentários</h2>
+    <h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Listagem de Comentários</h2>
+    <h4 class="text-center mb-4" style="color: gray; font-size: 15px;">Comentários para o Atendimento ID:
+        {{ request()->get('attendance_id') }}
+    </h4>
     <a href="{{ route('comment.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Novo Comentário</a>
     <table class="table mt-3">
         <thead>
