@@ -3,7 +3,7 @@
 @section('content')
 <div class="client-container">
   <h2 class="text-center mb-4" style="color: black; font-size: 24px;">Listagem de Clientes</h2>
-
+  <button class="no-print" onclick="imprimirPagina()">Imprimir</button>
   <form method="GET" action="{{ route('client.index') }}" class="mb-3 d-flex justify-content-center" style="padding: 20px;">
     <select name="status" class="form-select me-2"
       style="width: 150px; border-radius: 8px; padding: 8px; font-size: 16px; color: #333;">
@@ -84,7 +84,7 @@
       </tbody>
     </table>
   </div>
-
+  <script src="{{asset('js/imprimir.js')}}"></script>
   @if (session('message'))
   <div class="alert alert-success">
     {{ session('message') }}

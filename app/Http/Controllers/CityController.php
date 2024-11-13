@@ -75,8 +75,36 @@ class CityController extends Controller
      */
     public function destroy(City $city)
     {
-        $city->delete();
+        try {
+            // Validate the value...
+            $result = $city->deleteOrFail();
+            print($result);
+           return redirect()->route('city.index')->with('message', 'Cidade excluída com sucesso.');
 
-        return redirect()->route('city.index')->with('success', 'Cidade excluída com sucesso.');
+           //return redirect()->route('city.index')->with('error', 'Não foi possível excluir sua cidade.');   
+
+        } catch (Exception $e) {
+            $result = false;
+            return redirect()->route('city.index')->with('message', 'Não foi possível excluir sua cidade.');
+
+           
+        }  
+        catch (\Exception $e) {
+            $result = false;
+            return redirect()->route('city.index')->with('message', 'Não foi possível excluir sua cidade.');
+            //do something when exception is thrown
+     }
+     catch (\Error $e) {
+        $result = false;
+        return redirect()->route('city.index')->with('message', 'Não foi possível excluir sua cidade.');
+       //do something when error is thrown
+     }
+     catch (\Throwable $e) {
+        $result = false;
+        return redirect()->route('city.index')->with('message', 'Não foi possível excluir sua cidade.');
+        //do something when Throwable is thrown
+      }
+        
+       
     }
 }
