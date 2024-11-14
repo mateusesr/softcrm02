@@ -35,8 +35,12 @@
         @yield('content')
     </main>
     <style>
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
         .header-navbar {
-            text-decoration:none
+            text-decoration: none
         }
 
         .list-icon {

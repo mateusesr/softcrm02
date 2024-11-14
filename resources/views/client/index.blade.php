@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="client-container" id="client-container">
-  <h2 class="text-center mb-4" style="color: black; font-size: 24px;">Listagem de Clientes</h2>
+  <h2 class="text-center mb-4" style="color: black; font-size: 24px;">Clientes</h2>
   
 
   <form method="GET" action="{{ route('client.index') }}" class="mb-3 d-flex justify-content-center" style="padding: 20px;">
@@ -110,7 +110,7 @@
   .imprimir th:last-child{
     display: none ;
   }
-  
+
   .imprimir .table-action {
     display: none;
   }
@@ -204,9 +204,7 @@
     color: white;
   }
 
-  .btn-primary:hover {
-    background-color: #0056b3;
-  }
+  
 
   .btn-success {
     background-color: #28a745;

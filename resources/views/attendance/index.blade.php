@@ -2,23 +2,26 @@
 
 @section('content')
 <div class="attendance-container">
-    <h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Listagem de Atendimentos</h2>
+    <h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Atendimentos</h2>
 
     @if (request()->get('client_id'))
     <h4 class="text-center mb-4" style="color: gray; font-size: 15px;">Atendimentos para o Cliente ID:
         {{ request()->get('client_id') }}
     </h4>
-    <div class="d-flex justify-content-center mb-3">
-        <a href="{{ route('attendance.create', ['client_id' => request()->get('client_id')]) }}" class="btn btn-primary">Novo Atendimento</a>
-    </div>
+
     @endif
 
     <div class="table-container">
+        @if (request()->get('client_id'))
+        <div class="d-flex justify-content-center mb-3 table-action">
+            <a href="{{ route('attendance.create', ['client_id' => request()->get('client_id')]) }}" class="btn btn-primary">Novo Atendimento</a>
+            @endif
+        </div>
         <table class="table table-bordered table-hover table-striped text-center align-middle"
             style="background-color: white; border-radius: 8px; overflow: hidden;">
             <thead class="thead-dark">
                 <tr>
-                    <th>ID</th>
+                    <th>Protocolo</th>
                     <th>Cliente</th>
                     <th>Data</th>
                     <th>Status</th>
@@ -71,6 +74,22 @@
 </div>
 
 <style>
+    .table-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .table-action {
+        width: 100%;
+        max-width: 1000px;
+    }
+
+    .table-action .btn {
+        margin: 0;
+    }
+
     h2 {
         font-weight: bold;
         color: #343a40;

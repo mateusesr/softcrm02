@@ -12,7 +12,7 @@
 @endif
 
 
-<h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Listagem de Cidades</h2>
+<h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Cidades</h2>
 <div class="table-container">
     <div class="table-action">
         <a href="{{ route('city.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Nova Cidade</a>
