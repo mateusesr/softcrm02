@@ -53,13 +53,13 @@
 
                             <a title="Ver Comentários Desse Atendimento" href="{{ route('comment.index', ['attendance_id' => $attendance->id]) }}"
                                 class="btn"><span class="material-symbols-outlined list-icon">
-                                    table_eye
+                                    forum
                                 </span></a>
 
                             <a title="Criar Comentário Sobre o Atendimento" href="{{ route('comment.create', ['attendance_id' => $attendance->id]) }}" class="btn"><span class="material-symbols-outlined list-icon-add list-icon">
                                     note_add
                                 </span></a>
-                                
+
                         </div>
                     </td>
                 </tr>

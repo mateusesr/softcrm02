@@ -47,9 +47,9 @@
                 @csrf
                 <div class="mb-3">
                     <label for="attendance_id" class="form-label">Id do Atendimento</label>
-                    <select class="form-control" id="attendance_id" name="attendance_id" required>
+                    <select class="form-control" id="attendance_id" name="attendance_id" required >
                     @foreach($attendances as $attendance)
-                        <option value="{{ $attendance->id }}"> 
+                    <option  value="{{ $attendance->id }}">
                         {{ $attendance->id }}
                         </option>
                     @endforeach

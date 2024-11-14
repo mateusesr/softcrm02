@@ -6,7 +6,7 @@
     <h4 class="text-center mb-4" style="color: gray; font-size: 15px;">Comentários para o Atendimento ID:
         {{ request()->get('attendance_id') }}
     </h4>
-    <a href="{{ route('comment.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Novo Comentário</a>
+    <a href="{{ route('comment.create', ['attendance_id' => $attendance_id]) }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Novo Comentário</a>
     <table class="table mt-3">
         <thead>
             <tr>
@@ -96,6 +96,15 @@
         /* Arredondamento do último cabeçalho */
         border-bottom-right-radius: 10px;
         /* Arredondamento da última célula da última linha */
+
+    }
+
+    th:last-child {
+        border-radius: 0 5px 0 0;
+    }
+
+    th:first-child {
+        border-radius: 5px 0 0 0;
     }
 
     .btn {

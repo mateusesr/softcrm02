@@ -7,14 +7,18 @@
 
     @if (session('message'))
     <div" class="alert alert-success green-box bg-red-500 text-white px-4 py-2 rounded" role="alert">
-        {{ session('message') }}
-    </div>
+    {{ session('message') }}
+</div>
 @endif
 
+
 <h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Listagem de Cidades</h2>
-<a href="{{ route('city.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Nova Cidade</a>
+<div class="table-container">
+    <div class="table-action">
+        <a href="{{ route('city.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Nova Cidade</a>
+    </div>
     <table class="table table-bordered table-hover table-striped text-center align-middle"
-    style="background-color: white; border-radius: 8px; overflow: hidden;">
+        style="background-color: white; border-radius: 8px; overflow: hidden;">
         <thead>
             <tr>
                 <th>ID</th>
@@ -49,14 +53,27 @@
         </tbody>
     </table>
 </div>
+</div>
 
 @endsection
 
 <style>
-    .erro{
-        color:blue
-
+    .table-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
+
+    .table-action {
+        width: 100%;
+        max-width: 1000px;
+    }
+
+    .erro {
+        color: blue
+    }
+
     h2 {
         font-weight: bold;
         color: #343a40;

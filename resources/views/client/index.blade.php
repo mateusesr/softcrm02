@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="client-container">
+<div class="client-container" id="client-container">
   <h2 class="text-center mb-4" style="color: black; font-size: 24px;">Listagem de Clientes</h2>
-  <button class="no-print" onclick="imprimirPagina()">Imprimir</button>
+  
+
   <form method="GET" action="{{ route('client.index') }}" class="mb-3 d-flex justify-content-center" style="padding: 20px;">
     <select name="status" class="form-select me-2"
       style="width: 150px; border-radius: 8px; padding: 8px; font-size: 16px; color: #333;">
@@ -33,8 +34,9 @@
       </thead>
       <tbody>
 
-        <div class="d-flex justify-content-center mb-3 margin-left">
+        <div class="d-flex justify-content-center mb-3 margin-left table-action">
           <a href="{{ route('clients.create') }}" class="btn btn-primary">Novo Cliente</a>
+          <button class="no-print btn btn-primary" onclick="imprimirPagina()">Imprimir</button>
         </div>
 
         @foreach ($clients as $client)
@@ -55,7 +57,7 @@
             <div class="d-flex justify-content-center">
 
               <a href="{{ route('client.edit', $client->id) }}"
-              title="Editar Cliente" class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-edit list-icon">
+                title="Editar Cliente" class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-edit list-icon">
                   stylus
                 </span></a>
               @if ($client->is_active)
@@ -93,6 +95,27 @@
 </div>
 <!-- CSS inline para estilizar a tabela e centralização -->
 <style>
+  .no-print{
+    margin: 0 5px;
+  }
+  .table-action {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 15px;
+  }
+  .imprimir .btn{
+    display: none;
+  }
+
+  .imprimir th:last-child{
+    display: none ;
+  }
+  
+  .imprimir .table-action {
+    display: none;
+  }
+
+
   h2 {
     font-weight: bold;
     color: #343a40;
@@ -179,6 +202,10 @@
     background-color: #007bff;
     border-color: #007bff;
     color: white;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
   }
 
   .btn-success {

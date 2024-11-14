@@ -21,7 +21,7 @@ class CommentController extends Controller
         } else {
             $comments = Comment::all();
         }
-        return view('comment.index', compact('comments'));
+        return view('comment.index', compact('comments', 'attendance_id'));
     }
 
     /**
@@ -30,9 +30,13 @@ class CommentController extends Controller
     public function create(Request $request)
     {
         $attendance_id = $request->get('attendance_id'); 
-        $attendance = Attendance::find($attendance_id);
-        $attendances = Attendance::all();
-
+        
+        if ($attendance_id) {
+            $attendance = Attendance::find($attendance_id);
+            $attendances= [$attendance];
+        } else {
+            $attendances = Attendance::all();
+        }
 
         return view('comment.create', compact('attendance_id', 'attendance', 'attendances'));
     }
@@ -55,6 +59,7 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
+        
         return view('comment.show', compact('comment'));
     }
 

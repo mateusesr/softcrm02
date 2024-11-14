@@ -10,7 +10,7 @@
 
 <body>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100" rel="stylesheet" />
-    <nav class="bg-gray-800 p-4 header-navbar">
+    <nav class="bg-gray-800 p-4 header-navbar" id="navbar">
         <div class="container mx-auto flex justify-between ">
             <div class="flex space-x-4 header-navbar">
                 <a href="{{ route('dashboard') }}" class="text-white hover:bg-gray-700 px-8 py-2 rounded">Dashboard</a>

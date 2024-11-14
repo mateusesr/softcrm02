@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Attendance;
 use App\Models\Client;
 use App\Models\Type;
+use App\Models\Comment;
 use Illuminate\Http\Request;
+
 
 class AttendanceController extends Controller
 {
@@ -47,6 +49,7 @@ class AttendanceController extends Controller
 
     public function show(Attendance $attendance)
     {
+
         return view('attendance.show', compact('attendance'));
     }
 
@@ -80,4 +83,5 @@ class AttendanceController extends Controller
 
         return redirect()->route('attendance.index', ['client_id' => $request->client_id])->with('success', 'Atendimento criado com sucesso.');
     }
+
 }

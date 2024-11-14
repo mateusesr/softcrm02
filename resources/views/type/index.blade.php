@@ -10,11 +10,12 @@
     </div>
     @endif
 
-    <div class="d-flex justify-content-center mb-3">
-        <a href="{{ route('type.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Novo Tipo de Atendimento</a>
-    </div>
+
 
     <div class="table-container">
+        <div class="d-flex justify-content-center mb-3 table-action">
+            <a href="{{ route('type.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Novo Tipo de Atendimento</a>
+        </div>
         <table class="table table-bordered table-hover table-striped text-center align-middle"
             style="background-color: white; border-radius: 8px; overflow: hidden;">
             <thead class="thead-dark">
@@ -32,14 +33,14 @@
                     <td>
                         <div class="d-flex justify-content-center">
                             <a title="Editar o Tipo de Atendimento" href="{{ route('type.edit', $type->id) }}" class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-edit list-icon">
-                                stylus
+                                    stylus
                                 </span></a>
                             <form action="{{ route('type.destroy', $type->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button title="Excluir o Tipo de Atendimento" type="submit" class="btn btn-sm mx-1" onclick="return confirm('Tem certeza que deseja excluir este tipo?');"><span class="material-symbols-outlined list-icon-delete list-icon">
-                                    delete
-                                </span></button>
+                                        delete
+                                    </span></button>
                             </form>
                         </div>
                     </td>
@@ -51,6 +52,17 @@
 </div>
 
 <style>
+    .table-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .table-action {
+        width: 100%;
+        max-width: 1000px;
+    }
     h2 {
         font-weight: bold;
         color: #343a40;
