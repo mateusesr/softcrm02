@@ -1,47 +1,65 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="comment-container">
     <h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Comentários</h2>
-    <h4 class="text-center mb-4" style="color: gray; font-size: 15px;">Comentários para o Atendimento ID:
-        {{ request()->get('attendance_id') }}
-    </h4>
-    <a href="{{ route('comment.create', ['attendance_id' => $attendance_id]) }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Novo Comentário</a>
-    <table class="table mt-3">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Descrição</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($comments as $comment)
-            <tr>
-                <td>{{ $comment->id }}</td>
-                <td>{{ $comment->description }}</td>
-                <td>
-                    <a title="Ver Comentário" href="{{ route('comment.show', $comment->id) }}" class="btn "><span class="material-symbols-outlined list-icon">
-                            folder_eye
-                        </span></a>
-                    <a title="Editar" href="{{ route('comment.edit', $comment->id) }}" class="btn"><span class="material-symbols-outlined list-icon-edit list-icon">
-                            stylus
-                        </span></a>
-                    <form action="{{ route('comment.destroy', $comment->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button title="Excluir" type="submit" class="btn" onclick="return confirm('Tem certeza que deseja excluir este comentário?');"><span class="material-symbols-outlined list-icon-delete list-icon">
-                                delete
-                            </span></button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+
+
+    <div class="table-container">
+        <div class="d-flex justify-content-center mb-3 table-action">
+            <h4 class="text-center mb-4" style="color: gray; font-size: 15px;">Comentários para o Atendimento ID:
+                {{ request()->get('attendance_id') }}
+            </h4>
+            <a href="{{ route('comment.create', ['attendance_id' => $attendance_id]) }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Novo Comentário</a>
+            <table class="table mt-3">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Descrição</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($comments as $comment)
+                    <tr>
+                        <td>{{ $comment->id }}</td>
+                        <td>{{ $comment->description }}</td>
+                        <td>
+                            <a title="Ver Comentário" href="{{ route('comment.show', $comment->id) }}" class="btn "><span class="material-symbols-outlined list-icon">
+                                    folder_eye
+                                </span></a>
+                            <a title="Editar" href="{{ route('comment.edit', $comment->id) }}" class="btn"><span class="material-symbols-outlined list-icon-edit list-icon">
+                                    stylus
+                                </span></a>
+                            <form action="{{ route('comment.destroy', $comment->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button title="Excluir" type="submit" class="btn" onclick="return confirm('Tem certeza que deseja excluir este comentário?');"><span class="material-symbols-outlined list-icon-delete list-icon">
+                                        delete
+                                    </span></button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <style>
+    .table-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .table-action {
+        width: 100%;
+        max-width: 1000px;
+    }
+
     h2 {
         font-weight: bold;
         color: #343a40;

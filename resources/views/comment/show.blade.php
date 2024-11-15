@@ -9,7 +9,7 @@
         <p class="mt-1 text-gray-700">{{ $comment->description }}</p>
         <p class="mt-4"><strong>ID do Atendimento:</strong> <span class="text-blue-600">{{ $comment->attendance_id }}</span></p>
         <div class="mt-6">
-            <a href="{{ route('comment.index') }}" class="inline-block bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400">Voltar</a>
+            <a href="{{ route('comment.index', ['attendance_id' => $comment->attendance_id]) }}" class="inline-block bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400">Voltar</a>
         </div>
     </div>
 </div>

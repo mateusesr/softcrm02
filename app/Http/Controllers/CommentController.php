@@ -59,8 +59,15 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
+        $attendance_id = $comment->get('attendance_id'); 
+        if ($attendance_id) {
+            $attendance = Attendance::find($attendance_id);
+            $attendances= [$attendance];
+        } else {
+            $attendances = Attendance::all();
+        }
         
-        return view('comment.show', compact('comment'));
+        return view('comment.show', compact('comment', 'attendance_id', 'attendance', 'attendances'));
     }
 
     /**

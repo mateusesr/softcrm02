@@ -6,53 +6,53 @@
 <div class="container mx-auto px-4">
 
     @if (session('message'))
-    <div" class="alert alert-success green-box bg-red-500 text-white px-4 py-2 rounded" role="alert">
-    {{ session('message') }}
-</div>
-@endif
-
-
-<h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Cidades</h2>
-<div class="table-container">
-    <div class="table-action">
-        <a href="{{ route('city.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Nova Cidade</a>
+    <div class="alert alert-success green-box bg-red-500 text-white px-4 py-2 rounded" role="alert">
+        {{ session('message') }}
     </div>
-    <table class="table table-bordered table-hover table-striped text-center align-middle"
-        style="background-color: white; border-radius: 8px; overflow: hidden;">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>UF</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($cities as $city)
-            <tr>
-                <td>{{ $city->id }}</td>
-                <td>{{ $city->name }}</td>
-                <td>{{ $city->uf }}</td>
-                <td>
-                    <div>
-                        <a title="Editar Cidade" href="{{ route('city.edit', $city->id) }}" class="text-yellow-500 hover:underline"
-                            class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-edit list-icon">
-                                stylus
-                            </span></a>
-                        <form action="{{ route('city.destroy', $city->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button title="Excluir Cidade" type="submit" class="text-red-500 hover:underline, btn btn-sm mx-1" onclick="return confirm('Tem certeza que deseja excluir esta cidade?');"><span class="material-symbols-outlined list-icon-delete list-icon">
-                                    delete
-                                </span></button>
-                        </form>
-                    </div>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+    @endif
+
+
+    <h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Cidades</h2>
+    <div class="table-container">
+        <div class="table-action">
+            <a href="{{ route('city.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Nova Cidade</a>
+        </div>
+        <table class="table table-bordered table-hover table-striped text-center align-middle"
+            style="background-color: white; border-radius: 8px; overflow: hidden;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>UF</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($cities as $city)
+                <tr>
+                    <td>{{ $city->id }}</td>
+                    <td>{{ $city->name }}</td>
+                    <td>{{ $city->uf }}</td>
+                    <td>
+                        <div>
+                            <a title="Editar Cidade" href="{{ route('city.edit', $city->id) }}" class="text-yellow-500 hover:underline"
+                                class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-edit list-icon">
+                                    stylus
+                                </span></a>
+                            <form action="{{ route('city.destroy', $city->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button title="Excluir Cidade" type="submit" class="text-red-500 hover:underline, btn btn-sm mx-1" onclick="return confirm('Tem certeza que deseja excluir esta cidade?');"><span class="material-symbols-outlined list-icon-delete list-icon">
+                                        delete
+                                    </span></button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
 
 @endsection
