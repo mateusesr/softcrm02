@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="client-container" id="client-container">
   <h2 class="text-center mb-4" style="color: black; font-size: 24px;">Clientes</h2>
   
@@ -87,11 +88,6 @@
     </table>
   </div>
   <script src="{{asset('js/imprimir.js')}}"></script>
-  @if (session('message'))
-  <div class="alert alert-success">
-    {{ session('message') }}
-  </div>
-  @endif
 </div>
 <!-- CSS inline para estilizar a tabela e centralização -->
 <style>
@@ -165,7 +161,7 @@
   }
 
   .btn {
-    margin: 0 5px;
+    margin: 0 8px;
     padding: 8px 16px;
     border-radius: 5px;
     font-size: 14px;

@@ -1,6 +1,7 @@
 function imprimirPagina() {
+    var element= document.querySelector('#attendance-container');
     var element= document.querySelector('#client-container');
-    var header= document.querySelector('#navbar')
+    var header= document.querySelector('#navbar');
     header.style.display='none';
     element.classList.add('imprimir');
     window.print();

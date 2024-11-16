@@ -35,6 +35,12 @@
         @yield('content')
     </main>
     <style>
+        .btn-cancel:hover {
+                background-color: #494f55;
+        }
+        .btn-save:hover {
+            background-color: #0056b3;
+        }
         .btn-primary:hover {
             background-color: #0056b3;
         }
