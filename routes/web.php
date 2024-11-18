@@ -22,17 +22,24 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::delete('/profile', [ProfileController::class, 'desactivate'])->name('profile.desactivate');
 
+
     Route::post('/client', [ClientController::class, 'store'])->name('client.store');
     Route::put('/client/{client}', [ClientController::class, 'update'])->name('client.update');
     Route::delete('/{client}', [ClientController::class, 'destroy'])->name('client.destroy');
+
+    Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
+    Route::get('/clients/search', [ClientController::class, 'search'])->name('clients.search');
+
     Route::delete('/client/{id}', [ClientController::class, 'desactivate'])->name('client.desactivate');
     Route::post('/client/{id}/reactivate', [ClientController::class, 'reactivate'])->name('client.reactivate');
+
 
     Route::get('/client', [ClientController::class, 'index'])->name('client.index');
     Route::get('/show/{client}', [ClientController::class, 'show'])->name('client.show');
     Route::get('/client/create', [ClientController::class, 'create'])->name('client.create');
     Route::get('/edit/{client}', [ClientController::class, 'edit'])->name('client.edit');
     Route::get('/client/{id}/attendance', [AttendanceController::class, 'index']);
+
 
     Route::post('/attendance', [AttendanceController::class, 'store'])->name('attendance.store');
     Route::put('/attendance/{attendance}', [AttendanceController::class, 'update'])->name('attendance.update');
@@ -44,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/attendance/{attendance}/edit', [AttendanceController::class, 'edit'])->name('attendance.edit');
     
 
+    
     Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
     Route::put('/comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
     Route::delete('/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');

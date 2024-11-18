@@ -13,21 +13,31 @@ class ClientController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {
-        $query = Client::with('city');
+{
+    $query = Client::with('city'); // Inclui a relação com 'city'
 
-        // Verifica se um status foi selecionado e aplica o filtro
-        if ($request->has('status') && $request->status !== '') {
-            if ($request->status == 'ativo') {
-                $query->where('is_active', true);
-            } elseif ($request->status == 'inativo') {
-                $query->where('is_active', false);
-            }
+    // Filtro por status
+    if ($request->has('status') && $request->status !== '') {
+        if ($request->status == 'ativo') {
+            $query->where('is_active', true);
+        } elseif ($request->status == 'inativo') {
+            $query->where('is_active', false);
         }
-
-        $clients = $query->get(); // Obtém os clientes com base na consulta filtrada
-        return view('client.index', compact("clients"));
     }
+
+    // Filtro de pesquisa
+    if ($request->has('search') && $request->search !== '') {
+        $search = $request->search;
+        $query->where(function ($subQuery) use ($search) {
+            $subQuery->where('name', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%")
+                ->orWhere('phone', 'like', "%{$search}%");
+        });
+    }
+
+    $clients = $query->get(); // Obtém os clientes filtrados
+    return view('client.index', compact("clients"));
+}
 
     /**
      * Show the form for creating a new resource.
