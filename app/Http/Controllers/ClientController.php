@@ -14,9 +14,9 @@ class ClientController extends Controller
      */
     public function index(Request $request)
 {
-    $query = Client::with('city'); // Inclui a relação com 'city'
+    $query = Client::with('city');
 
-    // Filtro por status
+    
     if ($request->has('status') && $request->status !== '') {
         if ($request->status == 'ativo') {
             $query->where('is_active', true);
@@ -25,7 +25,7 @@ class ClientController extends Controller
         }
     }
 
-    // Filtro de pesquisa
+
     if ($request->has('search') && $request->search !== '') {
         $search = $request->search;
         $query->where(function ($subQuery) use ($search) {

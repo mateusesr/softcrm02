@@ -21,12 +21,12 @@
 
   <form action="{{ route('client.index') }}" method="GET" class="mb-4">
     <div class="row">
-        <!-- Campo de pesquisa -->
+       
         <div class="text-center mb-6">
             <input type="text" name="search" class="form-control" placeholder="Pesquisar Clientes..." 
             value="{{ request('search') }}">
         </div>
-        <!-- Botão de busca -->
+        
         <div class="text-center mb-3">
             <button type="submit" class="btn btn-primary w-100">Pesquisar</button>
         </div>
