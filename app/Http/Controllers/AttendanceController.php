@@ -39,7 +39,7 @@ class AttendanceController extends Controller
             'date' => 'required|date',
             'status' => 'required|in:1,2,3',
             'type_id' => 'required|exists:types,id',
-            'description' => 'required|string|max:255',
+            'description' => 'required|string|max:1000',
         ]);
 
         Attendance::create($request->all());

@@ -42,6 +42,7 @@
                     <td>{{ $attendance->status }}</td>
                     <td>{{ $attendance->type->name }}</td>
                     <td>{{ $attendance->description }}</td>
+                    
                     <td>
                         <div class="d-flex justify-content-center">
                             <a title="Editar Atendimento" href="{{ route('attendance.edit', $attendance->id) }}"

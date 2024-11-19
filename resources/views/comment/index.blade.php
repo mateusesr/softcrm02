@@ -16,6 +16,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Descrição</th>
+                        <th>Data</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -24,6 +25,7 @@
                     <tr>
                         <td>{{ $comment->id }}</td>
                         <td>{{ $comment->description }}</td>
+                        <td>{{ \Carbon\Carbon::parse($comment->created_at)->format('d/m/Y H:i') }}</td>
                         <td>
                             <a title="Ver Comentário" href="{{ route('comment.show', $comment->id) }}" class="btn "><span class="material-symbols-outlined list-icon">
                                     folder_eye

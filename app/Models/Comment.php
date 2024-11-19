@@ -12,6 +12,7 @@ class Comment extends Model
     protected $fillable = [
         'description',
         'attendance_id',
+        'created_at',
     ];
 
     public function attendance() {

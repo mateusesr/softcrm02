@@ -49,7 +49,7 @@
                 @csrf
                 <div class="mb-3">
                     <label for="client_id" class="form-label">Cliente</label>
-                    <select disabled class="form-control" id="client_id" name="client_id" required>
+                    <select class="form-control" id="client_id" name="client_id" required>
                         @foreach($clients as $client)
                         <option value="{{ $client->id }}" {{ isset($client_id) && $client_id == $client->id ? 'selected' : '' }}>
                             {{ $client->name }}
@@ -83,8 +83,8 @@
 
                 <div class="mb-3">
                     <label for="description" class="form-label">Descrição</label>
-                    <input type="text" class="form-control" id="description" name="description"
-                        placeholder="Digite a descrição" required>
+                    <textarea rows="3" cols="50" type="text" class="form-control" id="description" name="description"
+                        placeholder="Digite a descrição" required></textarea>
                 </div>
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary">Enviar</button>

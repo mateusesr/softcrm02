@@ -7,8 +7,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criar Comentário</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body,
         html {
@@ -57,8 +55,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Descrição</label>
-                    <input type="text" class="form-control" id="description" name="description"
-                        placeholder="Digite a descrição" required>
+                    <textarea rows="3" cols="50" type="text" class="form-control" id="description" name="description"
+                        placeholder="Digite a descrição" required></textarea>
                 </div>
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary">Enviar</button>
