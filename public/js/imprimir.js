@@ -1,10 +1,20 @@
 function imprimirPagina() {
-    var element= document.querySelector('#attendance-container');
-    var element= document.querySelector('#client-container');
+    var elementAttendance = document.querySelector('#attendance-container');
+    var elementClient= document.querySelector('#client-container');
     var header= document.querySelector('#navbar');
     header.style.display='none';
-    element.classList.add('imprimir');
+    if (elementClient) {
+        elementClient.classList.add('imprimir');
+    }
+    if (elementAttendance) {
+        elementAttendance.classList.add('imprimir');
+    }  
     window.print();
     header.style.display='block';
-    element.classList.remove('imprimir');
+    if (elementClient) {
+        elementClient.classList.remove('imprimir');
+    }
+    if (elementAttendance) {
+        elementAttendance.classList.remove('imprimir');
+    }
 }

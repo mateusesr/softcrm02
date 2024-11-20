@@ -6,8 +6,7 @@
   <h2 class="text-center mb-4" style="color: black; font-size: 24px;">Clientes</h2>
 
 
-  <form method="GET" action="{{ route('client.index') }}" class="mb-3 d-flex justify-content-center"
-    style="padding: 20px;">
+  <form method="GET" action="{{ route('client.index') }}" class="mb-3 d-flex justify-content-center">
     <select name="status" class="form-select me-2"
       style="width: 150px; border-radius: 8px; padding: 8px; font-size: 16px; color: #333;">
       <option value="" style="background-color: #f9f9f9;">Todos</option>
@@ -153,7 +152,7 @@
     display: flex;
     align-items: baseline;
     gap: 5px;
-    margin: 0 20px;
+    margin: 20px 0px;
   }
 
   .form-control:focus {
@@ -165,7 +164,7 @@
     width: 250px;
     padding: 10px;
     border: 2px solid #ccc;
-    border-radius: 25px;
+    border-radius: 8px;
     font-size: 16px;
     outline: none;
   }
@@ -202,7 +201,7 @@
   table th,
   table td {
     vertical-align: middle;
-    padding: 15px;
+    padding: 15px 10px;
     border-bottom: 1px solid #dee2e6;
   }
 
@@ -255,6 +254,11 @@
 
   .table-container {
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
   }
 
   .btn-warning {

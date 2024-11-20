@@ -5,34 +5,35 @@
     <h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Atendimentos</h2>
 
     @if (request()->get('client_id'))
-    <h4 class="text-center mb-4" style="color: gray; font-size: 15px;">Atendimentos para o Cliente ID:
-        {{ request()->get('client_id') }}
-    </h4>
+        <h4 class="text-center mb-4" style="color: gray; font-size: 15px;">Atendimentos para o Cliente ID:
+            {{ request()->get('client_id') }}
+        </h4>
     @endif
 
     <form method="GET" action="{{ route('attendance.index') }}" class="mb-3 d-flex justify-content-center"
-    style="padding: 20px;">
-    <select name="status" class="form-select me-2"
-        style="width: 150px; border-radius: 8px; padding: 8px; font-size: 16px; color: #333;">
-        <option value="" style="background-color: #f9f9f9;">Todos</option>
-        <option value="pendente" {{ request('status') == 'pendente' ? 'selected' : '' }}
-            style="background-color: yellow;">Pendentes</option>
-        <option value="urgente" {{ request('status') == 'urgente' ? 'selected' : '' }}
-            style="background-color: red; color: white;">Urgentes</option>
-        <option value="finalizado" {{ request('status') == 'finalizado' ? 'selected' : '' }}
-            style="background-color: green; color: white;">Finalizados</option>
-    </select>
-    <button type="submit" class="btn btn-primary ms-2" style="border-radius: 8px; padding: 8px; font-size: 16px;">
-        Filtrar
-    </button>
-</form>
+        style="padding: 20px;">
+        <select name="status" class="form-select me-2"
+            style="width: 150px; border-radius: 8px; padding: 8px; font-size: 16px; color: #333;">
+            <option value="" style="background-color: #f9f9f9;">Todos</option>
+            <option value="pendente" {{ request('status') == 'pendente' ? 'selected' : '' }}
+                style="background-color: yellow;">Pendentes</option>
+            <option value="urgente" {{ request('status') == 'urgente' ? 'selected' : '' }}
+                style="background-color: red; color: white;">Urgentes</option>
+            <option value="finalizado" {{ request('status') == 'finalizado' ? 'selected' : '' }}
+                style="background-color: green; color: white;">Finalizados</option>
+        </select>
+        <button type="submit" class="btn btn-primary ms-2" style="border-radius: 8px; padding: 8px; font-size: 16px;">
+            Filtrar
+        </button>
+    </form>
 
 
     <div class="table-container">
         @if (request()->get('client_id'))
-        <div class="d-flex justify-content-center mb-3 table-action">
-            <a href="{{ route('attendance.create', ['client_id' => request()->get('client_id')]) }}" class="btn btn-primary">Novo Atendimento</a>
-            @endif
+            <div class="d-flex justify-content-center mb-3 table-action">
+                <a href="{{ route('attendance.create', ['client_id' => request()->get('client_id')]) }}"
+                    class="btn btn-primary">Novo Atendimento</a>
+        @endif
         </div>
         <table class="table table-bordered table-hover table-striped text-center align-middle"
             style="background-color: white; border-radius: 8px; overflow: hidden;">
@@ -52,41 +53,46 @@
                     <button class="no-print btn btn-primary" onclick="imprimirPagina()">Imprimir</button>
                 </div>
                 @foreach ($attendances as $attendance)
-                <tr>
-                    <td>{{ $attendance->id }}</td>
-                    <td>{{ $attendance->client->name }}</td>
-                    <td>{{ \Carbon\Carbon::parse($attendance->date)->format('d/m/Y') }}</td>
-                    <td>{{ $attendance->status }}</td>
-                    <td>{{ $attendance->type->name }}</td>
-                    <td>{{ $attendance->description }}</td>
-                    
-                    <td>
-                        <div class="d-flex justify-content-center">
-                            <a title="Editar Atendimento" href="{{ route('attendance.edit', $attendance->id) }}"
-                                class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-edit list-icon">
-                                    stylus
-                                </span></a>
-                            <form action="{{ route('attendances.destroy', $attendance->id) }}" method="POST"
-                                onsubmit="return confirm('Tem certeza que deseja excluir este atendimento?');">
-                                @csrf
-                                @method('DELETE')
-                                <button title="Excluir Atendimento" type="submit" class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon-delete list-icon">
-                                        delete
-                                    </span></button>
-                            </form>
+                    <tr>
+                        <td>{{ $attendance->id }}</td>
+                        <td>{{ $attendance->client->name }}</td>
+                        <td>{{ \Carbon\Carbon::parse($attendance->date)->format('d/m/Y') }}</td>
+                        <td>{{ $attendance->status }}</td>
+                        <td>{{ $attendance->type->name }}</td>
+                        <td>{{ $attendance->description }}</td>
 
-                            <a title="Ver Comentários Desse Atendimento" href="{{ route('comment.index', ['attendance_id' => $attendance->id]) }}"
-                                class="btn"><span class="material-symbols-outlined list-icon">
-                                    forum
-                                </span></a>
+                        <td>
+                            <div class="d-flex justify-content-center">
+                                <a title="Editar Atendimento" href="{{ route('attendance.edit', $attendance->id) }}"
+                                    class="btn btn-sm mx-1"><span
+                                        class="material-symbols-outlined list-icon-edit list-icon">
+                                        stylus
+                                    </span></a>
+                                <form action="{{ route('attendances.destroy', $attendance->id) }}" method="POST"
+                                    onsubmit="return confirm('Tem certeza que deseja excluir este atendimento?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button title="Excluir Atendimento" type="submit" class="btn btn-sm mx-1"><span
+                                            class="material-symbols-outlined list-icon-delete list-icon">
+                                            delete
+                                        </span></button>
+                                </form>
 
-                            <a title="Criar Comentário Sobre o Atendimento" href="{{ route('comment.create', ['attendance_id' => $attendance->id]) }}" class="btn"><span class="material-symbols-outlined list-icon-add list-icon">
-                                    note_add
-                                </span></a>
+                                <a title="Ver Comentários Desse Atendimento"
+                                    href="{{ route('comment.index', ['attendance_id' => $attendance->id]) }}"
+                                    class="btn"><span class="material-symbols-outlined list-icon">
+                                        forum
+                                    </span></a>
 
-                        </div>
-                    </td>
-                </tr>
+                                <a title="Criar Comentário Sobre o Atendimento"
+                                    href="{{ route('comment.create', ['attendance_id' => $attendance->id]) }}"
+                                    class="btn"><span class="material-symbols-outlined list-icon-add list-icon">
+                                        note_add
+                                    </span></a>
+
+                            </div>
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
@@ -95,6 +101,52 @@
 </div>
 
 <style>
+    .attendance-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-select:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    }
+
+    .form-select {
+        width: 250px;
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 25px;
+        font-size: 16px;
+        outline: none;
+    }
+
+    .btn-search:focus {
+        outline: none;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    }
+
+    .row {
+        display: flex;
+        align-items: baseline;
+        gap: 5px;
+        margin: 20px 0px;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    }
+
+    .form-control {
+        width: 250px;
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        font-size: 16px;
+        outline: none;
+    }
+
     .no-print {
         margin: 0 5px;
     }
@@ -102,7 +154,7 @@
     .table-action {
         display: flex;
         justify-content: space-between;
-        margin: 0 15px;
+        margin: 0 10px;
     }
 
     .imprimir .btn {
@@ -127,7 +179,7 @@
     table th,
     table td {
         vertical-align: middle;
-        padding: 15px;
+        padding: 15px 10px;
         border-bottom: 1px solid #dee2e6;
     }
 
@@ -137,11 +189,7 @@
     }
 
 
-    .attendance-container {
-        flex-direction: column;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .client-container {
         max-width: max-content;
         margin: 0 auto;
     }
@@ -184,6 +232,11 @@
 
     .table-container {
         border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
     }
 
     .btn-warning {
