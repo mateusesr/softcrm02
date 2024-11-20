@@ -97,6 +97,15 @@
             </tbody>
         </table>
     </div>
+
+    <div class="d-flex justify-content-center">
+    {{ $attendances->links() }}
+    <p>Mostrando de {{ $attendances->firstItem() }} a {{ $attendances->lastItem() }} dos {{ $attendances->total() }} resultados</p>
+  </div>
+
+  <br>
+  <br>
+
     <script src="{{asset('js/imprimir.js')}}"></script>
 </div>
 

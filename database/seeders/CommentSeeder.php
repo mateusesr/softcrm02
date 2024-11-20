@@ -16,6 +16,11 @@ class CommentSeeder extends Seeder
         $comments = 
             [
                 ['attendance_id' => 1, 'description' => 'Comentário sobre o início do atendimento.', 'created_at' => '2024-11-01 10:30:00'],
+                ['attendance_id' => 1, 'description' => 'Comentário sobre o início do atendimento.', 'created_at' => '2024-11-01 10:30:00'],
+                ['attendance_id' => 1, 'description' => 'Comentário sobre o início do atendimento.', 'created_at' => '2024-11-01 10:30:00'],
+                ['attendance_id' => 1, 'description' => 'Comentário sobre o início do atendimento.', 'created_at' => '2024-11-01 10:30:00'],
+                ['attendance_id' => 1, 'description' => 'Comentário sobre o início do atendimento.', 'created_at' => '2024-11-01 10:30:00'],
+                ['attendance_id' => 1, 'description' => 'Comentário sobre o início do atendimento.', 'created_at' => '2024-11-01 10:30:00'],
                 ['attendance_id' => 2, 'description' => 'Discussão sobre o contrato e ajustes necessários.', 'created_at' => '2024-11-02 14:15:00'],
                 ['attendance_id' => 3, 'description' => 'Atualização mensal realizada com sucesso.', 'created_at' => '2024-11-03 09:00:00'],
                 ['attendance_id' => 4, 'description' => 'Observações sobre o progresso do serviço.', 'created_at' => '2024-11-04 16:45:00'],

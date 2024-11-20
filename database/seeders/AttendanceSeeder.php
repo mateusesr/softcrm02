@@ -23,6 +23,34 @@ class AttendanceSeeder extends Seeder
                 'date' => Carbon::now()->subDays(rand(0, 30))
             ],
             [
+                'client_id' => 1, 
+                'type_id' => 1, 
+                'description' => 'Consulta inicial sobre serviços.', 
+                'status' => 'Pendente', 
+                'date' => Carbon::now()->subDays(rand(0, 30))
+            ],
+            [
+                'client_id' => 1, 
+                'type_id' => 1, 
+                'description' => 'Consulta inicial sobre serviços.', 
+                'status' => 'Pendente', 
+                'date' => Carbon::now()->subDays(rand(0, 30))
+            ],
+            [
+                'client_id' => 1, 
+                'type_id' => 1, 
+                'description' => 'Consulta inicial sobre serviços.', 
+                'status' => 'Pendente', 
+                'date' => Carbon::now()->subDays(rand(0, 30))
+            ],
+            [
+                'client_id' => 1, 
+                'type_id' => 1, 
+                'description' => 'Consulta inicial sobre serviços.', 
+                'status' => 'Pendente', 
+                'date' => Carbon::now()->subDays(rand(0, 30))
+            ],
+            [
                 'client_id' => 2, 
                 'type_id' => 2, 
                 'description' => 'Revisão de contrato e propostas.', 
@@ -76,6 +104,41 @@ class AttendanceSeeder extends Seeder
                 'type_id' => 1, 
                 'description' => 'Treinamento de equipe.', 
                 'status' => 'Urgente', 
+                'date' => Carbon::now()->subDays(rand(0, 30))
+            ],
+            [
+                'client_id' => 5, 
+                'type_id' => 3, 
+                'description' => 'Avaliação de resultados.', 
+                'status' => 'Pendente', 
+                'date' => Carbon::now()->subDays(rand(0, 30))
+            ],
+            [
+                'client_id' => 5, 
+                'type_id' => 3, 
+                'description' => 'Avaliação de resultados.', 
+                'status' => 'Pendente', 
+                'date' => Carbon::now()->subDays(rand(0, 30))
+            ],
+            [
+                'client_id' => 5, 
+                'type_id' => 3, 
+                'description' => 'Avaliação de resultados.', 
+                'status' => 'Pendente', 
+                'date' => Carbon::now()->subDays(rand(0, 30))
+            ],
+            [
+                'client_id' => 5, 
+                'type_id' => 3, 
+                'description' => 'Avaliação de resultados.', 
+                'status' => 'Pendente', 
+                'date' => Carbon::now()->subDays(rand(0, 30))
+            ],
+            [
+                'client_id' => 5, 
+                'type_id' => 3, 
+                'description' => 'Avaliação de resultados.', 
+                'status' => 'Pendente', 
                 'date' => Carbon::now()->subDays(rand(0, 30))
             ],
             [

@@ -36,8 +36,7 @@ class AttendanceController extends Controller
             $query->where('client_id', $request->client_id);
         }
 
-        // Recuperar os resultados
-        $attendances = $query->get();
+        $attendances = $query->paginate(10);
 
         // Enviar os resultados para a view
         return view('attendance.index', compact('attendances'));
