@@ -43,7 +43,7 @@
                 </select>
             </div>
             <div class="d-grid">
-                <button type="submit" class="btn btn-save">Enviar</button>
+                <button type="submit" class="btn btn-save">Salvar</button>
                 <br>
                 <a href="{{ route('client.index') }}" class="btn btn-secondary btn-cancel">Retornar</a>
             </div>

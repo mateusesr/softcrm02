@@ -8,7 +8,7 @@
 
   
 
-  <form action="{{ route('client.index') }}" method="GET" class="mb-4">
+  <form action="{{ route('client.index') }}" method="GET" class="mb-4 search">
     <div class="row">
 
       <div class="text-center mb-6">
@@ -128,7 +128,7 @@
     </table>
   </div>
 
-  <div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-center paginate">
     {{ $clients->links() }}
   </div> <br><br>
 
@@ -138,7 +138,7 @@
 <!-- CSS inline para estilizar a tabela e centralização -->
 <style>
   .filter {
-    margin: 20px;
+   
   }
   .form-select:focus {
     border-color: #007bff;
@@ -163,7 +163,6 @@
     display: flex;
     align-items: baseline;
     gap: 5px;
-    margin: 20px;
   }
 
   .form-control:focus {
@@ -189,6 +188,12 @@
     justify-content: space-between;
     margin: 0 10px;
   }
+  .imprimir .paginate{
+    display: none;
+  }
+  .imprimir .search {
+    display: none;
+  }
 
   .imprimir .btn {
     display: none;
@@ -212,7 +217,7 @@
   table th,
   table td {
     vertical-align: middle;
-    padding: 15px 20px;
+    padding: 15px 12px;
     border-bottom: 1px solid #dee2e6;
   }
 
