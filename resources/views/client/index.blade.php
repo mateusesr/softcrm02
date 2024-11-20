@@ -6,18 +6,7 @@
   <h2 class="text-center mb-4" style="color: black; font-size: 24px;">Clientes</h2>
 
 
-  <form method="GET" action="{{ route('client.index') }}" class="mb-3 d-flex justify-content-center">
-    <select name="status" class="form-select me-2"
-      style="width: 150px; border-radius: 8px; padding: 8px; font-size: 16px; color: #333;">
-      <option value="" style="background-color: #f9f9f9;">Todos</option>
-      <option value="ativo" {{ request('status') == 'ativo' ? 'selected' : '' }} style="background-color: #c6f6d5;">
-        Ativos</option>
-      <option value="inativo" {{ request('status') == 'inativo' ? 'selected' : '' }} style="background-color: #f8d7da;">
-        Inativos</option>
-    </select>
-    <button type="submit" class="btn btn-primary ms-2"
-      style="border-radius: 8px; padding: 8px; font-size: 16px;">Filtrar</button>
-  </form>
+  
 
   <form action="{{ route('client.index') }}" method="GET" class="mb-4">
     <div class="row">
@@ -31,6 +20,19 @@
         <button type="submit" class="btn btn-primary w-100 btn-search">Pesquisar</button>
       </div>
     </div>
+  </form>
+
+  <form method="GET" action="{{ route('client.index') }}" class="mb-3 d-flex justify-content-center">
+    <select name="status" class="form-select me-2"
+      style="width: 150px; border-radius: 8px; padding: 8px; font-size: 16px; color: #333;">
+      <option value="" style="background-color: #f9f9f9;">Todos</option>
+      <option value="ativo" {{ request('status') == 'ativo' ? 'selected' : '' }} style="background-color: #c6f6d5;">
+        Ativos</option>
+      <option value="inativo" {{ request('status') == 'inativo' ? 'selected' : '' }} style="background-color: #f8d7da;">
+        Inativos</option>
+    </select>
+    <button type="submit" class="btn btn-primary ms-2"
+      style="border-radius: 8px; padding: 8px; font-size: 16px;">Filtrar Clientes por Status</button>
   </form>
 
   <div class="table-container">
@@ -128,11 +130,7 @@
 
   <div class="d-flex justify-content-center">
     {{ $clients->links() }}
-    <p>Mostrando de {{ $clients->firstItem() }} a {{ $clients->lastItem() }} dos {{ $clients->total() }} resultados</p>
-  </div>
-
-  <br>
-  <br>
+  </div> <br><br>
 
 
   <script src="{{asset('js/imprimir.js')}}"></script>
