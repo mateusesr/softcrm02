@@ -30,7 +30,10 @@ class AttendanceController extends Controller
                     break;
             }
         }
-
+        
+        if ($request->has('sort') && $request->has('direction')) {
+            $query->orderBy($request->sort, $request->direction);
+        }
         // Filtrar por client_id, se fornecido
         if ($request->has('client_id') && $request->client_id !== '') {
             $query->where('client_id', $request->client_id);

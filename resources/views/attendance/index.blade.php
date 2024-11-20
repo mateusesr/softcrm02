@@ -6,9 +6,9 @@
         <h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Atendimentos</h2>
 
         @if (request()->get('client_id'))
-        <h4 class="text-center mb-4" style="color: gray; font-size: 15px;">Atendimentos para o Cliente ID:
-            {{ request()->get('client_id') }}
-        </h4>
+            <h4 class="text-center mb-4" style="color: gray; font-size: 15px;">Atendimentos para o Cliente ID:
+                {{ request()->get('client_id') }}
+            </h4>
         @endif
 
         <form method="GET" action="{{ route('attendance.index') }}" class="mb-3 d-flex justify-content-center"
@@ -17,7 +17,7 @@
                 style="width: 150px; border-radius: 8px; padding: 8px; font-size: 16px; color: #333;">
                 <option value="" style="background-color: #f9f9f9;">Todos</option>
                 <option value="pendente" {{ request('status') == 'pendente' ? 'selected' : '' }}
-                    style="background-color: yellow;">Pendentes</option>
+                    style="background-color: #eee8aa;">Pendentes</option>
                 <option value="urgente" {{ request('status') == 'urgente' ? 'selected' : '' }}
                     style="background-color:  #f8d7da; ">Urgentes</option>
                 <option value="finalizado" {{ request('status') == 'finalizado' ? 'selected' : '' }}
@@ -32,20 +32,52 @@
 
         <div class="table-container">
             @if (request()->get('client_id'))
-            <div class="d-flex justify-content-center mb-3 table-action">
-                <a href="{{ route('attendance.create', ['client_id' => request()->get('client_id')]) }}"
-                    class="btn btn-primary">Novo Atendimento</a>
-                @endif
+                <div class="d-flex justify-content-center mb-3 table-action">
+                    <a href="{{ route('attendance.create', ['client_id' => request()->get('client_id')]) }}"
+                        class="btn btn-primary">Novo Atendimento</a>
+            @endif
             </div>
             <table class="table table-bordered table-hover table-striped text-center align-middle"
                 style="background-color: white; border-radius: 8px; overflow: hidden;">
                 <thead class="thead-dark">
                     <tr>
-                        <th>Protocolo</th>
-                        <th>Cliente</th>
-                        <th>Data</th>
+                        <th>
+                            <a href="{{ route('attendance.index', array_merge(request()->all(), ['sort' => 'id', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}"
+                                class="text-white text-decoration-none">
+                                Protocolo
+                                @if(request('sort') == 'id')
+                                    <span>{{ request('direction') === 'asc' ? '▲' : '▼' }}</span>
+                                @endif
+                            </a>
+                        </th>
+                        <th>
+                            <a href="{{ route('attendance.index', array_merge(request()->all(), ['sort' => 'client_id', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}"
+                                class="text-white text-decoration-none">
+                                Nome
+                                @if(request('sort') == 'client_id')
+                                    <span>{{ request('direction') === 'asc' ? '▲' : '▼' }}</span>
+                                @endif
+                            </a>
+                        </th>
+                        <th>
+                            <a href="{{ route('attendance.index', array_merge(request()->all(), ['sort' => 'date', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}"
+                                class="text-white text-decoration-none">
+                                Data
+                                @if(request('sort') == 'date')
+                                    <span>{{ request('direction') === 'asc' ? '▲' : '▼' }}</span>
+                                @endif
+                            </a>
+                        </th>
                         <th>Status</th>
-                        <th>Tipo</th>
+                        <th>
+                            <a href="{{ route('attendance.index', array_merge(request()->all(), ['sort' => 'type_id', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}"
+                                class="text-white text-decoration-none">
+                                Tipo
+                                @if(request('sort') == 'type_id')
+                                    <span>{{ request('direction') === 'asc' ? '▲' : '▼' }}</span>
+                                @endif
+                            </a>
+                        </th>
                         <th>Descrição</th>
                         <th>Ações</th>
                     </tr>
@@ -55,46 +87,46 @@
                         <button class="no-print btn btn-primary" onclick="imprimirPagina()">Imprimir</button>
                     </div>
                     @foreach ($attendances as $attendance)
-                    <tr>
-                        <td>{{ $attendance->id }}</td>
-                        <td>{{ $attendance->client->name }}</td>
-                        <td>{{ \Carbon\Carbon::parse($attendance->date)->format('d/m/Y') }}</td>
-                        <td>{{ $attendance->status }}</td>
-                        <td>{{ $attendance->type->name }}</td>
-                        <td>{{ $attendance->description }}</td>
+                        <tr>
+                            <td>{{ $attendance->id }}</td>
+                            <td>{{ $attendance->client->name }}</td>
+                            <td>{{ \Carbon\Carbon::parse($attendance->date)->format('d/m/Y') }}</td>
+                            <td>{{ $attendance->status }}</td>
+                            <td>{{ $attendance->type->name }}</td>
+                            <td>{{ $attendance->description }}</td>
 
-                        <td>
-                            <div class="d-flex justify-content-center">
-                                <a title="Editar Atendimento" href="{{ route('attendance.edit', $attendance->id) }}"
-                                    class="btn btn-sm mx-1"><span
-                                        class="material-symbols-outlined list-icon-edit list-icon">
-                                        stylus
-                                    </span></a>
-                                <form action="{{ route('attendances.destroy', $attendance->id) }}" method="POST"
-                                    onsubmit="return confirm('Tem certeza que deseja excluir este atendimento?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button title="Excluir Atendimento" type="submit" class="btn btn-sm mx-1"><span
-                                            class="material-symbols-outlined list-icon-delete list-icon">
-                                            delete
-                                        </span></button>
-                                </form>
+                            <td>
+                                <div class="d-flex justify-content-center">
+                                    <a title="Editar Atendimento" href="{{ route('attendance.edit', $attendance->id) }}"
+                                        class="btn btn-sm mx-1"><span
+                                            class="material-symbols-outlined list-icon-edit list-icon">
+                                            stylus
+                                        </span></a>
+                                    <form action="{{ route('attendances.destroy', $attendance->id) }}" method="POST"
+                                        onsubmit="return confirm('Tem certeza que deseja excluir este atendimento?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button title="Excluir Atendimento" type="submit" class="btn btn-sm mx-1"><span
+                                                class="material-symbols-outlined list-icon-delete list-icon">
+                                                delete
+                                            </span></button>
+                                    </form>
 
-                                <a title="Ver Comentários Desse Atendimento"
-                                    href="{{ route('comment.index', ['attendance_id' => $attendance->id]) }}"
-                                    class="btn"><span class="material-symbols-outlined list-icon">
-                                        forum
-                                    </span></a>
+                                    <a title="Ver Comentários Desse Atendimento"
+                                        href="{{ route('comment.index', ['attendance_id' => $attendance->id]) }}"
+                                        class="btn"><span class="material-symbols-outlined list-icon">
+                                            forum
+                                        </span></a>
 
-                                <a title="Criar Comentário Sobre o Atendimento"
-                                    href="{{ route('comment.create', ['attendance_id' => $attendance->id]) }}"
-                                    class="btn"><span class="material-symbols-outlined list-icon-add list-icon">
-                                        note_add
-                                    </span></a>
+                                    <a title="Criar Comentário Sobre o Atendimento"
+                                        href="{{ route('comment.create', ['attendance_id' => $attendance->id]) }}"
+                                        class="btn"><span class="material-symbols-outlined list-icon-add list-icon">
+                                            note_add
+                                        </span></a>
 
-                            </div>
-                        </td>
-                    </tr>
+                                </div>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -195,7 +227,7 @@
         table th,
         table td {
             vertical-align: middle;
-            padding: 15px 10px;
+            padding: 15px 20px;
             border-bottom: 1px solid #dee2e6;
         }
 

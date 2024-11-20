@@ -22,7 +22,7 @@
     </div>
   </form>
 
-  <form method="GET" action="{{ route('client.index') }}" class="mb-3 d-flex justify-content-center">
+  <form method="GET" action="{{ route('client.index') }}" class="mb-3 d-flex justify-content-center filter">
     <select name="status" class="form-select me-2"
       style="width: 150px; border-radius: 8px; padding: 8px; font-size: 16px; color: #333;">
       <option value="" style="background-color: #f9f9f9;">Todos</option>
@@ -137,6 +137,9 @@
 </div>
 <!-- CSS inline para estilizar a tabela e centralização -->
 <style>
+  .filter {
+    margin: 20px;
+  }
   .form-select:focus {
     border-color: #007bff;
     box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
@@ -160,7 +163,7 @@
     display: flex;
     align-items: baseline;
     gap: 5px;
-    margin: 20px 0px;
+    margin: 20px;
   }
 
   .form-control:focus {
@@ -209,7 +212,7 @@
   table th,
   table td {
     vertical-align: middle;
-    padding: 15px 10px;
+    padding: 15px 20px;
     border-bottom: 1px solid #dee2e6;
   }
 
