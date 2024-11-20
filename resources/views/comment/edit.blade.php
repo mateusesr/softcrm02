@@ -9,19 +9,23 @@
 @section('content')
 <div class="container">
     <h2 class="text-center mb-4" style="color: black; font-size: 24px;">Editar Comentário</h1>
-    <form class="form-box" action="{{ route('comment.update', $comment->id) }}" method="POST" class="bg-white p-6 rounded shadow-md">
-        @csrf
-        @method('PUT')
-        <div class="mb-4">
-            <label for="attendance_id" class="block text-sm font-medium text-gray-700">ID do Atendimento</label>
-            <input type="number" name="attendance_id" id="attendance_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" value="{{ $comment->attendance_id }}" required readonly>
-        </div>
-        <div class="mb-4">
-            <label for="description" class="block text-sm font-medium text-gray-700">Descrição</label>
-            <textarea name="description" id="description" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" required>{{ $comment->description }}</textarea>
-        </div>
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Atualizar</button>
-    </form>
+        <form class="form-box" action="{{ route('comment.update', $comment->id) }}" method="POST" class="bg-white p-6 rounded shadow-md">
+            @csrf
+            @method('PUT')
+            <div class="mb-4">
+                <label for="attendance_id" class="block text-sm font-medium text-gray-700">ID do Atendimento</label>
+                <input type="number" name="attendance_id" id="attendance_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" value="{{ $comment->attendance_id }}" required readonly>
+            </div>
+            <div class="mb-4">
+                <label for="description" class="block text-sm font-medium text-gray-700">Descrição</label>
+                <textarea name="description" id="description" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" required>{{ $comment->description }}</textarea>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-save">Enviar</button>
+                <br>
+                <a href="{{ route('comment.index', ['attendance_id' => $attendance_id]) }}" class="btn btn-secondary btn-cancel">Retornar</a>
+            </div>
+        </form>
 </div>
 <style>
     a {
@@ -40,71 +44,46 @@
 
     .form-box {
         background-color: white;
-        /* Fundo branco para contraste */
         padding: 30px;
-        /* Aumenta o espaçamento interno */
         border-radius: 12px;
-        /* Cantos mais arredondados */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-        /* Sombra um pouco mais forte */
         width: 100%;
         max-width: 500px;
-        /* Aumenta a largura máxima */
         box-sizing: border-box;
-        /* Inclui padding na largura total */
         margin: 40px auto;
-        /* Centraliza e adiciona mais espaçamento vertical */
     }
-
-    
 
     .btn-save {
         background-color: #007bff;
-        /* Azul chamativo */
         color: white;
-        /* Cor do texto */
         border: none;
-        /* Remove bordas padrão */
         border-radius: 6px;
-        /* Cantos arredondados */
         padding: 12px 20px;
-        /* Aumenta o espaçamento interno */
         font-size: 1.1rem;
-        /* Tamanho do texto maior */
         cursor: pointer;
-        /* Mostra que o botão é clicável */
         transition: background-color 0.3s ease;
-        /* Animação suave */
         width: 100%;
-        /* Botão ocupa toda a largura do formulário */
     }
 
     input,
-    select {
+    select,
+    textarea {
         margin-bottom: 20px;
         width: 100%;
-        /* Campos ocupam toda a largura do formulário */
         padding: 12px;
-        /* Aumenta o espaço interno dos campos */
         font-size: 1rem;
-        /* Tamanho da fonte maior */
         border: 1px solid #ccc;
-        /* Borda leve */
         border-radius: 6px;
-        /* Cantos arredondados */
         margin-bottom: 20px;
-        /* Espaçamento entre os campos */
         box-sizing: border-box;
     }
 
     label {
 
         font-size: 1.1rem;
-        /* Tamanho maior para os rótulos */
         font-weight: bold;
         margin-bottom: 5px;
         display: block;
-        /* Força os rótulos a ficarem em linha separada */
     }
 
     .table-container .form-group {
@@ -133,7 +112,7 @@
         margin: 0;
     }
 
-    h2{
+    h2 {
         font-weight: bold;
         color: #343a40;
         margin-bottom: 20px;
@@ -183,4 +162,4 @@
         color: white;
     }
 </style>
-@endsection 
+@endsection

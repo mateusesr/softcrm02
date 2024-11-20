@@ -83,7 +83,7 @@ class CityController extends Controller
 
            //return redirect()->route('city.index')->with('error', 'Não foi possível excluir sua cidade.');   
 
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $result = false;
             return redirect()->route('city.index')->with('message', 'Não foi possível excluir sua cidade.');
 

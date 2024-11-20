@@ -11,31 +11,31 @@
 
 <body>
     <div class="container">
-            <h2 class="text-center mb-4" style="color: black; font-size: 24px;">Criar Comentário</h2>
-            <form  class="form-box" action="{{ route('comment.store') }}" method="POST">
-                @csrf
-                <div class="form-group">
-                    <label for="attendance_id" class="form-label">Id do Atendimento</label>
-                    <select class="form-control" id="attendance_id" name="attendance_id" required >
+        <h2 class="text-center mb-4" style="color: black; font-size: 24px;">Criar Comentário</h2>
+        <form class="form-box" action="{{ route('comment.store') }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <label for="attendance_id" class="form-label">Id do Atendimento</label>
+                <select class="form-control" id="attendance_id" name="attendance_id" required>
                     @foreach($attendances as $attendance)
-                    <option  value="{{ $attendance->id }}">
+                    <option value="{{ $attendance->id }}">
                         {{ $attendance->id }}
-                        </option>
+                    </option>
                     @endforeach
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="description" class="form-label">Descrição</label>
-                    <textarea rows="3" cols="50" type="text" class="form-control" id="description" name="description"
-                        placeholder="Digite a descrição" required></textarea>
-                </div>
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-save">Enviar</button>
-                    <br>
-                    <a href="{{ route('comment.index', ['attendance_id' => $attendance_id]) }}" class="btn btn-secondary btn-cancel">Retornar</a>
-                </div>
-            </form>
-        </div>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="description" class="form-label">Descrição</label>
+                <textarea rows="3" cols="50" type="text" class="form-control" id="description" name="description"
+                    placeholder="Digite a descrição" required></textarea>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-save">Enviar</button>
+                <br>
+                <a href="{{ route('comment.index', ['attendance_id' => $attendance_id]) }}" class="btn btn-secondary btn-cancel">Retornar</a>
+            </div>
+        </form>
+    </div>
 </body>
 <style>
     a {
@@ -54,71 +54,47 @@
 
     .form-box {
         background-color: white;
-        /* Fundo branco para contraste */
         padding: 30px;
-        /* Aumenta o espaçamento interno */
         border-radius: 12px;
-        /* Cantos mais arredondados */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-        /* Sombra um pouco mais forte */
         width: 100%;
         max-width: 500px;
-        /* Aumenta a largura máxima */
         box-sizing: border-box;
-        /* Inclui padding na largura total */
         margin: 40px auto;
-        /* Centraliza e adiciona mais espaçamento vertical */
-    }
 
-    
+    }
 
     .btn-save {
         background-color: #007bff;
-        /* Azul chamativo */
         color: white;
-        /* Cor do texto */
         border: none;
-        /* Remove bordas padrão */
         border-radius: 6px;
-        /* Cantos arredondados */
         padding: 12px 20px;
-        /* Aumenta o espaçamento interno */
         font-size: 1.1rem;
-        /* Tamanho do texto maior */
         cursor: pointer;
-        /* Mostra que o botão é clicável */
         transition: background-color 0.3s ease;
-        /* Animação suave */
         width: 100%;
-        /* Botão ocupa toda a largura do formulário */
     }
 
     input,
-    select {
+    select, 
+    textarea {
         margin-bottom: 20px;
         width: 100%;
-        /* Campos ocupam toda a largura do formulário */
         padding: 12px;
-        /* Aumenta o espaço interno dos campos */
         font-size: 1rem;
-        /* Tamanho da fonte maior */
         border: 1px solid #ccc;
-        /* Borda leve */
         border-radius: 6px;
-        /* Cantos arredondados */
         margin-bottom: 20px;
-        /* Espaçamento entre os campos */
         box-sizing: border-box;
     }
 
     label {
 
         font-size: 1.1rem;
-        /* Tamanho maior para os rótulos */
         font-weight: bold;
         margin-bottom: 5px;
         display: block;
-        /* Força os rótulos a ficarem em linha separada */
     }
 
     .table-container .form-group {
@@ -147,30 +123,23 @@
         margin: 0;
     }
 
-    h2{
+    h2 {
         font-weight: bold;
         color: #343a40;
         margin-bottom: 20px;
-        /* Espaçamento abaixo do título */
     }
 
     .btn {
         margin-top: 10px;
-        margin: 5px 1px;
-        /* Espaçamento entre os botões */
+        margin: 5px auto;
         padding: 10px 16px;
-        /* Aumenta o espaçamento interno dos botões */
         border-radius: 5px;
-        /* Arredondamento dos botões */
         font-size: 14px;
-        /* Tamanho da fonte dos botões */
     }
 
     .btn-group {
         display: flex;
-        /* Os botões ficarão alinhados na horizontal */
         justify-content: center;
-        /* Centraliza o grupo de botões */
     }
 
     .btn-warning {

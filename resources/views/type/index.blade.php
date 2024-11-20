@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="type-container">
-    <h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Listagem de Tipos de Atendimentos</h2>
+    <h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Tipos de Atendimentos</h2>
 
     @if (session('message'))
     <div class="alert alert-success">

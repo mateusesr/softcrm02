@@ -73,23 +73,26 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Comment $comment)
+    public function edit($id)
     {
-        return view('comment.edit', compact('comment'));
+        $comment = Comment::findOrFail($id);
+        $attendance_id = $comment->attendance_id; // Obter o attendance_id do comentário
+        return view('comment.edit', compact('comment', "attendance_id" ));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'description' => 'required|string|max:255',
         ]);
 
+        $comment = Comment::findOrFail($id);
         $comment->update($request->all());
 
-        return redirect()->route('comment.index')->with('success', 'Comentário atualizado com sucesso.');
+        return redirect()->route('comment.index', ['attendance_id' => $comment->attendance_id])->with('success', 'Comentário atualizado com sucesso.');
     }
 
     /**

@@ -10,19 +10,20 @@
 
 <body>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100" rel="stylesheet" />
+    <header>
     <nav class="bg-gray-800 p-4 header-navbar" id="navbar">
-        <div class="container mx-auto flex justify-between ">
-            <div class="flex space-x-4 header-navbar">
+        <div class="container mx-auto flex justify-between header">
+            <div class="flex space-x-4 navbar-left">
                 <a href="{{ route('dashboard') }}" class="text-white hover:bg-gray-700 px-8 py-2 rounded">Dashboard</a>
                 <a href="{{ route('client.index') }}" class="text-white hover:bg-gray-700 px-8 py-2 rounded">Clientes</a>
                 <a href="{{ route('attendance.index') }}" class="text-white hover:bg-gray-700 px-8 py-2 rounded">Atendimentos</a>
                 <a href="{{ route('type.index') }}" class="text-white hover:bg-gray-700 px-8 py-2 rounded">Tipos de Atendimentos</a>
                 <a href="{{ route('city.index') }}" class="text-white hover:bg-gray-700 px-8 py-2 rounded">Cidades</a>
             </div>
-            <div class="flex space-x-4">
+            <div class="flex space-x-4 profile navbar-right">
                 @auth
                 <a href="{{ route('profile.edit') }}" class="text-white hover:bg-gray-700 px-8 py-2 rounded">Perfil</a>
-                <form action="{{ route('logout') }}" method="POST" class="inline">
+                <form class="form-out" action="{{ route('logout') }}" method="POST" class="inline">
                     @csrf
                     <button type="submit" class="text-white hover:bg-gray-700 px-8 py-2 rounded">Logout</button>
                 </form>
@@ -30,23 +31,31 @@
             </div>
         </div>
     </nav>
+    </header>
 
     <main class="container mx-auto mt-4">
         @yield('content')
     </main>
     <style>
-        .btn-cancel:hover {
-                background-color: #494f55;
+        .header {
+            width: 100%;
+            height: 40px;
         }
+        
+        .header-navbar {
+            text-decoration: none;
+        }
+
+        .btn-cancel:hover {
+            background-color: #494f55;
+        }
+
         .btn-save:hover {
             background-color: #0056b3;
         }
+
         .btn-primary:hover {
             background-color: #0056b3;
-        }
-
-        .header-navbar {
-            text-decoration: none
         }
 
         .list-icon {
@@ -118,6 +127,6 @@
             margin: 0;
         }
     </style>
-</body>
+
 
 </html>
