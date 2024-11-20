@@ -12,43 +12,59 @@
 
 <body>
     <div class="container ">
+
         <h2 class="text-center mb-4" style="color: black; font-size: 24px;">Criar Cliente</h2>
         <form class="form-box" action="{{ route('client.store') }}" method="POST">
-                @csrf
-                <div class="form-group">
-                    <label for="name" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Digite o nome" required>
+            @if (isset($client))
+                <div class="alert alert-success sucess" role="alert">
+                    Cliente salvo com sucesso!
                 </div>
-                <div class="form-group">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Digite o email"
-                        required>
-                </div>
-                <div class="form-group">
-                    <label for="phone" class="form-label">Telefone</label>
-                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Digite o telefone"
-                        required>
-                </div>
-                <div class="form-group">
-                    <label for="city_id" class="form-label">Cidade</label>
-                    <select class="form-control" id="city_id" name="city_id" required>
-                        <option value="" disabled selected>Escolha a sua cidade</option>
-                        @foreach($cities as $city)
-                            <option value="{{ $city->id }}">{{ $city->name }} - {{$city->uf}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">Enviar</button>
-                    <br>
-                    <a href="{{ route('client.index') }}" class="btn btn-primary">Retornar</a>
-                </div>
-            </form>
+            @endif
+            @csrf
+            <div class="form-group">
+                <label for="name" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Digite o nome" required>
+            </div>
+            <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Digite o email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone" class="form-label">Telefone</label>
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Digite o telefone" required>
+            </div>
+            <div class="form-group">
+                <label for="city_id" class="form-label">Cidade</label>
+                <select class="form-control" id="city_id" name="city_id" required>
+                    <option value="" disabled selected>Escolha a sua cidade</option>
+                    @foreach($cities as $city)
+                        <option value="{{ $city->id }}">{{ $city->name }} - {{$city->uf}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-save">Enviar</button>
+                <br>
+                <a href="{{ route('client.index') }}" class="btn btn-secondary btn-cancel">Retornar</a>
+            </div>
         </form>
-    </div> 
+        </form>
+    </div>
 </body>
 <style>
-      a {
+    .sucess {
+        display: flex;
+        background-color: green;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        padding: 10px 10px;
+        border-radius: 6px;
+        font-weight: bold;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    a {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -87,7 +103,7 @@
     }
 
     input,
-    select, 
+    select,
     textarea {
         margin-bottom: 20px;
         width: 100%;
@@ -176,5 +192,6 @@
         color: white;
     }
 </style>
+
 </html>
 @endsection

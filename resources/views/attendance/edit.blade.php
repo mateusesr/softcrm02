@@ -41,8 +41,8 @@
             <div class="form-group">
                 <label for="status" class="form-label">Status</label>
                 <select class="form-control" id="status" name="status" required>
-                    <option value="1" {{ $attendance->status == 1 ? 'selected' : '' }}>Ativo</option>
-                    <option value="2" {{ $attendance->status == 2 ? 'selected' : '' }}>Em Espera</option>
+                    <option value="1" {{ $attendance->status == 1 ? 'selected' : '' }}>Pendente</option>
+                    <option value="2" {{ $attendance->status == 2 ? 'selected' : '' }}>Urgente</option>
                     <option value="3" {{ $attendance->status == 3 ? 'selected' : '' }}>Finalizado</option>
                 </select>
             </div>

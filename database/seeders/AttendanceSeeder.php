@@ -19,14 +19,14 @@ class AttendanceSeeder extends Seeder
                 'client_id' => 1, 
                 'type_id' => 1, 
                 'description' => 'Consulta inicial sobre serviços.', 
-                'status' => 'Ativo', 
+                'status' => 'Pendente', 
                 'date' => Carbon::now()->subDays(rand(0, 30))
             ],
             [
                 'client_id' => 2, 
                 'type_id' => 2, 
                 'description' => 'Revisão de contrato e propostas.', 
-                'status' => 'Em espera', 
+                'status' => 'Urgente', 
                 'date' => Carbon::now()->subDays(rand(0, 30))
             ],
             [
@@ -40,14 +40,14 @@ class AttendanceSeeder extends Seeder
                 'client_id' => 4, 
                 'type_id' => 3, 
                 'description' => 'Discussão sobre atualizações de serviço.', 
-                'status' => 'Ativo', 
+                'status' => 'Pendente', 
                 'date' => Carbon::now()->subDays(rand(0, 30))
             ],
             [
                 'client_id' => 5, 
                 'type_id' => 2, 
                 'description' => 'Solicitação de suporte técnico.', 
-                'status' => 'Em espera', 
+                'status' => 'Urgente', 
                 'date' => Carbon::now()->subDays(rand(0, 30))
             ],
             [
@@ -61,7 +61,7 @@ class AttendanceSeeder extends Seeder
                 'client_id' => 2, 
                 'type_id' => 1, 
                 'description' => 'Suporte em novos projetos.', 
-                'status' => 'Ativo', 
+                'status' => 'Pendente', 
                 'date' => Carbon::now()->subDays(rand(0, 30))
             ],
             [
@@ -75,14 +75,14 @@ class AttendanceSeeder extends Seeder
                 'client_id' => 4, 
                 'type_id' => 1, 
                 'description' => 'Treinamento de equipe.', 
-                'status' => 'Em espera', 
+                'status' => 'Urgente', 
                 'date' => Carbon::now()->subDays(rand(0, 30))
             ],
             [
                 'client_id' => 5, 
                 'type_id' => 3, 
                 'description' => 'Avaliação de resultados.', 
-                'status' => 'Ativo', 
+                'status' => 'Pendente', 
                 'date' => Carbon::now()->subDays(rand(0, 30))
             ],
         ];

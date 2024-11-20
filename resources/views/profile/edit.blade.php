@@ -42,11 +42,5 @@
 @endsection
 
 <style>
- .green-box{
-    border:2px #00800080 solid;
-    border-radius:0.5em;
-    background-color: #00800080;
-    padding: 3px;
-    text-align: center;
- }
+ 
 </style>

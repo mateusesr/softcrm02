@@ -9,42 +9,49 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    
+
     public function index(Request $request)
-{
-    $query = Client::with('city');
+    {
+        $query = Client::with('city');
 
-    
-    if ($request->has('status') && $request->status !== '') {
-        if ($request->status == 'ativo') {
-            $query->where('is_active', true);
-        } elseif ($request->status == 'inativo') {
-            $query->where('is_active', false);
+
+        
+        if ($request->has('status') && $request->status !== '') {
+            if ($request->status == 'ativo') {
+                $query->where('is_active', true);
+            } elseif ($request->status == 'inativo') {
+                $query->where('is_active', false);
+            }
         }
+
+
+        if ($request->has('search') && $request->search !== '') {
+            $search = $request->search;
+            $query->where(function ($subQuery) use ($search) {
+                $subQuery->where('name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%")
+                    ->orWhere('phone', 'like', "%{$search}%");
+            });
+        }
+
+        if ($request->has('sort') && $request->has('direction')) {
+            $query->orderBy($request->sort, $request->direction);
+        }
+
+        $clients = $query->paginate(10);
+
+        $clients = $query->get(); // Obtém os clientes filtrados
+        return view('client.index', compact("clients"));
     }
 
 
-    if ($request->has('search') && $request->search !== '') {
-        $search = $request->search;
-        $query->where(function ($subQuery) use ($search) {
-            $subQuery->where('name', 'like', "%{$search}%")
-                ->orWhere('email', 'like', "%{$search}%")
-                ->orWhere('phone', 'like', "%{$search}%");
-        });
-    }
-
-    $clients = $query->get(); // Obtém os clientes filtrados
-    return view('client.index', compact("clients"));
-}
-
-  
     public function create()
     {
         $cities = City::orderBy('uf')->orderBy('name')->get(); // Ordenando primeiro pela UF e depois pelo nome
         return view('client.create', compact('cities')); // Passando as cidades para a view
     }
 
-  
+
     public function store(Request $request)
     {
         $client = Client::create($request->toArray());
@@ -53,7 +60,7 @@ class ClientController extends Controller
         return view("client.create", compact('client', 'cities')); // Passando as cidades para a view
     }
 
-   
+
     public function show(string $id)
     {
         $client = Client::findOrFail($id);
@@ -61,14 +68,14 @@ class ClientController extends Controller
         return view('client.show', compact('client', 'cities')); // Passando as cidades para a view
     }
 
-   
+
     public function edit(Client $client)
     {
         $cities = City::all(); // Obtém todas as cidades
         return view('client.edit', compact('client', 'cities')); // Passa o cliente e a lista de cidades
     }
 
-    
+
     public function update(Request $request, string $id)
     {
         $client = Client::whereId($id)->update([
@@ -83,19 +90,19 @@ class ClientController extends Controller
 
 
     public function destroy(string $id)
-{
-    $deleted = Client::destroy($id);
+    {
+        $deleted = Client::destroy($id);
 
-    if ($deleted) {
- 
-        return redirect()->route('client.index');
-    } else {
+        if ($deleted) {
 
-        return redirect()->route('client.index');
+            return redirect()->route('client.index');
+        } else {
+
+            return redirect()->route('client.index');
+        }
     }
-}
 
-   
+
     public function desactivate(string $id)
     {
         $client = Client::findOrFail($id);

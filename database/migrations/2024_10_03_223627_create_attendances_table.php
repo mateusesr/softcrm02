@@ -17,8 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger("type_id");
             $table->date('date');
             $table->text("description");
-            $table->enum("status",["Ativo","Em espera","Finalizado"]);
-
+            $table->enum("status",["Pendente","Urgente","Finalizado"]);
             $table->timestamps();
 
             $table->foreign('client_id')->references("id")->on("clients");

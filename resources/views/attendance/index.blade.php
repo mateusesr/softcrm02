@@ -8,8 +8,25 @@
     <h4 class="text-center mb-4" style="color: gray; font-size: 15px;">Atendimentos para o Cliente ID:
         {{ request()->get('client_id') }}
     </h4>
-
     @endif
+
+    <form method="GET" action="{{ route('attendance.index') }}" class="mb-3 d-flex justify-content-center"
+    style="padding: 20px;">
+    <select name="status" class="form-select me-2"
+        style="width: 150px; border-radius: 8px; padding: 8px; font-size: 16px; color: #333;">
+        <option value="" style="background-color: #f9f9f9;">Todos</option>
+        <option value="pendente" {{ request('status') == 'pendente' ? 'selected' : '' }}
+            style="background-color: yellow;">Pendentes</option>
+        <option value="urgente" {{ request('status') == 'urgente' ? 'selected' : '' }}
+            style="background-color: red; color: white;">Urgentes</option>
+        <option value="finalizado" {{ request('status') == 'finalizado' ? 'selected' : '' }}
+            style="background-color: green; color: white;">Finalizados</option>
+    </select>
+    <button type="submit" class="btn btn-primary ms-2" style="border-radius: 8px; padding: 8px; font-size: 16px;">
+        Filtrar
+    </button>
+</form>
+
 
     <div class="table-container">
         @if (request()->get('client_id'))

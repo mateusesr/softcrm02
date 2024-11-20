@@ -13,21 +13,41 @@ class AttendanceController extends Controller
 {
     public function index(Request $request)
     {
-        $client_id = $request->get('client_id');
-        if ($client_id) {
-            $attendances = Attendance::where('client_id', $client_id)->get();
-        } else {
-            $attendances = Attendance::all();
+        // Consulta inicial com relacionamentos
+        $query = Attendance::with('type');
+
+        // Filtrar por status
+        if ($request->has('status') && $request->status !== '') {
+            switch ($request->status) {
+                case 'pendente':
+                    $query->where('status', 'pendente');
+                    break;
+                case 'urgente':
+                    $query->where('status', 'urgente');
+                    break;
+                case 'finalizado':
+                    $query->where('status', 'finalizado');
+                    break;
+            }
         }
+
+        // Filtrar por client_id, se fornecido
+        if ($request->has('client_id') && $request->client_id !== '') {
+            $query->where('client_id', $request->client_id);
+        }
+
+        // Recuperar os resultados
+        $attendances = $query->get();
+
+        // Enviar os resultados para a view
         return view('attendance.index', compact('attendances'));
     }
 
     public function create(Request $request)
-
     {
-        $client_id = $request->get('client_id'); 
-        $clients = Client::all(); 
-        $types = Type::all(); 
+        $client_id = $request->get('client_id');
+        $clients = Client::all();
+        $types = Type::all();
 
         return view('attendance.create', compact('client_id', 'clients', 'types'));
     }
@@ -37,14 +57,16 @@ class AttendanceController extends Controller
         $request->validate([
             'client_id' => 'required|exists:clients,id',
             'date' => 'required|date',
-            'status' => 'required|in:1,2,3',
+            'status' => 'required|in:Pendente,Urgente,Finalizado',
             'type_id' => 'required|exists:types,id',
-            'description' => 'required|string|max:1000',
+            'description' => 'required|string|max:255',
         ]);
 
-        Attendance::create($request->all());
-
-        return redirect()->route('attendance.index', ['client_id' => $request->client_id])->with('success', 'Atendimento criado com sucesso.');
+        $client_id = $request->get('client_id');
+        $types = Type::all();
+        $clients = Client::all();
+        $attendance = Attendance::create($request->toArray());
+        return view("attendance.create", compact('attendance', 'clients', 'types', 'client_id'));
     }
 
     public function show(Attendance $attendance)
