@@ -16,17 +16,13 @@ class CityController extends Controller
         return view('city.index', compact('cities'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    
     public function create()
     {
         return view('city.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
     {
         $request->validate([
@@ -39,25 +35,19 @@ class CityController extends Controller
         return redirect()->route('city.index')->with('success', 'Cidade criada com sucesso.');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    
     public function show(City $city)
     {
         return view('city.show', compact('city'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+ 
     public function edit(City $city)
     {
         return view('city.edit', compact('city'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+   
     public function update(Request $request, City $city)
     {
         $request->validate([
@@ -70,9 +60,7 @@ class CityController extends Controller
         return redirect()->route('city.index')->with('success', 'Cidade atualizada com sucesso.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(City $city)
     {
         try {

@@ -9,9 +9,7 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index(Request $request)
 {
     $query = Client::with('city');
@@ -39,18 +37,14 @@ class ClientController extends Controller
     return view('client.index', compact("clients"));
 }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+  
     public function create()
     {
         $cities = City::orderBy('uf')->orderBy('name')->get(); // Ordenando primeiro pela UF e depois pelo nome
         return view('client.create', compact('cities')); // Passando as cidades para a view
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+  
     public function store(Request $request)
     {
         $client = Client::create($request->toArray());
@@ -59,9 +53,7 @@ class ClientController extends Controller
         return view("client.create", compact('client', 'cities')); // Passando as cidades para a view
     }
 
-    /**
-     * Display the specified resource.
-     */
+   
     public function show(string $id)
     {
         $client = Client::findOrFail($id);
@@ -69,18 +61,14 @@ class ClientController extends Controller
         return view('client.show', compact('client', 'cities')); // Passando as cidades para a view
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+   
     public function edit(Client $client)
     {
         $cities = City::all(); // Obtém todas as cidades
         return view('client.edit', compact('client', 'cities')); // Passa o cliente e a lista de cidades
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(Request $request, string $id)
     {
         $client = Client::whereId($id)->update([
@@ -107,9 +95,7 @@ class ClientController extends Controller
     }
 }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+   
     public function desactivate(string $id)
     {
         $client = Client::findOrFail($id);

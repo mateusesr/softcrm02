@@ -15,21 +15,27 @@
             @csrf
             @method('PATCH')
 
-            <div class="mb-3">
-                <label for="name" class="block text-sm font-medium text-gray-700">Nome</label>
-                <input type="text" class="form-input mt-1 block w-full" id="name" name="name" value="{{ $user->name }}" required>
+            <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                    @include('profile.partials.update-profile-information-form')
+                </div>
             </div>
 
-            <div class="mb-3">
-                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                <input type="email" class="form-input mt-1 block w-full" id="email" name="email" value="{{ $user->email }}" required>
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                    @include('profile.partials.update-password-form')
+                </div>
             </div>
 
-            <div class="flex items-center justify-end mt-3">
-                <button type="submit" class="btn btn-primary bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">
-                    Atualizar
-                </button>
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                    @include('profile.partials.delete-user-form')
+                </div>
             </div>
+        </div>
+    </div>
         </form>
     </div>
 </div>

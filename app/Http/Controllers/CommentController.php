@@ -24,9 +24,7 @@ class CommentController extends Controller
         return view('comment.index', compact('comments', 'attendance_id'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+   
     public function create(Request $request)
     {
         $attendance_id = $request->get('attendance_id'); 
@@ -54,9 +52,7 @@ class CommentController extends Controller
         return redirect()->route('comment.index', ['attendance_id' => $request->attendance_id])->with('success', 'Atendimento criado com sucesso.');
     }
 
-    /**
-     * Display the specified resource.
-     */
+  
     public function show(Comment $comment)
     {
         $attendance_id = $comment->get('attendance_id'); 
@@ -70,9 +66,7 @@ class CommentController extends Controller
         return view('comment.show', compact('comment', 'attendance_id', 'attendance', 'attendances'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit($id)
     {
         $comment = Comment::findOrFail($id);
@@ -80,9 +74,7 @@ class CommentController extends Controller
         return view('comment.edit', compact('comment', "attendance_id" ));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -95,9 +87,7 @@ class CommentController extends Controller
         return redirect()->route('comment.index', ['attendance_id' => $comment->attendance_id])->with('success', 'Comentário atualizado com sucesso.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+   
     public function destroy(Comment $comment)
     {
         $comment->delete();
