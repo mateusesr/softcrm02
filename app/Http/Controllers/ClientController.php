@@ -15,7 +15,6 @@ class ClientController extends Controller
         $query = Client::with('city');
 
 
-        
         if ($request->has('status') && $request->status !== '') {
             if ($request->status == 'ativo') {
                 $query->where('is_active', true);
@@ -40,7 +39,7 @@ class ClientController extends Controller
 
         $clients = $query->paginate(10);
 
-        $clients = $query->get(); // Obtém os clientes filtrados
+         
         return view('client.index', compact("clients"));
     }
 

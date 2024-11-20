@@ -43,8 +43,8 @@
               class="text-white text-decoration-none">
               ID
               @if(request('sort') == 'id')
-          <span>{{ request('direction') === 'asc' ? '▲' : '▼' }}</span>
-        @endif
+              <span>{{ request('direction') === 'asc' ? '▲' : '▼' }}</span>
+              @endif
             </a>
           </th>
           <th>
@@ -52,8 +52,8 @@
               class="text-white text-decoration-none">
               Nome
               @if(request('sort') == 'name')
-          <span>{{ request('direction') === 'asc' ? '▲' : '▼' }}</span>
-        @endif
+              <span>{{ request('direction') === 'asc' ? '▲' : '▼' }}</span>
+              @endif
             </a>
           </th>
           <th>
@@ -61,8 +61,8 @@
               class="text-white text-decoration-none">
               Email
               @if(request('sort') == 'email')
-          <span>{{ request('direction') === 'asc' ? '▲' : '▼' }}</span>
-        @endif
+              <span>{{ request('direction') === 'asc' ? '▲' : '▼' }}</span>
+              @endif
             </a>
           </th>
           <th>Telefone</th>
@@ -79,52 +79,62 @@
         </div>
 
         @foreach ($clients as $client)
-      <tr>
-        <td>{{ $client->id }}</td>
-        <td>{{ $client->name }}</td>
-        <td>{{ $client->email }}</td>
-        <td>{{ $client->phone }}</td>
-        <td>{{ $client->city->name }}</td>
-        <td>
-        @if ($client->is_active)
-      <span class="badge bg-success">Ativo</span>
-    @else
-    <span class="badge bg-danger">Inativo</span>
-  @endif
-        </td>
-        <td>
-        <div class="d-flex justify-content-center">
+        <tr>
+          <td>{{ $client->id }}</td>
+          <td>{{ $client->name }}</td>
+          <td>{{ $client->email }}</td>
+          <td>{{ $client->phone }}</td>
+          <td>{{ $client->city->name }}</td>
+          <td>
+            @if ($client->is_active)
+            <span class="badge bg-success">Ativo</span>
+            @else
+            <span class="badge bg-danger">Inativo</span>
+            @endif
+          </td>
+          <td>
+            <div class="d-flex justify-content-center">
 
-          <a href="{{ route('client.edit', $client->id) }}" title="Editar Cliente" class="btn btn-sm mx-1"><span
-            class="material-symbols-outlined list-icon-edit list-icon">
-            stylus
-          </span></a>
-          @if ($client->is_active)
-        <form action="{{ route('client.desactivate', $client->id) }}" method="POST" class="d-inline">
-        @csrf
-        @method('DELETE')
+              <a href="{{ route('client.edit', $client->id) }}" title="Editar Cliente" class="btn btn-sm mx-1"><span
+                  class="material-symbols-outlined list-icon-edit list-icon">
+                  stylus
+                </span></a>
+              @if ($client->is_active)
+              <form action="{{ route('client.desactivate', $client->id) }}" method="POST" class="d-inline">
+                @csrf
+                @method('DELETE')
 
-        <button title="Inativar Cliente" type="submit" class="btn btn-sm mx-1"><span
-        class="material-symbols-outlined list-icon-add list-icon-check list-icon ">
-        </span></button>
-        </form>
-      @else
-      <form action="{{ route('client.reactivate', $client->id) }}" method="POST" class="d-inline">
-      @csrf
-      <button title="Ativar Cliente" type="submit" class="btn btn-sm mx-1"><span
-      class="material-symbols-outlined list-icon-delete list-icon-cancel list-icon">
-      </span></button>
-      </form>
-    @endif
-          <a title="Ver Atendimentos" href="{{ route('attendance.index', ['client_id' => $client->id]) }}"
-          class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon">
-            table_eye
-          </span></a>
-        </div>
-    @endforeach
+                <button title="Inativar Cliente" type="submit" class="btn btn-sm mx-1"><span
+                    class="material-symbols-outlined list-icon-add list-icon-check list-icon ">
+                  </span></button>
+              </form>
+              @else
+              <form action="{{ route('client.reactivate', $client->id) }}" method="POST" class="d-inline">
+                @csrf
+                <button title="Ativar Cliente" type="submit" class="btn btn-sm mx-1"><span
+                    class="material-symbols-outlined list-icon-delete list-icon-cancel list-icon">
+                  </span></button>
+              </form>
+              @endif
+              <a title="Ver Atendimentos" href="{{ route('attendance.index', ['client_id' => $client->id]) }}"
+                class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon">
+                  table_eye
+                </span></a>
+            </div>
+            @endforeach
       </tbody>
     </table>
   </div>
+
+  <div class="d-flex justify-content-center">
+    {{ $clients->links() }}
+    <p>Mostrando de {{ $clients->firstItem() }} a {{ $clients->lastItem() }} de {{ $clients->total() }} resultados</p>
+  </div>
+
+  <br>
+  <br>
+
+
   <script src="{{asset('js/imprimir.js')}}"></script>
 </div>
 <!-- CSS inline para estilizar a tabela e centralização -->
