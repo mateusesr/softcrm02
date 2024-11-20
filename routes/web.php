@@ -60,6 +60,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/show/{comment}', [CommentController::class, 'show'])->name('comment.show');
     Route::get('/comment/create/{attendance_id}', [CommentController::class, 'create'])->name('comment.create');
     Route::get('/comment/{comment}/edit', [CommentController::class, 'edit'])->name('comment.edit');
+
+
+    Route::get('/city/search', [CityController::class, 'search'])->name('city.search');
     
 });
 

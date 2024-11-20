@@ -7,9 +7,18 @@ use Illuminate\Http\Request;
 
 class CityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
+    public function search(Request $request)
+    {
+        $query = $request->input('query'); // Termo da pesquisa
+
+        $cities = City::where('name', 'like', "%{$query}%")
+            ->orderBy('name')
+            ->get();
+
+        return view('city.index', compact('cities'));
+    }
+
     public function index()
     {
         $cities = City::all();
