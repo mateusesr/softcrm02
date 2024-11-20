@@ -128,7 +128,7 @@
 
   <div class="d-flex justify-content-center">
     {{ $clients->links() }}
-    <p>Mostrando de {{ $clients->firstItem() }} a {{ $clients->lastItem() }} de {{ $clients->total() }} resultados</p>
+    <p>Mostrando de {{ $clients->firstItem() }} a {{ $clients->lastItem() }} dos {{ $clients->total() }} resultados</p>
   </div>
 
   <br>
