@@ -39,7 +39,7 @@ class ClientController extends Controller
 
         $clients = $query->paginate(10);
 
-         
+
         return view('client.index', compact("clients"));
     }
 
@@ -119,5 +119,4 @@ class ClientController extends Controller
 
         return redirect()->route('client.index')->with('message', 'Cliente reativado com sucesso!');
     }
-
 }

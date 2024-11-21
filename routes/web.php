@@ -49,9 +49,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/show/{attendance}', [AttendanceController::class, 'show'])->name('attendance.show');
     Route::get('/attendance/create', [AttendanceController::class, 'create'])->name('attendance.create');
     Route::get('/attendance/{attendance}/edit', [AttendanceController::class, 'edit'])->name('attendance.edit');
-    
 
-    
+
+
     Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
     Route::put('/comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
     Route::delete('/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
@@ -63,7 +63,6 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/city/search', [CityController::class, 'search'])->name('city.search');
-    
 });
 
 Route::resource('comment', CommentController::class);
@@ -73,4 +72,3 @@ Route::resource('city', CityController::class);
 Route::resource('type', TypeController::class);
 
 require __DIR__ . '/auth.php';
-

@@ -44,4 +44,4 @@ class UpdateStatusInAttendancesTable extends Migration
 
         // O status 3 (Finalizado) permanece inalterado
     }
-} 
+}

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
-    
+
     protected $fillable = [
         'city_id',
         'name',
@@ -16,7 +16,8 @@ class Client extends Model
         'updated_at',
     ];
 
-    public function city() {
+    public function city()
+    {
         return $this->belongsTo(City::class);
     }
 
@@ -24,5 +25,4 @@ class Client extends Model
     {
         return $this->hasMany(Attendance::class);
     }
-
 }

@@ -16,16 +16,18 @@ class Attendance extends Model
         'description',
     ];
 
-    public function client() {
+    public function client()
+    {
         return $this->belongsTo(Client::class);
     }
 
-    public function type() {
+    public function type()
+    {
         return $this->belongsTo(Type::class);
     }
 
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
-
 }

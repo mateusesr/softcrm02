@@ -90,7 +90,7 @@
         /* Centraliza e adiciona mais espaçamento vertical */
     }
 
-    
+
 
     .btn-save {
         background-color: #007bff;
@@ -167,7 +167,7 @@
         margin: 0;
     }
 
-    h2{
+    h2 {
         font-weight: bold;
         color: #343a40;
         margin-bottom: 20px;

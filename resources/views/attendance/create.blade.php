@@ -12,66 +12,66 @@
 
 <body>
     <div class="container">
-            
 
-            <h2 class="text-center mb-4" style="color: black; font-size: 24px;">Criar Atendimento</h2>
-            <form class="form-box" action="{{ route('attendance.store') }}" method="POST">
+
+        <h2 class="text-center mb-4" style="color: black; font-size: 24px;">Criar Atendimento</h2>
+        <form class="form-box" action="{{ route('attendance.store') }}" method="POST">
             @if (isset($attendance))
-                <div class="alert alert-success sucess" role="alert">
-                    Atendimento salvo com sucesso!
-                </div>
+            <div class="alert alert-success sucess" role="alert">
+                Atendimento salvo com sucesso!
+            </div>
             @endif
-                @csrf
-                <div class="form-group">
-                    <label for="client_id" class="form-label">Cliente</label>
-                    <select class="form-control" id="client_id" name="client_id" required>
-                        @foreach($clients as $client)
-                            <option value="{{ $client->id }}" {{ isset($client_id) && $client_id == $client->id ? 'selected' : '' }}>
-                                {{ $client->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="type_id" class="form-label">Tipo</label>
-                    <select class="form-control" id="type_id" name="type_id" required>
-                        <option value="">Selecione o tipo</option>
-                        @foreach ($types as $type)
-                            <option value="{{ $type->id }}">{{ $type->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
+            @csrf
+            <div class="form-group">
+                <label for="client_id" class="form-label">Cliente</label>
+                <select class="form-control" id="client_id" name="client_id" required>
+                    @foreach($clients as $client)
+                    <option value="{{ $client->id }}" {{ isset($client_id) && $client_id == $client->id ? 'selected' : '' }}>
+                        {{ $client->name }}
+                    </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="type_id" class="form-label">Tipo</label>
+                <select class="form-control" id="type_id" name="type_id" required>
+                    <option value="">Selecione o tipo</option>
+                    @foreach ($types as $type)
+                    <option value="{{ $type->id }}">{{ $type->name }}</option>
+                    @endforeach
+                </select>
+            </div>
 
-                <div class="form-group">
-                    <label for="date" class="form-label">Data</label>
-                    <input type="date" class="form-control" id="date" name="date" placeholder="Digite a data" required>
-                </div>
-                <div class="form-group">
-                    <label for="status" class="form-label">Status</label>
-                    <select class="form-control" id="status" name="status" required>
-                        <option value="1">Pendente</option>
-                        <option value="2">Urgente</option>
-                        <option value="3">Finalizado</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label for="date" class="form-label">Data</label>
+                <input type="date" class="form-control" id="date" name="date" placeholder="Digite a data" required>
+            </div>
+            <div class="form-group">
+                <label for="status" class="form-label">Status</label>
+                <select class="form-control" id="status" name="status" required>
+                    <option value="1">Pendente</option>
+                    <option value="2">Urgente</option>
+                    <option value="3">Finalizado</option>
+                </select>
+            </div>
 
-                <div class="form-group">
-                    <label for="description" class="form-label">Descrição</label>
-                    <textarea rows="3" cols="50" type="text" class="form-control" id="description" name="description"
-                        placeholder="Digite a descrição" required></textarea>
-                </div>
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-save">Enviar</button>
-                    <br>
-                    <a href="{{ route('attendance.index', ['client_id' => $client_id]) }}"
-                        class="btn btn-secondary btn-cancel">Retornar</a>
-                </div>
-            </form>
-        </div>
+            <div class="form-group">
+                <label for="description" class="form-label">Descrição</label>
+                <textarea rows="3" cols="50" type="text" class="form-control" id="description" name="description"
+                    placeholder="Digite a descrição" required></textarea>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-save">Enviar</button>
+                <br>
+                <a href="{{ route('attendance.index', ['client_id' => $client_id]) }}"
+                    class="btn btn-secondary btn-cancel">Retornar</a>
+            </div>
+        </form>
+    </div>
     </div>
 </body>
 <style>
-      .sucess {
+    .sucess {
         display: flex;
         background-color: green;
         align-items: center;
@@ -211,5 +211,6 @@
         color: white;
     }
 </style>
+
 </html>
 @endsection

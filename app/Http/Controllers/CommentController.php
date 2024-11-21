@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    
+
     public function index(Request $request)
     {
         $attendance_id = $request->get('attendance_id');
@@ -22,14 +22,14 @@ class CommentController extends Controller
         return view('comment.index', compact('comments', 'attendance_id'));
     }
 
-   
+
     public function create(Request $request)
     {
-        $attendance_id = $request->get('attendance_id'); 
-        
+        $attendance_id = $request->get('attendance_id');
+
         if ($attendance_id) {
             $attendance = Attendance::find($attendance_id);
-            $attendances= [$attendance];
+            $attendances = [$attendance];
         } else {
             $attendances = Attendance::all();
         }
@@ -50,17 +50,17 @@ class CommentController extends Controller
         return redirect()->route('comment.index', ['attendance_id' => $request->attendance_id])->with('success', 'Atendimento criado com sucesso.');
     }
 
-  
+
     public function show(Comment $comment)
     {
-        $attendance_id = $comment->get('attendance_id'); 
+        $attendance_id = $comment->get('attendance_id');
         if ($attendance_id) {
             $attendance = Attendance::find($attendance_id);
-            $attendances= [$attendance];
+            $attendances = [$attendance];
         } else {
             $attendances = Attendance::all();
         }
-        
+
         return view('comment.show', compact('comment', 'attendance_id', 'attendance', 'attendances'));
     }
 
@@ -69,7 +69,7 @@ class CommentController extends Controller
     {
         $comment = Comment::findOrFail($id);
         $attendance_id = $comment->attendance_id; // Obter o attendance_id do comentário
-        return view('comment.edit', compact('comment', "attendance_id" ));
+        return view('comment.edit', compact('comment', "attendance_id"));
     }
 
 
@@ -85,7 +85,7 @@ class CommentController extends Controller
         return redirect()->route('comment.index', ['attendance_id' => $comment->attendance_id])->with('success', 'Comentário atualizado com sucesso.');
     }
 
-   
+
     public function destroy(Comment $comment)
     {
         $comment->delete();

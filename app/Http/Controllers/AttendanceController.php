@@ -30,7 +30,7 @@ class AttendanceController extends Controller
                     break;
             }
         }
-        
+
         if ($request->has('sort') && $request->has('direction')) {
             $query->orderBy($request->sort, $request->direction);
         }
@@ -107,5 +107,4 @@ class AttendanceController extends Controller
 
         return redirect()->route('attendance.index', ['client_id' => $request->client_id])->with('success', 'Atendimento criado com sucesso.');
     }
-
 }

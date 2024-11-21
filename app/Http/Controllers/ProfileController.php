@@ -21,7 +21,7 @@ class ProfileController extends Controller
         ]);
     }
 
-    
+
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $request->user()->fill($request->validated());
@@ -35,7 +35,7 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit')->with('status', 'Perfil Atualizado com sucesso!');
     }
 
-   
+
     public function desactivate(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [

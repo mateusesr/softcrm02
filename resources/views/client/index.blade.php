@@ -6,7 +6,7 @@
   <h2 class="text-center mb-4" style="color: black; font-size: 24px;">Clientes</h2>
 
 
-  
+
 
   <form action="{{ route('client.index') }}" method="GET" class="mb-4 search">
     <div class="row">
@@ -137,9 +137,8 @@
 </div>
 <!-- CSS inline para estilizar a tabela e centralização -->
 <style>
-  .filter {
-   
-  }
+  .filter {}
+
   .form-select:focus {
     border-color: #007bff;
     box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
@@ -188,9 +187,11 @@
     justify-content: space-between;
     margin: 0 10px;
   }
-  .imprimir .paginate{
+
+  .imprimir .paginate {
     display: none;
   }
+
   .imprimir .search {
     display: none;
   }

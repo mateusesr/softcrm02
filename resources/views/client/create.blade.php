@@ -16,9 +16,9 @@
         <h2 class="text-center mb-4" style="color: black; font-size: 24px;">Criar Cliente</h2>
         <form class="form-box" action="{{ route('client.store') }}" method="POST">
             @if (isset($client))
-                <div class="alert alert-success sucess" role="alert">
-                    Cliente salvo com sucesso!
-                </div>
+            <div class="alert alert-success sucess" role="alert">
+                Cliente salvo com sucesso!
+            </div>
             @endif
             @csrf
             <div class="form-group">
@@ -38,7 +38,7 @@
                 <select class="form-control" id="city_id" name="city_id" required>
                     <option value="" disabled selected>Escolha a sua cidade</option>
                     @foreach($cities as $city)
-                        <option value="{{ $city->id }}">{{ $city->name }} - {{$city->uf}}</option>
+                    <option value="{{ $city->id }}">{{ $city->name }} - {{$city->uf}}</option>
                     @endforeach
                 </select>
             </div>

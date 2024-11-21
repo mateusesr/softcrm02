@@ -15,10 +15,8 @@ class Comment extends Model
         'created_at',
     ];
 
-    public function attendance() {
+    public function attendance()
+    {
         return $this->belongsTo(Attendance::class);
     }
-
 }
-
-

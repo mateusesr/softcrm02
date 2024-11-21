@@ -29,7 +29,6 @@
             <div class="form-group">
                 <label for="city_id ">Cidade</label>
                 <select name="city_id" id="city_id" class="form-control" required>
-                    <!-- Supondo que você tenha uma lista de cidades -->
                     @foreach ($cities as $city)
                     <option value="{{ $city->id }}" {{ $client->city_id == $city->id ? 'selected' : '' }}>{{ $city->name }}</option>
                     @endforeach
@@ -76,7 +75,7 @@
         /* Centraliza e adiciona mais espaçamento vertical */
     }
 
-    
+
 
     .btn-save {
         background-color: #007bff;
@@ -153,7 +152,7 @@
         margin: 0;
     }
 
-    h2{
+    h2 {
         font-weight: bold;
         color: #343a40;
         margin-bottom: 20px;

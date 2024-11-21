@@ -13,7 +13,7 @@ class CommentSeeder extends Seeder
      */
     public function run(): void
     {
-        $comments = 
+        $comments =
             [
                 ['attendance_id' => 1, 'description' => 'Comentário sobre o início do atendimento.', 'created_at' => '2024-11-01 10:30:00'],
                 ['attendance_id' => 1, 'description' => 'Comentário sobre o início do atendimento.', 'created_at' => '2024-11-01 10:30:00'],
@@ -29,8 +29,8 @@ class CommentSeeder extends Seeder
                 ['attendance_id' => 2, 'description' => 'Novo ponto abordado para revisão do contrato.', 'created_at' => '2024-11-07 15:25:00'],
                 ['attendance_id' => 3, 'description' => 'Conclusão e assinatura finalizada.', 'created_at' => '2024-11-08 17:30:00'],
                 ['attendance_id' => 4, 'description' => 'Novo treinamento solicitado.', 'created_at' => '2024-11-09 10:05:00'],
-                ['attendance_id' => 5, 'description' => 'Feedback sobre os resultados finais.', 'created_at' => '2024-11-10 14:50:00'],    
-        ];
+                ['attendance_id' => 5, 'description' => 'Feedback sobre os resultados finais.', 'created_at' => '2024-11-10 14:50:00'],
+            ];
 
         DB::table('comments')->insert($comments);
     }
