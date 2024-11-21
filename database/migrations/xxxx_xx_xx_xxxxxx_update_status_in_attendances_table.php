@@ -14,16 +14,14 @@ class UpdateStatusInAttendancesTable extends Migration
      */
     public function up()
     {
-        // Atualiza os valores do status
+
         DB::table('attendances')
-            ->where('status', 1) // Ativo
+            ->where('status', 1)
             ->update(['status' => 'Pendente']);
 
         DB::table('attendances')
-            ->where('status', 2) // Em Espera
+            ->where('status', 2)
             ->update(['status' => 'Urgente']);
-
-        // O status 3 (Finalizado) permanece inalterado
     }
 
     /**
@@ -33,7 +31,7 @@ class UpdateStatusInAttendancesTable extends Migration
      */
     public function down()
     {
-        // Reverte os valores do status para os antigos
+
         DB::table('attendances')
             ->where('status', 'Pendente')
             ->update(['status' => 1]);
@@ -41,7 +39,5 @@ class UpdateStatusInAttendancesTable extends Migration
         DB::table('attendances')
             ->where('status', 'Urgente')
             ->update(['status' => 2]);
-
-        // O status 3 (Finalizado) permanece inalterado
     }
 }
