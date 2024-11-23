@@ -23,13 +23,9 @@ class TypeController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
+        $type = Type::create($request->toArray());
 
-        Type::create($request->all());
-
-        return redirect()->route('type.index')->with('success', 'Tipo criado com sucesso.');
+        return view("type.create", compact('type')); // Passando as cidades para a view
     }
 
 

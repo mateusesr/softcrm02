@@ -54,7 +54,6 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         $client = Client::create($request->toArray());
-
         $cities = City::orderBy('uf')->orderBy('name')->get(); // Adicionando a busca das cidades
         return view("client.create", compact('client', 'cities')); // Passando as cidades para a view
     }

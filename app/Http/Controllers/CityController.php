@@ -38,11 +38,12 @@ class CityController extends Controller
             'name' => 'required|string|max:255',
             'uf' => 'required|string|max:2',
         ]);
+        
+        $city = City::create($request->toArray());
 
-        City::create($request->all());
-
-        return redirect()->route('city.index')->with('success', 'Cidade criada com sucesso.');
+        return view("city.create", compact('city')); 
     }
+
 
 
     public function show(City $city)
