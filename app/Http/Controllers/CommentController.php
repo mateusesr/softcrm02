@@ -86,10 +86,13 @@ class CommentController extends Controller
     }
 
 
-    public function destroy(Comment $comment)
+    public function destroy(Request $request, Comment $comment)
     {
+        $attendance_id = $request->input('attendance_id');
         $comment->delete();
 
-        return redirect()->route('comment.index')->with('success', 'Comentário excluído com sucesso.');
+        return redirect()->route('comment.index', ['attendance_id' => $attendance_id])
+            ->with('success', 'Comentário excluído com sucesso.');
     }
 }
+

@@ -33,10 +33,13 @@
         </nav>
     </header>
 
-    <main class="container mx-auto mt-4">
+    <main class="container mx-auto mt-4 main">
         @yield('content')
     </main>
+
     <style>
+        
+
         .btn-save,
         .btn-cancel,
         .btn-primary {

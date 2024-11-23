@@ -103,8 +103,10 @@ class AttendanceController extends Controller
 
     public function destroy(Request $request, Attendance $attendance)
     {
+        $client_id = $request->input('client_id');
         $attendance->delete();
 
-        return redirect()->route('attendance.index', ['client_id' => $request->client_id])->with('success', 'Atendimento criado com sucesso.');
+        return redirect()->route('attendance.index', ['client_id' => $client_id])
+            ->with('success', 'Atendimento excluído com sucesso.');
     }
 }
