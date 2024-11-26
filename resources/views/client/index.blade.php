@@ -74,8 +74,10 @@
       <tbody>
 
         <div class="d-flex justify-content-center mb-3 margin-left table-action">
-          <a href="{{ route('clients.create') }}" class="btn btn-primary">Novo Cliente</a>
-          <button class="no-print btn btn-primary" onclick="imprimirPagina()">Imprimir</button>
+          <a href="{{ route('clients.create') }}" class="btn btn-new">Novo Cliente</a>
+          <button class="no-print btn btn-primary btn-print" onclick="imprimirPagina()"><span class="material-symbols-outlined">
+              print
+            </span>Relatório</button>
         </div>
 
         @foreach ($clients as $client)
@@ -134,9 +136,11 @@
 </div>
 <!-- CSS inline para estilizar a tabela e centralização -->
 <style>
-  .hidden {
-        margin: 0 20px;
-    }
+  .btn-print {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
   .all {
     max-width: max-content;
     margin: 10px auto;
@@ -275,10 +279,9 @@
   }
 
   .btn {
-    margin: 0 8px;
     padding: 8px 16px;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .btn-group {
@@ -319,6 +322,12 @@
     color: white;
   }
 
+  .btn-new {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+    margin: 0 10px;
+  }
 
 
   .btn-success {

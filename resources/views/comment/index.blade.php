@@ -1,17 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="comment-container">
+<div class="comment-container" id="comment-container">
     <h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Comentários</h2>
-
-
-    <div class="table-container">
-        <div class="d-flex justify-content-center mb-3 table-action">
-            <h4 class="text-center mb-4" style="color: gray; font-size: 15px;">Comentários para o Atendimento ID:
+    <h4 class="text-center mb-4" style="color: gray; font-size: 15px;">Comentários para o Atendimento ID:
                 {{ request()->get('attendance_id') }}
             </h4>
-            <a href="{{ route('comment.create', ['attendance_id' => $attendance_id]) }}"
-                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 btn-primary">Novo Comentário</a>
+
+            <a href="javascript:history.back()" class="" style="
+                            display: flex;
+                            align-items: center;
+                            width: 38em;
+                            justify-content: center;
+                            margin: 20px 1px;
+                        ">
+                <span class=" material-symbols-outlined list-icon-back">
+                    arrow_back
+                </span> Voltar</a>
+            </a>
+
+    <div class="table-container">
+            
+
+
             <table class="table mt-3">
                 <thead>
                     <tr>
@@ -22,6 +33,15 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <div class="d-flex justify-content-center mb-3 margin-left table-action">
+                        <a href="{{ route('comment.create', ['attendance_id' => $attendance_id]) }}"
+                            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 btn-primary">Novo
+                            Comentário</a>
+                        <button class="no-print btn btn-primary btn-print" onclick="imprimirPagina()"><span
+                                class="material-symbols-outlined">
+                                print
+                            </span>Relatório</button>
+                    </div>
                     @foreach ($comments as $comment)
                         <tr>
                             <td>{{ $comment->id }}</td>
@@ -52,11 +72,27 @@
                     @endforeach
                 </tbody>
             </table>
-        </div>
+        
     </div>
 </div>
-
+<script src="{{asset('js/imprimir.js')}}"></script>
 <style>
+    .btn-print {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .table-action {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 10px;
+    flex-direction: row-reverse;
+  }
+    .list-icon-back {
+        font-weight: bold !important;
+        font-size: 2em !important;
+    }
+
     .table-container {
         display: flex;
         flex-direction: column;
@@ -135,8 +171,6 @@
     }
 
     .btn {
-        margin: 0 5px;
-        /* Espaçamento entre os botões */
         padding: 8px 16px;
         /* Aumenta o espaçamento interno dos botões */
         border-radius: 5px;

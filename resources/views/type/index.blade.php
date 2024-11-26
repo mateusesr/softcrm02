@@ -69,9 +69,13 @@
     }
 
     .table-action {
+        display: flex;
         width: 100%;
         max-width: 1000px;
+        flex-direction: row-reverse;
+        margin: 0 auto;
     }
+
 
     h2 {
         font-weight: bold;

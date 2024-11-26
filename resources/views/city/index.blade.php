@@ -9,7 +9,7 @@
             {{ session('message') }}
         </div>
         @endif
-
+        
         <h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Cidades</h2>
 
         <form class="form-box" action="{{ route('city.search') }}" method="GET" class="mb-4">
@@ -107,9 +107,8 @@
   .row {
     display: flex;
     align-items: baseline;
-    gap: 5px;
     max-width: max-content;
-        margin: 10px auto;
+    margin: 10px auto;
   }
 
   .form-control:focus {
@@ -134,6 +133,7 @@
     display: flex;
     justify-content: space-between;
     margin: 0 22px;
+    flex-direction: row-reverse;
   }
 
   .imprimir .hidden {
@@ -213,7 +213,7 @@
     margin: 0 8px;
     padding: 8px 16px;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .btn-group {

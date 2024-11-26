@@ -12,11 +12,12 @@
 
     @if(request()->has('client_id'))
         <a href="javascript:history.back()" class="" style="
-                    display: flex;
-                    align-items: center;
-                    width: 80px;
-                    justify-content: center;
-                ">
+                            display: flex;
+                            align-items: center;
+                            width: 80px;
+                            justify-content: center;
+                            
+                        ">
             <span class=" material-symbols-outlined list-icon-back">
                 arrow_back
             </span> Voltar</a>
@@ -98,7 +99,10 @@
                         <a href="{{ route('attendance.create', ['client_id' => request()->get('client_id')]) }}"
                             class="btn btn-primary">Novo Atendimento</a>
                     @endif
-                    <button class="no-print btn btn-primary" onclick="imprimirPagina()">Imprimir</button>
+                    <button class="no-print btn btn-primary btn-print" onclick="imprimirPagina()"><span
+                            class="material-symbols-outlined">
+                            print
+                        </span>Relatório</button>
                 </div>
 
                 @foreach ($attendances as $attendance)
@@ -151,14 +155,16 @@
         </div> <br><br>
 
     </div>
-
-
-
     <script src="{{asset('js/imprimir.js')}}"></script>
 </div>
 
-
 <style>
+    .btn-print {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
     .list-icon-back {
         font-weight: bold !important;
         font-size: 2em !important;
@@ -172,7 +178,7 @@
     }
 
     .hidden {
-        margin: 0 20px;
+        margin: 0 21px;
     }
 
     .attendance-container {
@@ -213,6 +219,7 @@
         display: flex;
         justify-content: space-between;
         margin: 0 12px;
+        flex-direction: row-reverse;
     }
 
     .imprimir .paginate {
