@@ -3,6 +3,7 @@
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\TypeController;
@@ -61,7 +62,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/comment/create/{attendance_id}', [CommentController::class, 'create'])->name('comment.create');
     Route::get('/comment/{comment}/edit', [CommentController::class, 'edit'])->name('comment.edit');
 
-
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/city/search', [CityController::class, 'search'])->name('city.search');
 });
 
