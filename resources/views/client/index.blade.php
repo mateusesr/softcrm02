@@ -41,7 +41,7 @@
               class="text-white text-decoration-none">
               ID
               @if(request('sort') == 'id')
-          <span>{{ request('direction') === 'asc' ? '▲' : '▼' }}</span>
+          <span>{{ request('direction') === 'asc' ? '▼' : '▲' }}</span>
         @endif
             </a>
           </th>
@@ -51,7 +51,7 @@
               class="text-white text-decoration-none">
               Nome
               @if(request('sort') == 'name')
-          <span>{{ request('direction') === 'asc' ? '▲' : '▼' }}</span>
+          <span>{{ request('direction') === 'asc' ? '▼' : '▲' }}</span>
         @endif
             </a>
           </th>
@@ -61,7 +61,7 @@
               class="text-white text-decoration-none">
               Email
               @if(request('sort') == 'email')
-          <span>{{ request('direction') === 'asc' ? '▲' : '▼' }}</span>
+          <span>{{ request('direction') === 'asc' ? '▼' : '▲' }}</span>
         @endif
             </a>
           </th>

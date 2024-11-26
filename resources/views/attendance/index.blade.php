@@ -54,7 +54,7 @@
                             class="text-white text-decoration-none">
                             Protocolo
                             @if(request('sort') == 'id')
-                                <span>{{ request('direction') === 'asc' ? '▲' : '▼' }}</span>
+                                <span>{{ request('direction') === 'asc' ? '▼' : '▲' }}</span>
                             @endif
                         </a>
                     </th>
@@ -64,7 +64,7 @@
                             class="text-white text-decoration-none">
                             Nome
                             @if(request('sort') == 'client_id')
-                                <span>{{ request('direction') === 'asc' ? '▲' : '▼' }}</span>
+                                <span>{{ request('direction') === 'asc' ? '▼' : '▲' }}</span>
                             @endif
                         </a>
                     </th>
@@ -74,7 +74,7 @@
                             class="text-white text-decoration-none">
                             Data
                             @if(request('sort') == 'date')
-                                <span>{{ request('direction') === 'asc' ? '▲' : '▼' }}</span>
+                                <span>{{ request('direction') === 'asc' ? '▼' : '▲' }}</span>
                             @endif
                         </a>
                     </th>
@@ -85,7 +85,7 @@
                             class="text-white text-decoration-none">
                             Tipo
                             @if(request('sort') == 'type_id')
-                                <span>{{ request('direction') === 'asc' ? '▲' : '▼' }}</span>
+                                <span>{{ request('direction') === 'asc' ? '▼' : '▲' }}</span>
                             @endif
                         </a>
                     </th>

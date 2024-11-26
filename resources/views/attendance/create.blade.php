@@ -12,8 +12,6 @@
 
 <body>
     <div class="container">
-
-
         <h2 class="text-center mb-4" style="color: black; font-size: 24px;">Criar Atendimento</h2>
         <form class="form-box" action="{{ route('attendance.store') }}" method="POST">
             @if (isset($attendance))
@@ -68,7 +66,11 @@
             </div>
         </form>
     </div>
-    </div>
+
+    <script>
+        document.getElementById('date').value = new Date().toISOString().split('T')[0];
+        document.getElementById('time').value = hours + ':' + minutes;
+    </script>
 </body>
 <style>
     .sucess {
@@ -135,7 +137,6 @@
     }
 
     label {
-
         font-size: 1.1rem;
         font-weight: bold;
         margin-bottom: 5px;
