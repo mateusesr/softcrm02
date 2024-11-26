@@ -67,7 +67,6 @@ class CitySeeder extends Seeder
             ['name' => 'Guaíba', 'uf' => 'RS'],
             ['name' => 'Cachoeirinha', 'uf' => 'RS'],
             ['name' => 'Sapucaia do Sul', 'uf' => 'RS'],
-            ['name' => 'Santarém', 'uf' => 'RS'],
             ['name' => 'Esteio', 'uf' => 'RS'],
             ['name' => 'Farroupilha', 'uf' => 'RS'],
             ['name' => 'Ijuí', 'uf' => 'RS'],
@@ -79,7 +78,23 @@ class CitySeeder extends Seeder
             ['name' => 'Sapiranga', 'uf' => 'RS'],
             ['name' => 'São Borja', 'uf' => 'RS'],
             ['name' => 'Santo Ângelo', 'uf' => 'RS'],
-            // Adicione mais cidades do Rio Grande do Sul conforme necessário...
+
+            // Cidades da região de Soledade e Passo Fundo (RS)
+            ['name' => 'Soledade', 'uf' => 'RS'],
+            ['name' => 'Marau', 'uf' => 'RS'],
+            ['name' => 'Carazinho', 'uf' => 'RS'],
+            ['name' => 'Tapejara', 'uf' => 'RS'],
+            ['name' => 'Espumoso', 'uf' => 'RS'],
+            ['name' => 'Ibirubá', 'uf' => 'RS'],
+            ['name' => 'Casca', 'uf' => 'RS'],
+            ['name' => 'Getúlio Vargas', 'uf' => 'RS'],
+            ['name' => 'Victor Graeff', 'uf' => 'RS'],
+            ['name' => 'Arvorezinha', 'uf' => 'RS'],
+            ['name' => 'Fontoura Xavier', 'uf' => 'RS'],
+            ['name' => 'Nova Alvorada', 'uf' => 'RS'],
+            ['name' => 'Tio Hugo', 'uf' => 'RS'],
+            ['name' => 'Mormaço', 'uf' => 'RS'],
+            ['name' => 'Ibirapuitã', 'uf' => 'RS'],
         ];
 
         // Insere todas as cidades no banco de dados
