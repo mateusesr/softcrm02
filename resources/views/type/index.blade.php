@@ -5,10 +5,10 @@
     <h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Tipos de Atendimentos</h2>
 
     @if (session('message'))
-    <div class="alert alert-success">
-        {{ session('message') }}
-    </div>
-    @endif
+        <div class="alert alert-success green-box bg-red-500 text-white px-4 py-2 rounded erro" role="alert">
+            {{ session('message') }}
+        </div>
+        @endif
 
 
 
@@ -52,6 +52,15 @@
 </div>
 
 <style>
+
+.erro {
+    max-width: max-content;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+
     .table-container {
         display: flex;
         flex-direction: column;
