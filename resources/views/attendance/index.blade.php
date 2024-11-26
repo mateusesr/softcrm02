@@ -10,19 +10,19 @@
         </h4>
     @endif
 
-   
-        <a href="javascript:history.back()" class="" style="
+
+    <a href="javascript:history.back()" class="" style="
                             display: flex;
                             align-items: center;
                             width: 80px;
                             justify-content: center;
                             
                         ">
-            <span class=" material-symbols-outlined list-icon-back">
-                arrow_back
-            </span> Voltar</a>
-        </a>
-    
+        <span class=" material-symbols-outlined list-icon-back">
+            arrow_back
+        </span> Voltar</a>
+    </a>
+
 
     <form method="GET" action="{{ route('attendance.index') }}" class="mb-3 d-flex justify-content-center all">
         <select name="status" class="form-select me-2"
@@ -159,6 +159,12 @@
 </div>
 
 <style>
+    .hidden {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
     .btn-print {
         display: flex;
         align-items: center;
@@ -184,10 +190,6 @@
     .attendance-container {
         max-width: max-content;
         margin: 0 auto;
-    }
-
-    span {
-        margin-left: 8px;
     }
 
     .filter {

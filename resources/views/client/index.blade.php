@@ -122,15 +122,14 @@
           class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon">
             table_eye
           </span></a>
-          <a title="Criar Atendimento"
-              href="{{ route('attendance.create', ['client_id' => $client->id]) }}" class="btn"><span
-                class="material-symbols-outlined list-icon-add list-icon">
-                note_add
-              </span></a>
+          <a title="Criar Atendimento" href="{{ route('attendance.create', ['client_id' => $client->id]) }}"
+          class="btn"><span class="material-symbols-outlined list-icon-add list-icon">
+            note_add
+          </span></a>
         </div>
-        
+
     @endforeach
-            
+
       </tbody>
     </table>
   </div>
@@ -144,6 +143,12 @@
 </div>
 <!-- CSS inline para estilizar a tabela e centralização -->
 <style>
+  .hidden {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
   .btn-print {
     display: flex;
     align-items: center;
@@ -160,10 +165,6 @@
     justify-content: center;
     align-content: center;
     display: flex;
-  }
-
-  span {
-    margin-left: 8px;
   }
 
   .form-select:focus {
