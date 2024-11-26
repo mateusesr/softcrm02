@@ -73,6 +73,10 @@
     </div>
 </div>
 
+<div class="d-flex justify-content-center paginate">
+            {{ $cities->links() }}
+        </div> <br><br>
+
 @endsection
 
 <style>

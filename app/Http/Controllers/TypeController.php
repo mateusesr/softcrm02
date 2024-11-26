@@ -59,7 +59,7 @@ class TypeController extends Controller
             // Validate the value...
             $result = $type->deleteOrFail();
             print($result);
-            return redirect()->route('type.index')->with('message', 'Tipo de Atendimento excluída com sucesso.');
+            return redirect()->route('type.index')->with('message', 'Tipo de Atendimento excluído com sucesso.');
 
             //return redirect()->route('type.index')->with('error', 'Não foi possível excluir o Tipo de Atendimento.');   
 

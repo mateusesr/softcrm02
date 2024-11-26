@@ -21,8 +21,11 @@ class CityController extends Controller
 
     public function index()
     {
-        $cities = City::all();
-        return view('city.index', compact('cities'));
+        $query = City::query(); // Initialize the query
+
+        $cities = $query->paginate(20); // Get paginated cities
+
+        return view('city.index', compact('cities')); // Return the view with cities
     }
 
 
