@@ -59,8 +59,29 @@ class TypeController extends Controller
 
     public function destroy(Type $type)
     {
-        $type->delete();
+        try {
+            // Validate the value...
+            $result = $type->deleteOrFail();
+            print($result);
+            return redirect()->route('type.index')->with('message', 'Tipo de Atendimento excluída com sucesso.');
 
-        return redirect()->route('type.index')->with('success', 'Tipo excluído com sucesso.');
+            //return redirect()->route('type.index')->with('error', 'Não foi possível excluir sua Tipo de Atendimento.');   
+
+        } catch (\Exception $e) {
+            $result = false;
+            return redirect()->route('type.index')->with('message', 'Não foi possível excluir sua Tipo de Atendimento.');
+        } catch (\Exception $e) {
+            $result = false;
+            return redirect()->route('type.index')->with('message', 'Não foi possível excluir sua Tipo de Atendimento.');
+            //do something when exception is thrown
+        } catch (\Error $e) {
+            $result = false;
+            return redirect()->route('type.index')->with('message', 'Não foi possível excluir sua Tipo de Atendimento.');
+            //do something when error is thrown
+        } catch (\Throwable $e) {
+            $result = false;
+            return redirect()->route('type.index')->with('message', 'Não foi possível excluir sua Tipo de Atendimento.');
+            //do something when Throwable is thrown
+        }
     }
 }
