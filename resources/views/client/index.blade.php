@@ -75,7 +75,8 @@
 
         <div class="d-flex justify-content-center mb-3 margin-left table-action">
           <a href="{{ route('clients.create') }}" class="btn btn-new">Novo Cliente</a>
-          <button class="no-print btn btn-primary btn-print" onclick="imprimirPagina()"><span class="material-symbols-outlined">
+          <button class="no-print btn btn-primary btn-print" onclick="imprimirPagina()"><span
+              class="material-symbols-outlined">
               print
             </span>Relatório</button>
         </div>
@@ -121,8 +122,15 @@
           class="btn btn-sm mx-1"><span class="material-symbols-outlined list-icon">
             table_eye
           </span></a>
+          <a title="Criar Atendimento"
+              href="{{ route('attendance.create', ['client_id' => $client->id]) }}" class="btn"><span
+                class="material-symbols-outlined list-icon-add list-icon">
+                note_add
+              </span></a>
         </div>
+        
     @endforeach
+            
       </tbody>
     </table>
   </div>
@@ -141,6 +149,7 @@
     align-items: center;
     gap: 5px;
   }
+
   .all {
     max-width: max-content;
     margin: 10px auto;

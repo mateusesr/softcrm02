@@ -10,7 +10,7 @@
         </h4>
     @endif
 
-    @if(request()->has('client_id'))
+   
         <a href="javascript:history.back()" class="" style="
                             display: flex;
                             align-items: center;
@@ -22,7 +22,7 @@
                 arrow_back
             </span> Voltar</a>
         </a>
-    @endif
+    
 
     <form method="GET" action="{{ route('attendance.index') }}" class="mb-3 d-flex justify-content-center all">
         <select name="status" class="form-select me-2"

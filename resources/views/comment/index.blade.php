@@ -4,90 +4,120 @@
 <div class="comment-container" id="comment-container">
     <h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Comentários</h2>
     <h4 class="text-center mb-4" style="color: gray; font-size: 15px;">Comentários para o Atendimento ID:
-                {{ request()->get('attendance_id') }}
-            </h4>
+        {{ request()->get('attendance_id') }}
+    </h4>
 
-            <a href="javascript:history.back()" class="" style="
-                            display: flex;
-                            align-items: center;
-                            width: 38em;
-                            justify-content: center;
-                            margin: 20px 1px;
-                        ">
-                <span class=" material-symbols-outlined list-icon-back">
-                    arrow_back
-                </span> Voltar</a>
-            </a>
+    <a href="javascript:history.back()" class="return">
+        <span class=" material-symbols-outlined list-icon-back">
+            arrow_back
+        </span>Voltar</a>
+    </a>
 
     <div class="table-container">
-            
-
-
-            <table class="table mt-3">
-                <thead>
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descrição</th>
+                    <th>Data</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <div class="d-flex justify-content-center mb-3 margin-left table-action">
+                    <a href="{{ route('comment.create', ['attendance_id' => $attendance_id]) }}"
+                        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 btn-primary">Novo
+                        Comentário</a>
+                    <button class="no-print btn btn-primary btn-print" onclick="imprimirPagina()"><span
+                            class="material-symbols-outlined">
+                            print
+                        </span>Relatório</button>
+                </div>
+                @foreach ($comments as $comment)
                     <tr>
-                        <th>ID</th>
-                        <th>Descrição</th>
-                        <th>Data</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <div class="d-flex justify-content-center mb-3 margin-left table-action">
-                        <a href="{{ route('comment.create', ['attendance_id' => $attendance_id]) }}"
-                            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 btn-primary">Novo
-                            Comentário</a>
-                        <button class="no-print btn btn-primary btn-print" onclick="imprimirPagina()"><span
-                                class="material-symbols-outlined">
-                                print
-                            </span>Relatório</button>
-                    </div>
-                    @foreach ($comments as $comment)
-                        <tr>
-                            <td>{{ $comment->id }}</td>
-                            <td>{{ $comment->description }}</td>
-                            <td>{{ \Carbon\Carbon::parse($comment->created_at)->format('d/m/Y H:i') }}</td>
-                            <td>
-                                <a title="Ver Comentário" href="{{ route('comment.show', $comment->id) }}"
-                                    class="btn "><span class="material-symbols-outlined list-icon">
-                                        folder_eye
-                                    </span></a>
-                                <a title="Editar" href="{{ route('comment.edit', $comment->id) }}" class="btn"><span
-                                        class="material-symbols-outlined list-icon-edit list-icon">
-                                        stylus
-                                    </span></a>
-                                <form action="{{ route('comment.destroy', $comment->id) }}" method="POST"
-                                    style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <input type="hidden" name="attendance_id" value="{{ $comment->attendance_id }}">
-                                    <button title="Excluir" type="submit" class="btn"
-                                        onclick="return confirm('Tem certeza que deseja excluir este comentário?');">
-                                        <span class="material-symbols-outlined list-icon-delete list-icon">delete</span>
-                                    </button>
-                                </form>
+                        <td>{{ $comment->id }}</td>
+                        <td>{{ $comment->description }}</td>
+                        <td>{{ \Carbon\Carbon::parse($comment->created_at)->format('d/m/Y H:i') }}</td>
+                        <td>
+                            <a title="Ver Comentário" href="{{ route('comment.show', $comment->id) }}" class="btn "><span
+                                    class="material-symbols-outlined list-icon">
+                                    folder_eye
+                                </span></a>
+                            <a title="Editar" href="{{ route('comment.edit', $comment->id) }}" class="btn"><span
+                                    class="material-symbols-outlined list-icon-edit list-icon">
+                                    stylus
+                                </span></a>
+                            <form action="{{ route('comment.destroy', $comment->id) }}" method="POST"
+                                style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <input type="hidden" name="attendance_id" value="{{ $comment->attendance_id }}">
+                                <button title="Excluir" type="submit" class="btn"
+                                    onclick="return confirm('Tem certeza que deseja excluir este comentário?');">
+                                    <span class="material-symbols-outlined list-icon-delete list-icon">delete</span>
+                                </button>
+                            </form>
 
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+
     </div>
+    <script src="{{asset('js/imprimir.js')}}"></script>
 </div>
-<script src="{{asset('js/imprimir.js')}}"></script>
+
 <style>
+    .return {
+        display: flex;
+        align-items: center;
+        width: 38em;
+        justify-content: center;
+        margin: 20px 1px;
+    }
+
+    .imprimir .return {
+        display: none;
+    }
+
+    .imprimir .list-icon-back {
+        display: none;
+    }
+
+    .imprimir .paginate {
+        display: none;
+    }
+
+    .imprimir .search {
+        display: none;
+    }
+
+    .imprimir .btn {
+        display: none;
+    }
+
+    .imprimir th:last-child {
+        display: none;
+    }
+
+    .imprimir .table-action {
+        display: none;
+    }
+
     .btn-print {
         display: flex;
         align-items: center;
         gap: 5px;
     }
+
     .table-action {
-    display: flex;
-    justify-content: space-between;
-    margin: 0 10px;
-    flex-direction: row-reverse;
-  }
+        display: flex;
+        justify-content: space-between;
+        margin: 0 10px;
+        flex-direction: row-reverse;
+    }
+
     .list-icon-back {
         font-weight: bold !important;
         font-size: 2em !important;
