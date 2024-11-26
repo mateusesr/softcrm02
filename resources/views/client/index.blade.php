@@ -134,6 +134,9 @@
 </div>
 <!-- CSS inline para estilizar a tabela e centralização -->
 <style>
+  .hidden {
+        margin: 0 20px;
+    }
   .all {
     max-width: max-content;
     margin: 10px auto;
@@ -199,6 +202,7 @@
     display: flex;
     justify-content: space-between;
     margin: 0 10px;
+    flex-direction: row-reverse;
   }
 
   .imprimir .paginate {

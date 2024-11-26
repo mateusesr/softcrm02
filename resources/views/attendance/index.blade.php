@@ -10,6 +10,19 @@
         </h4>
     @endif
 
+    @if(request()->has('client_id'))
+        <a href="javascript:history.back()" class="" style="
+                    display: flex;
+                    align-items: center;
+                    width: 80px;
+                    justify-content: center;
+                ">
+            <span class=" material-symbols-outlined list-icon-back">
+                arrow_back
+            </span> Voltar</a>
+        </a>
+    @endif
+
     <form method="GET" action="{{ route('attendance.index') }}" class="mb-3 d-flex justify-content-center all">
         <select name="status" class="form-select me-2"
             style="width: 150px; border-radius: 8px; padding: 8px; font-size: 16px; color: #333;">
@@ -64,7 +77,7 @@
                             @endif
                         </a>
                     </th>
-                    <th>Status</th>
+                    <th>Descrição</th>
                     <th>
                         <a class="filter"
                             href="{{ route('attendance.index', array_merge(request()->all(), ['sort' => 'type_id', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}"
@@ -75,7 +88,7 @@
                             @endif
                         </a>
                     </th>
-                    <th>Descrição</th>
+                    <th>Status</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -93,9 +106,10 @@
                         <td>{{ $attendance->id }}</td>
                         <td>{{ $attendance->client->name }}</td>
                         <td>{{ \Carbon\Carbon::parse($attendance->date)->format('d/m/Y') }}</td>
-                        <td>{{ $attendance->status }}</td>
-                        <td>{{ $attendance->type->name }}</td>
                         <td>{{ $attendance->description }}</td>
+                        <td>{{ $attendance->type->name }}</td>
+                        <td>{{ $attendance->status }}</td>
+
 
                         <td>
                             <div class="d-flex justify-content-center">
@@ -125,7 +139,6 @@
                                     class="btn"><span class="material-symbols-outlined list-icon-add list-icon">
                                         note_add
                                     </span></a>
-
                             </div>
                         </td>
                     </tr>
@@ -146,10 +159,18 @@
 
 
 <style>
+    .list-icon-back {
+        font-weight: bold !important;
+        font-size: 2em !important;
+    }
+
     .all {
         max-width: max-content;
         margin: 0 auto;
-  }
+        display: flex;
+        align-items: center;
+    }
+
     .hidden {
         margin: 0 20px;
     }

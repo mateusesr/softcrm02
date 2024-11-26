@@ -13,9 +13,13 @@ class AttendanceController extends Controller
 {
     public function index(Request $request)
     {
+        
         // Consulta inicial com relacionamentos
         $query = Attendance::with('type');
 
+        if ($request->has('attendance_id') && $request->attendance_id !== '') {
+            $query->where('id', $request->attendance_id);
+        }
         // Filtrar por status
         if ($request->has('status') && $request->status !== '') {
             switch ($request->status) {
@@ -84,6 +88,15 @@ class AttendanceController extends Controller
         $types = Type::all(); // Obter todos os tipos
         return view('attendance.edit', compact('attendance', 'clients', 'types'));
     }
+
+    public function getRecentAttendances($limit = 5)
+    {
+        return Attendance::with('client', 'type')
+            ->orderBy('date', 'desc') // Ordena pela data mais recente
+            ->take($limit) // Limita os resultados
+            ->get();
+    }
+
 
     public function update(Request $request, $id)
     {
