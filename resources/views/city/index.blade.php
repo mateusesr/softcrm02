@@ -76,6 +76,7 @@
 @endsection
 
 <style>
+  
    .erro {
     max-width: max-content;
     margin: 0 auto;
@@ -107,7 +108,8 @@
     display: flex;
     align-items: baseline;
     gap: 5px;
-    margin: 10px 17em;
+    max-width: max-content;
+        margin: 10px auto;
   }
 
   .form-control:focus {

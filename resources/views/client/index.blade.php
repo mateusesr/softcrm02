@@ -17,7 +17,7 @@
     </div>
   </form>
   <!-- Botão de Filtro -->
-  <form method="GET" action="{{ route('client.index') }}" class="mb-3 d-flex justify-content-center filter">
+  <form method="GET" action="{{ route('client.index') }}" class="mb-3 d-flex justify-content-center all">
     <select name="status" class="form-select me-2"
       style="width: 150px; border-radius: 8px; padding: 8px; font-size: 16px; color: #333;">
       <option value="" style="background-color: #f9f9f9;">Todos</option>
@@ -36,7 +36,8 @@
       <thead class="thead-dark">
         <tr>
           <th>
-            <a href="{{ route('client.index', array_merge(request()->all(), ['sort' => 'id', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}"
+            <a class="filter"
+              href="{{ route('client.index', array_merge(request()->all(), ['sort' => 'id', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}"
               class="text-white text-decoration-none">
               ID
               @if(request('sort') == 'id')
@@ -45,7 +46,8 @@
             </a>
           </th>
           <th>
-            <a href="{{ route('client.index', array_merge(request()->all(), ['sort' => 'name', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}"
+            <a class="filter"
+              href="{{ route('client.index', array_merge(request()->all(), ['sort' => 'name', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}"
               class="text-white text-decoration-none">
               Nome
               @if(request('sort') == 'name')
@@ -54,7 +56,8 @@
             </a>
           </th>
           <th>
-            <a href="{{ route('client.index', array_merge(request()->all(), ['sort' => 'email', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}"
+            <a class="filter"
+              href="{{ route('client.index', array_merge(request()->all(), ['sort' => 'email', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}"
               class="text-white text-decoration-none">
               Email
               @if(request('sort') == 'email')
@@ -131,7 +134,21 @@
 </div>
 <!-- CSS inline para estilizar a tabela e centralização -->
 <style>
-  .filter {}
+  .all {
+    max-width: max-content;
+    margin: 10px auto;
+  }
+
+  .filter {
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    display: flex;
+  }
+
+  span {
+    margin-left: 8px;
+  }
 
   .form-select:focus {
     border-color: #007bff;
@@ -156,6 +173,8 @@
     display: flex;
     align-items: baseline;
     gap: 5px;
+    max-width: max-content;
+    margin: 10px auto;
   }
 
   .form-control:focus {

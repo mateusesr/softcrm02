@@ -10,7 +10,7 @@
         </h4>
     @endif
 
-    <form method="GET" action="{{ route('attendance.index') }}" class="mb-3 d-flex justify-content-center">
+    <form method="GET" action="{{ route('attendance.index') }}" class="mb-3 d-flex justify-content-center all">
         <select name="status" class="form-select me-2"
             style="width: 150px; border-radius: 8px; padding: 8px; font-size: 16px; color: #333;">
             <option value="" style="background-color: #f9f9f9;">Todos</option>
@@ -146,6 +146,10 @@
 
 
 <style>
+    .all {
+        max-width: max-content;
+        margin: 0 auto;
+  }
     .hidden {
         margin: 0 20px;
     }
@@ -187,7 +191,7 @@
     .table-action {
         display: flex;
         justify-content: space-between;
-        margin: 0 13px;
+        margin: 0 12px;
     }
 
     .imprimir .paginate {
