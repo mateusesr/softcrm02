@@ -12,6 +12,7 @@ class Attendance extends Model
         'client_id',
         'type_id',
         'date',
+        'time',
         'status',
         'description',
     ];

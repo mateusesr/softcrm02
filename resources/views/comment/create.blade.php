@@ -29,6 +29,13 @@
                 <textarea rows="3" cols="50" type="text" class="form-control" id="description" name="description"
                     placeholder="Digite a descrição" required></textarea>
             </div>
+            <div class="form-group">
+                <label for="finish" class="form-label">Finalizar atendimento</label>
+                <select class="form-control" id="finish" name="finish" required>
+                    <option value="0" selected>Não</option>
+                    <option value="1">Sim</option>
+                </select>
+            </div>
             <div class="d-grid">
                 <button type="submit" class="btn btn-save">Enviar</button>
                 <br>

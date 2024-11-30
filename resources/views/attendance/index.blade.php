@@ -78,6 +78,16 @@
                             @endif
                         </a>
                     </th>
+                    <th>
+                        <a class="filter"
+                            href="{{ route('attendance.index', array_merge(request()->all(), ['sort' => 'time', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}"
+                            class="text-white text-decoration-none">
+                            Hora
+                            @if(request('sort') == 'time')
+                                <span>{{ request('direction') === 'asc' ? '▼' : '▲' }}</span>
+                            @endif
+                        </a>
+                    </th>
                     <th>Descrição</th>
                     <th>
                         <a class="filter"
@@ -110,6 +120,7 @@
                         <td>{{ $attendance->id }}</td>
                         <td>{{ $attendance->client->name }}</td>
                         <td>{{ \Carbon\Carbon::parse($attendance->date)->format('d/m/Y') }}</td>
+                        <td>{{ $attendance->time }}</td>
                         <td>{{ $attendance->description }}</td>
                         <td>{{ $attendance->type->name }}</td>
                         <td>{{ $attendance->status }}</td>

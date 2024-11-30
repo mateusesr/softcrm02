@@ -3,8 +3,23 @@
 @section('content')
 <div class="comment-container" id="comment-container">
     <h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Comentários</h2>
-    <h4 class="text-center mb-4" style="color: gray; font-size: 15px;">Comentários para o Atendimento ID:
-        {{ request()->get('attendance_id') }}
+    <h4 class="text-center mb-2" style="color: gray; font-size: 15px;"><b>Protocolo</b>:
+        {{  $comments[0]->attendance->id }}
+    </h4>
+    <h4 class="text-center mb-2" style="color: gray; font-size: 15px;"><b>Cliente</b>:
+        {{ $comments[0]->attendance->client->name }}
+    </h4>
+    <h4 class="text-center mb-2" style="color: gray; font-size: 15px;"><b>Data e Hora</b>:
+        {{ \Carbon\Carbon::parse($comments[0]->attendance->date)->format('d/m/Y') }} - {{$comments[0]->attendance->time}}
+    </h4>
+    <h4 class="text-center mb-2" style="color: gray; font-size: 15px;"><b>Descrição</b>:
+        {{ $comments[0]->attendance->description }}
+    </h4>
+    <h4 class="text-center mb-2" style="color: gray; font-size: 15px;"><b>Tipo</b>:
+        {{ $comments[0]->attendance->type->name }}
+    </h4>
+    <h4 class="text-center mb-4" style="color: gray; font-size: 15px;"><b>Status</b>:
+        {{ $comments[0]->attendance->status }}
     </h4>
 
     <a href="javascript:history.back()" class="return">

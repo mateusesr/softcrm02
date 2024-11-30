@@ -15,7 +15,7 @@ class CommentController extends Controller
     {
         $attendance_id = $request->get('attendance_id');
         if ($attendance_id) {
-            $comments = Comment::where('attendance_id', $attendance_id)->get();
+            $comments = Comment::with(['attendance.type', 'attendance.client'])->where('attendance_id', $attendance_id)->get();
         } else {
             $comments = Comment::all();
         }
@@ -46,6 +46,10 @@ class CommentController extends Controller
         ]);
 
         Comment::create($request->all());
+
+        if ($request->finish == '1') {
+            Attendance::whereId($request->attendance_id)->update(['status' => 'Finalizado']);
+        }
 
         return redirect()->route('comment.index', ['attendance_id' => $request->attendance_id])->with('success', 'Atendimento criado com sucesso.');
     }

@@ -30,13 +30,17 @@
                 <select class="form-control" id="type_id" name="type_id" required>
                     <option value="">Selecione o tipo</option>
                     @foreach ($types as $type)
-                    <option value="{{ $type->id }}">{{ $type->name }}</option>
+                    <option value="{{ $type->id }}" {{ $attendance->type_id == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="form-group">
                 <label for="date" class="form-label">Data</label>
                 <input type="date" class="form-control" id="date" name="date" value="{{ $attendance->date }}" required>
+            </div>
+            <div class="form-group">
+                <label for="time" class="form-label">Hora</label>
+                <input type="time" class="form-control" id="time" name="time" value="{{ $attendance->time }}" required>
             </div>
             <div class="form-group">
                 <label for="status" class="form-label">Status</label>

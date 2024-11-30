@@ -35,7 +35,7 @@
                 <select class="form-control" id="type_id" name="type_id" required>
                     <option value="">Selecione o tipo</option>
                     @foreach ($types as $type)
-                    <option value="{{ $type->id }}">{{ $type->name }}</option>
+                    <option value="{{ $type->id }}" {{ $type->id == 1 ? 'selected' : '' }}>{{ $type->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -45,9 +45,13 @@
                 <input type="date" class="form-control" id="date" name="date" placeholder="Digite a data" required>
             </div>
             <div class="form-group">
+                <label for="time" class="form-label">Hora</label>
+                <input type="time" class="form-control" id="time" name="time" placeholder="Digite a hora" required  value="{{ old('time', date('H:i', strtotime('-3 hours'))) }}">
+            </div>
+            <div class="form-group">
                 <label for="status" class="form-label">Status</label>
                 <select class="form-control" id="status" name="status" required>
-                    <option value="1">Pendente</option>
+                    <option value="1" selected>Pendente</option>
                     <option value="2">Urgente</option>
                     <option value="3">Finalizado</option>
                 </select>
@@ -122,6 +126,8 @@
         transition: background-color 0.3s ease;
         width: 100%;
     }
+
+   
 
     input,
     select,

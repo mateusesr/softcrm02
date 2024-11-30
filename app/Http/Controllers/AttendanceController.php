@@ -63,6 +63,7 @@ class AttendanceController extends Controller
         $request->validate([
             'client_id' => 'required|exists:clients,id',
             'date' => 'required|date',
+            'time' => 'required',
             'status' => 'required|in:1,2,3',
             'type_id' => 'required|exists:types,id',
             'description' => 'required|string|max:255',
@@ -103,6 +104,7 @@ class AttendanceController extends Controller
         $request->validate([
             'client_id' => 'required|exists:clients,id',
             'date' => 'required|date',
+            'time' => 'required',
             'status' => 'required|in:1,2,3',
             'type_id' => 'required|exists:types,id',
             'description' => 'required|string|max:255',
