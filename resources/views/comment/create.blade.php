@@ -84,7 +84,7 @@
     }
 
     input,
-    select, 
+    select,
     textarea {
         margin-bottom: 20px;
         width: 100%;

@@ -99,4 +99,3 @@ class CommentController extends Controller
             ->with('success', 'Comentário excluído com sucesso.');
     }
 }
-

@@ -46,7 +46,7 @@
             </div>
             <div class="form-group">
                 <label for="time" class="form-label">Hora</label>
-                <input type="time" class="form-control" id="time" name="time" placeholder="Digite a hora" required  value="{{ old('time', date('H:i', strtotime('-3 hours'))) }}">
+                <input type="time" class="form-control" id="time" name="time" placeholder="Digite a hora" required value="{{ old('time', date('H:i', strtotime('-3 hours'))) }}">
             </div>
             <div class="form-group">
                 <label for="status" class="form-label">Status</label>
@@ -127,7 +127,7 @@
         width: 100%;
     }
 
-   
+
 
     input,
     select,

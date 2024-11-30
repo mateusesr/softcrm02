@@ -27,12 +27,12 @@
                 </div>
                 <div class="flex space-x-4 profile navbar-right">
                     @auth
-                        <a href="{{ route('profile.edit') }}"
-                            class="text-white hover:bg-gray-700 px-8 py-2 rounded">Perfil</a>
-                        <form class="form-out" action="{{ route('logout') }}" method="POST" class="inline">
-                            @csrf
-                            <button type="submit" class="text-white hover:bg-gray-700 px-8 py-2 rounded">Logout</button>
-                        </form>
+                    <a href="{{ route('profile.edit') }}"
+                        class="text-white hover:bg-gray-700 px-8 py-2 rounded">Perfil</a>
+                    <form class="form-out" action="{{ route('logout') }}" method="POST" class="inline">
+                        @csrf
+                        <button type="submit" class="text-white hover:bg-gray-700 px-8 py-2 rounded">Logout</button>
+                    </form>
                     @endauth
                 </div>
             </div>

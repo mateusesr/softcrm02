@@ -4,7 +4,7 @@
 <div class="comment-container" id="comment-container">
     <h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Comentários</h2>
     <h4 class="text-center mb-2" style="color: gray; font-size: 15px;"><b>Protocolo</b>:
-        {{  $comments[0]->attendance->id }}
+        {{ $comments[0]->attendance->id }}
     </h4>
     <h4 class="text-center mb-2" style="color: gray; font-size: 15px;"><b>Cliente</b>:
         {{ $comments[0]->attendance->client->name }}
@@ -49,32 +49,32 @@
                         </span>Relatório</button>
                 </div>
                 @foreach ($comments as $comment)
-                    <tr>
-                        <td>{{ $comment->id }}</td>
-                        <td>{{ $comment->description }}</td>
-                        <td>{{ \Carbon\Carbon::parse($comment->created_at)->format('d/m/Y H:i') }}</td>
-                        <td>
-                            <a title="Ver Comentário" href="{{ route('comment.show', $comment->id) }}" class="btn "><span
-                                    class="material-symbols-outlined list-icon">
-                                    folder_eye
-                                </span></a>
-                            <a title="Editar" href="{{ route('comment.edit', $comment->id) }}" class="btn"><span
-                                    class="material-symbols-outlined list-icon-edit list-icon">
-                                    stylus
-                                </span></a>
-                            <form action="{{ route('comment.destroy', $comment->id) }}" method="POST"
-                                style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <input type="hidden" name="attendance_id" value="{{ $comment->attendance_id }}">
-                                <button title="Excluir" type="submit" class="btn"
-                                    onclick="return confirm('Tem certeza que deseja excluir este comentário?');">
-                                    <span class="material-symbols-outlined list-icon-delete list-icon">delete</span>
-                                </button>
-                            </form>
+                <tr>
+                    <td>{{ $comment->id }}</td>
+                    <td>{{ $comment->description }}</td>
+                    <td>{{ \Carbon\Carbon::parse($comment->created_at)->format('d/m/Y H:i') }}</td>
+                    <td>
+                        <a title="Ver Comentário" href="{{ route('comment.show', $comment->id) }}" class="btn "><span
+                                class="material-symbols-outlined list-icon">
+                                folder_eye
+                            </span></a>
+                        <a title="Editar" href="{{ route('comment.edit', $comment->id) }}" class="btn"><span
+                                class="material-symbols-outlined list-icon-edit list-icon">
+                                stylus
+                            </span></a>
+                        <form action="{{ route('comment.destroy', $comment->id) }}" method="POST"
+                            style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="attendance_id" value="{{ $comment->attendance_id }}">
+                            <button title="Excluir" type="submit" class="btn"
+                                onclick="return confirm('Tem certeza que deseja excluir este comentário?');">
+                                <span class="material-symbols-outlined list-icon-delete list-icon">delete</span>
+                            </button>
+                        </form>
 
-                        </td>
-                    </tr>
+                    </td>
+                </tr>
                 @endforeach
             </tbody>
         </table>
