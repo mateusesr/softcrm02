@@ -85,8 +85,9 @@ class AttendanceController extends Controller
     public function edit($id)
     {
         $attendance = Attendance::findOrFail($id);
-        $clients = Client::all(); // Se precisar listar clientes para seleção
-        $types = Type::all(); // Obter todos os tipos
+        $attendance->date = \Carbon\Carbon::parse($attendance->date)->format('Y-m-d');
+        $clients = Client::all();
+        $types = Type::all();
         return view('attendance.edit', compact('attendance', 'clients', 'types'));
     }
 
