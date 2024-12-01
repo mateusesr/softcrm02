@@ -3,30 +3,36 @@
 @section('content')
 <div class="comment-container" id="comment-container">
     <h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Comentários</h2>
-    <h4 class="text-center mb-2" style="color: gray; font-size: 15px;"><b>Protocolo</b>:
-        {{ $comments[0]->attendance->id }}
-    </h4>
-    <h4 class="text-center mb-2" style="color: gray; font-size: 15px;"><b>Cliente</b>:
-        {{ $comments[0]->attendance->client->name }}
-    </h4>
-    <h4 class="text-center mb-2" style="color: gray; font-size: 15px;"><b>Data e Hora</b>:
-        {{ \Carbon\Carbon::parse($comments[0]->attendance->date)->format('d/m/Y') }} - {{$comments[0]->attendance->time}}
-    </h4>
-    <h4 class="text-center mb-2" style="color: gray; font-size: 15px;"><b>Descrição</b>:
-        {{ $comments[0]->attendance->description }}
-    </h4>
-    <h4 class="text-center mb-2" style="color: gray; font-size: 15px;"><b>Tipo</b>:
-        {{ $comments[0]->attendance->type->name }}
-    </h4>
-    <h4 class="text-center mb-4" style="color: gray; font-size: 15px;"><b>Status</b>:
-        {{ $comments[0]->attendance->status }}
-    </h4>
-
     <a href="javascript:history.back()" class="return">
         <span class=" material-symbols-outlined list-icon-back">
             arrow_back
         </span>Voltar</a>
     </a>
+    <div class="attendance-container">
+        <div class="attendance-items-container">
+            <h4 class="text-center"><b>Protocolo</b>:
+                {{ $comments[0]->attendance->id }}
+            </h4>
+            <h4 class="text-center"><b>Cliente</b>:
+                {{ $comments[0]->attendance->client->name }}
+            </h4>
+            <h4 class="text-center"><b>Data e Hora</b>:
+                {{ \Carbon\Carbon::parse($comments[0]->attendance->date)->format('d/m/Y') }} -
+                {{$comments[0]->attendance->time}}
+            </h4>
+            <h4 class="text-center"><b>Descrição</b>:
+                {{ $comments[0]->attendance->description }}
+            </h4>
+            <h4 class="text-center"><b>Tipo</b>:
+                {{ $comments[0]->attendance->type->name }}
+            </h4>
+            <h4 class="text-center"><b>Status</b>:
+                {{ $comments[0]->attendance->status }}
+            </h4>
+        </div>
+    </div>
+
+
 
     <div class="table-container">
         <table class="table mt-3">
@@ -49,32 +55,33 @@
                         </span>Relatório</button>
                 </div>
                 @foreach ($comments as $comment)
-                <tr>
-                    <td>{{ $comment->id }}</td>
-                    <td>{{ $comment->description }}</td>
-                    <td>{{ \Carbon\Carbon::parse($comment->created_at)->format('d/m/Y H:i') }}</td>
-                    <td>
-                        <a title="Ver Comentário" href="{{ route('comment.show', $comment->id) }}" class="btn "><span
-                                class="material-symbols-outlined list-icon">
-                                folder_eye
-                            </span></a>
-                        <a title="Editar" href="{{ route('comment.edit', $comment->id) }}" class="btn"><span
-                                class="material-symbols-outlined list-icon-edit list-icon">
-                                stylus
-                            </span></a>
-                        <form action="{{ route('comment.destroy', $comment->id) }}" method="POST"
-                            style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <input type="hidden" name="attendance_id" value="{{ $comment->attendance_id }}">
-                            <button title="Excluir" type="submit" class="btn"
-                                onclick="return confirm('Tem certeza que deseja excluir este comentário?');">
-                                <span class="material-symbols-outlined list-icon-delete list-icon">delete</span>
-                            </button>
-                        </form>
+                    <tr>
+                        <td>{{ $comment->id }}</td>
+                        <td>{{ $comment->description }}</td>
+                        <td>{{ \Carbon\Carbon::parse($comment->created_at)->setTimezone('America/Sao_Paulo')->format('d/m/Y H:i') }}
+                        </td>
+                        <td>
+                            <a title="Ver Comentário" href="{{ route('comment.show', $comment->id) }}" class="btn "><span
+                                    class="material-symbols-outlined list-icon">
+                                    folder_eye
+                                </span></a>
+                            <a title="Editar" href="{{ route('comment.edit', $comment->id) }}" class="btn"><span
+                                    class="material-symbols-outlined list-icon-edit list-icon">
+                                    stylus
+                                </span></a>
+                            <form action="{{ route('comment.destroy', $comment->id) }}" method="POST"
+                                style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <input type="hidden" name="attendance_id" value="{{ $comment->attendance_id }}">
+                                <button title="Excluir" type="submit" class="btn"
+                                    onclick="return confirm('Tem certeza que deseja excluir este comentário?');">
+                                    <span class="material-symbols-outlined list-icon-delete list-icon">delete</span>
+                                </button>
+                            </form>
 
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
@@ -84,6 +91,35 @@
 </div>
 
 <style>
+    .attendance-items-container h4:first-child {
+        width: 100%;
+    }
+
+    .attendance-items-container h4 {
+        padding: 10px 20px;
+        color: black;
+        font-size: 15px;
+        max-width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .attendance-items-container {
+        display: flex;
+        justify-content: space-evenly;
+        align-content: center;
+        flex-wrap: wrap;
+    }
+
+    .attendance-container {
+        background-color: #f1f1f1;
+        width: 100%;
+        max-width: 1000px;
+        margin: 20px auto;
+        border-radius: 10px;
+        padding: 15px;
+    }
+
     .return {
         display: flex;
         align-items: center;

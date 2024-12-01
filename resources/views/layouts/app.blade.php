@@ -14,8 +14,10 @@
         <nav class="bg-gray-800 p-4 header-navbar" id="navbar">
             <div class="container mx-auto flex justify-between header">
                 <div class="flex space-x-4 navbar-left">
-                    <a href="{{ route('dashboard') }}"
-                        class="text-white hover:bg-gray-700 px-8 py-2 rounded">Dashboard</a>
+                    <a href="{{ route('dashboard') }}" class="text-white hover:bg-gray-700 px-8 py-2 rounded" ><span style="font-size:25px;"
+                            class="material-symbols-outlined">
+                            home
+                        </span></a>
                     <a href="{{ route('client.index') }}"
                         class="text-white hover:bg-gray-700 px-8 py-2 rounded">Clientes</a>
                     <a href="{{ route('attendance.index') }}"
@@ -27,12 +29,12 @@
                 </div>
                 <div class="flex space-x-4 profile navbar-right">
                     @auth
-                    <a href="{{ route('profile.edit') }}"
-                        class="text-white hover:bg-gray-700 px-8 py-2 rounded">Perfil</a>
-                    <form class="form-out" action="{{ route('logout') }}" method="POST" class="inline">
-                        @csrf
-                        <button type="submit" class="text-white hover:bg-gray-700 px-8 py-2 rounded">Logout</button>
-                    </form>
+                        <a href="{{ route('profile.edit') }}"
+                            class="text-white hover:bg-gray-700 px-8 py-2 rounded">Perfil</a>
+                        <form class="form-out" action="{{ route('logout') }}" method="POST" class="inline">
+                            @csrf
+                            <button type="submit" class="text-white hover:bg-gray-700 px-8 py-2 rounded">Logout</button>
+                        </form>
                     @endauth
                 </div>
             </div>
