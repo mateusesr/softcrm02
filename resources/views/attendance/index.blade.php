@@ -2,6 +2,13 @@
 
 @section('content')
 <div class="attendance-container" id="attendance-container">
+     
+@if (session('warning'))
+        <div class="alert alert-success green-box bg-red-500 text-white px-4 py-2 rounded erro" role="alert">
+            {{ session('warning') }}
+        </div>
+    @endif
+
     <h2 class="text-center mb-4" style="color: black; font-weight: bold; font-size: 24px;">Atendimentos</h2>
 
     @if (request()->get('client_id'))
@@ -170,6 +177,13 @@
 </div>
 
 <style>
+    .erro {
+    max-width: max-content;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
     .hidden {
         display: flex;
         justify-content: center;

@@ -19,6 +19,9 @@ class CommentController extends Controller
         } else {
             $comments = Comment::all();
         }
+        if ($comments->isEmpty()) {
+            return redirect()->back()->with('warning', 'Nenhum comentário encontrado para este atendimento.');
+        }
         return view('comment.index', compact('comments', 'attendance_id'));
     }
 
@@ -57,7 +60,7 @@ class CommentController extends Controller
 
     public function show(Comment $comment)
     {
-        $attendance_id = $comment->get('attendance_id');
+        $attendance_id = $comment->attendance_id;
         if ($attendance_id) {
             $attendance = Attendance::find($attendance_id);
             $attendances = [$attendance];

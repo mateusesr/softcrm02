@@ -60,7 +60,7 @@
                         <td>{{ $comment->description }}</td>
                         <td>{{ \Carbon\Carbon::parse($comment->created_at)->setTimezone('America/Sao_Paulo')->format('d/m/Y H:i') }}
                         </td>
-                        <td>
+                        <td class="icon">
                             <a title="Ver Comentário" href="{{ route('comment.show', $comment->id) }}" class="btn "><span
                                     class="material-symbols-outlined list-icon">
                                     folder_eye
@@ -91,6 +91,11 @@
 </div>
 
 <style>
+    .icon {
+        justify-content: center;
+        display: flex;
+    }
+
     .attendance-items-container h4:first-child {
         width: 100%;
     }
