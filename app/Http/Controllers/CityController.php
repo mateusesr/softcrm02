@@ -23,7 +23,7 @@ class CityController extends Controller
     {
         $query = City::query(); // Initialize the query
 
-        $cities = $query->paginate(20); // Get paginated cities
+        $cities = City::all(); // Get paginated cities
 
         return view('city.index', compact('cities')); // Return the view with cities
     }
